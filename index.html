@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>សម្បូរបែប - ទំព័រដើម</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Siemreap&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-white font-khmer text-[#4f2620]">
+    <a href="#main" class="skip-link">រំលងទៅមាតិការមុខ</a>
+    <!-- Header -->
+    <header class="bg-[#F5F5F5] h-auto md:h-[89px] py-3 md:py-0 sticky top-0 z-50">
+        <nav
+            class="max-w-[1360px] mx-auto flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 lg:px-10 relative">
+            <div class="h-[60px] w-[120px] md:h-[90px] md:w-[165px] flex items-center">
+                <a href="index.html" class="block h-full w-full">
+                    <img src="images/logo.png" alt="SombobaebKH Logo" class="w-full h-full object-contain">
+                </a>
+            </div>
+            <div class="hidden lg:flex gap-4 xl:gap-[26px] items-center text-[14px] xl:text-[16px]">
+                <a href="index.html" class="text-[#dd070c] font-semibold">ទំព័រដើម</a>
+                <a href="general_food.html"
+                    class="text-[#642f28] hover:text-[#dd070c] transition-colors">មុខម្ហូបទូទៅ</a>
+                <a href="province.html" class="text-[#642f28] hover:text-[#dd070c] transition-colors">ម្ហូបតាមខេត្ត</a>
+                <a href="about.html" class="text-[#642f28] hover:text-[#dd070c] transition-colors">អំពីយើង</a>
+            </div>
+            <div class="flex gap-2 md:gap-[15px] items-center">
+                <a href="#" id="uploadBtn"
+                    class="hidden md:flex group border border-[#642f28] rounded-[5px] px-3 md:px-6 py-1.5 md:py-2 items-center gap-1 md:gap-2 hover:bg-[#dd070c] hover:text-white transition-colors">
+                    <svg class="w-[9px] h-[10px] text-[#642f28] group-hover:text-white transition-colors"
+                        viewBox="0 0 9 10" fill="none">
+                        <path d="M4.5 0L4.5 7M4.5 0L1.5 3M4.5 0L7.5 3M0 10H9" stroke="currentColor" stroke-width="1" />
+                    </svg>
+                    <span
+                        class="text-[#642f28] text-[13px] md:text-[15px] group-hover:text-white transition-colors">បង្ហោះ</span>
+                </a>
+                <button id="darkModeBtn" class="relative hidden md:block" aria-label="Dark mode toggle">
+                    <svg class="w-[28px] h-[32px] md:w-[34px] md:h-[38px]" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 640" fill="#000000">
+                        <path
+                            d="M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z" />
+                    </svg>
+                </button>
+                <button class="w-[38px] h-[38px] md:w-[47px] md:h-[47px] rounded-full overflow-hidden">
+                    <img src="images/user-icon.svg" alt="User" class="w-full h-full object-cover">
+                </button>
+                <button id="hamburger"
+                    class="lg:hidden flex flex-col justify-center items-center w-10 h-10 rounded-md hover:bg-[#e5d5c4] transition-colors relative z-[60]"
+                    aria-label="Toggle menu">
+                    <span class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out"></span>
+                    <span
+                        class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out mt-1.5"></span>
+                    <span
+                        class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out mt-1.5"></span>
+                </button>
+            </div>
+        </nav>
+        <div id="navMenu"
+            class="lg:hidden overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 absolute top-full left-0 right-0 z-40 w-full">
+            <div class="bg-white border-t-2 border-[#642f28] shadow-lg w-full">
+                <div class="max-w-[1360px] mx-auto px-4 py-4 flex flex-col gap-1">
+                    <a href="index.html"
+                        class="bg-[#f3e9dd] text-[#dd070c] px-4 py-3 rounded-md text-[15px] font-semibold">ទំព័រដើម</a>
+                    <a href="general_food.html"
+                        class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">មុខម្ហូបទូទៅ</a>
+                    <a href="province.html"
+                        class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">ម្ហូបតាមខេត្ត</a>
+                    <a href="about.html"
+                        class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">អំពីយើង</a>
+                    <div class="md:hidden border-t border-gray-200 mt-2 pt-3 flex flex-col gap-2">
+                        <a href="#"
+                            class="flex items-center gap-2 text-[#642f28] hover:bg-[#f3e9dd] px-4 py-3 rounded-md transition-colors">
+                            <svg class="w-5 h-5" viewBox="0 0 9 10" fill="none">
+                                <path d="M4.5 0L4.5 7M4.5 0L1.5 3M4.5 0L7.5 3M0 10H9" stroke="currentColor"
+                                    stroke-width="1" />
+                            </svg>
+                            <span class="text-[15px] font-medium">បង្ហោះ</span>
+                        </a>
+                        <button
+                            class="flex items-center gap-2 text-[#642f28] hover:bg-[#f3e9dd] px-4 py-3 rounded-md transition-colors">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                fill="currentColor">
+                                <path
+                                    d="M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z" />
+                            </svg>
+                            <span class="text-[15px] font-medium">ងងឹត</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- Hero -->
+        <section
+            class="relative h-[420px] md:h-[520px] lg:h-[580px] flex items-center justify-center text-center w-full">
+            <img src="https://www.figma.com/api/mcp/asset/2c6b2449-494e-4b34-84c2-5380f0a2a3cd" alt="Cambodian dishes"
+                class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/55"></div>
+            <div class="relative z-10 max-w-5xl mx-auto px-4 md:px-6">
+                <p class="text-[20px] md:text-[26px] lg:text-[30px] text-[#f8d3bd] mb-3">ស្វែងរកមុខម្ហូប</p>
+
+                <form class="mt-8 w-full">
+                    <div
+                        class="mx-auto flex w-full max-w-[980px] flex-wrap md:flex-nowrap items-center gap-3 rounded-[22px] border border-white/40 bg-[#f4ede3] px-5 py-3.5 shadow-[0_15px_35px_rgba(16,65,39,0.18)]">
+                        <span class="inline-flex items-center justify-center text-[#55504c] text-2xl">
+                            <img src="https://www.figma.com/api/mcp/asset/0133dc8d-bfa8-4ccd-ae02-859e2fd2e894"
+                                alt="Search icon" class="w-7 h-7">
+                        </span>
+                        <input type="text" placeholder="វាយឈ្មោះមុខម្ហូប (ឧ. ទឹកគ្រឿង, នំបញ្ចុក..)"
+                            class="flex-1 min-w-[200px] bg-transparent text-[#6f6861] placeholder:text-[#b7b0a8] text-[18px] focus:outline-none">
+                        <button type="submit"
+                            class="min-w-[140px] rounded-[16px] bg-[#104127] px-8 py-2.5 text-[18px] text-[#fbf2e8] font-medium">ស្វែងរក</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Popular General Food -->
+        <section class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 pt-12 md:pt-16">
+            <div class="text-center mb-10">
+                <p class="text-[#104127] text-[32px] md:text-[36px]">មុខម្ហូបទូទៅដែលពេញនិយម</p>
+            </div>
+            <div class="grid grid-cols-9 gap-8 lg:mt-16 md:mt-10">
+                <div class="col-span-3 flex flex-col">
+                    <img src="../img/khor.png" alt="ខត្រីប៉េងប៉ោះ">
+                    <h4 class="text-2xl font-extrabold text-center mt-12 md:mb-4 font-siemreap">ខត្រីប៉េងប៉ោះ</h4>
+                    <div>
+                        <a class="justify-center w-full flex" href="#"><button type="button"
+                                class="   justify-end bg-baner_green w-28 h-12 rounded-xl text-white from-teal-400 via-teal-500 to-teal-600  focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 font-siemreap">មើលបន្ថែម</button></a>
+                    </div>
+
+                </div>
+                <div class="col-span-3">
+                    <img src="../img/chicken_bee.png" alt="មាន់ដុតទឹកឃ្មំុ">
+                    <h4 class="text-2xl font-extrabold text-center mt-12 md:mb-4 font-siemreap">មាន់ដុតទឹកឃ្មំុ</h4>
+                    <div class="justify-end w-full flex">
+                        <a class="justify-center  w-full flex" href="#"><button type="button"
+                                class="place-content-end   bg-baner_green w-28 h-12 rounded-xl text-white from-teal-400 via-teal-500 to-teal-600  focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 font-siemreap">មើលបន្ថែម</button></a>
+                    </div>
+                </div>
+                <div class="col-span-3">
+                    <img src="../img/lok_lak.png" alt="ឡុកឡាក់">
+                    <h4 class="text-2xl font-extrabold text-center md:mb-4 mt-12">ឡុកឡាក់</h4>
+                    <div class="justify-end w-full flex">
+                        <a class="justify-center  w-full flex" href="#"><button type="button"
+                                class="place-content-end bg-baner_green w-28 h-12 rounded-xl text-white from-teal-400 via-teal-500 to-teal-600  focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 font-siemreap">មើលបន្ថែម</button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Rated -->
+        <section class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 pt-16">
+            <div class="flex flex-col items-center text-center mb-12">
+                <h2 class="text-[34px] md:text-[40px] text-[#104127]">មុខម្ហូបមួយចំនួនដែលមានអ្នក Rating ច្រើនជាងគេ</h2>
+            </div>
+            <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-4 justify-items-center">
+                <article
+                    class="w-full max-w-[285px] bg-white border border-black/10 rounded-[18px] overflow-hidden shadow-sm flex flex-col">
+                    <div class="h-[292px]">
+                        <img src="https://www.figma.com/api/mcp/asset/8cc807e6-2c7a-420b-b7d6-e760f0fe6efe"
+                            alt="ទឹកគ្រឿង" class="w-full h-full object-cover">
+                    </div>
+                    <div class="px-5 py-4 flex items-end justify-between gap-3">
+                        <p class="text-[#104127] text-[20px] leading-tight">ទឹកគ្រឿង</p>
+                        <div class="text-right">
+                            <div class="flex items-center justify-end gap-1 text-[#f7c646]"
+                                aria-label="Rating 5 out of 5">
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                            </div>
+                            <p class="text-[12px] text-black/50">70 Reviews</p>
+                        </div>
+                    </div>
+                </article>
+                <article
+                    class="w-full max-w-[285px] bg-white border border-black/10 rounded-[18px] overflow-hidden shadow-sm flex flex-col">
+                    <div class="h-[292px]">
+                        <img src="https://www.figma.com/api/mcp/asset/55b69f72-57ed-43d3-ab24-ba497e2a8c96"
+                            alt="សម្លរសាលម៉ុន" class="w-full h-full object-cover">
+                    </div>
+                    <div class="px-5 py-4 flex items-end justify-between gap-3">
+                        <p class="text-[#104127] text-[20px] leading-tight">ឆាក្ដាម</p>
+                        <div class="text-right">
+                            <div class="flex items-center justify-end gap-1 text-[#f7c646]"
+                                aria-label="Rating 5 out of 5">
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                            </div>
+                            <p class="text-[12px] text-black/50">70 Reviews</p>
+                        </div>
+                    </div>
+                </article>
+                <article
+                    class="w-full max-w-[285px] bg-white border border-black/10 rounded-[18px] overflow-hidden shadow-sm flex flex-col">
+                    <div class="h-[292px]">
+                        <img src="https://www.figma.com/api/mcp/asset/840a5291-feea-49b4-809e-9cadc82dcfea"
+                            alt="នំបញ្ចុក" class="w-full h-full object-cover">
+                    </div>
+                    <div class="px-5 py-4 flex items-end justify-between gap-3">
+                        <p class="text-[#104127] text-[20px] leading-tight">នំបញ្ចុក</p>
+                        <div class="text-right">
+                            <div class="flex items-center justify-end gap-1 text-[#f7c646]"
+                                aria-label="Rating 5 out of 5">
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                            </div>
+                            <p class="text-[12px] text-black/50">70 Reviews</p>
+                        </div>
+                    </div>
+                </article>
+                <article
+                    class="w-full max-w-[285px] bg-white border border-black/10 rounded-[18px] overflow-hidden shadow-sm flex flex-col">
+                    <div class="h-[292px]">
+                        <img src="https://www.figma.com/api/mcp/asset/a1596f6d-cc80-4c76-8a7e-34fc1502f3ad"
+                            alt="ប្រហុកអាំងជ្រុញ" class="w-full h-full object-cover">
+                    </div>
+                    <div class="px-5 py-4 flex items-end justify-between gap-3">
+                        <p class="text-[#104127] text-[20px] leading-tight">ប្រហុកអាំងជ្រុញ</p>
+                        <div class="text-right">
+                            <div class="flex items-center justify-end gap-1 text-[#f7c646]"
+                                aria-label="Rating 4 out of 5">
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">★</span>
+                                <span aria-hidden="true">☆</span>
+                            </div>
+                            <p class="text-[12px] text-black/50">40 Reviews</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Restaurants -->
+        <section class="max-w-[1367px] mx-auto px-4 md:px-6 lg:px-10 pt-20">
+            <div class="text-center mb-10">
+                <h2 class="text-[34px] md:text-[40px] text-[#104127]">ភោជនីយដ្ឋានតាមបណ្តាខេត្តល្បីៗ</h2>
+            </div>
+            <div class="space-y-10">
+                <article class="grid lg:grid-cols-[420px_1fr] gap-8 items-center bg-white rounded-[20px] shadow-sm p-6">
+                    <div class="rounded-[20px] overflow-hidden h-[280px]">
+                        <img src="images/Nesat Seafood Madness.jpg"
+                            alt="Nesat Seafood Madness" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <h3 class="text-[#ad343e] text-[30px]">Nesat Seafood Madness</h3>
+                        <p class="text-[#104127] text-[22px]">ទីតាំង ៖ ខេត្ត កំពត</p>
+                        <p class="text-[#104127] text-[22px]">ជាភោជនីយដ្ឋានល្បីមួយនៅខេត្ត កំពត</p>
+                        <a href="#"
+                            class="bg-[#104127] text-white text-[20px] px-6 py-3 rounded-[10px] w-fit inline-flex items-center gap-2">មើលបន្ថែម
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+                <article class="grid lg:grid-cols-[420px_1fr] gap-8 items-center bg-white rounded-[20px] shadow-sm p-6">
+                    <div class="rounded-[20px] overflow-hidden h-[280px]">
+                        <img src="https://www.figma.com/api/mcp/asset/b229399b-b0a4-4269-a048-4cbdbc873f71"
+                            alt="Magic Crab Restaurant" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <h3 class="text-[#ad343e] text-[30px]">Magic Crab Restaurant</h3>
+                        <p class="text-[#104127] text-[22px]">ទីតាំង ៖ ខេត្ត កែប</p>
+                        <p class="text-[#104127] text-[22px]">ជាភោជនីយដ្ឋានល្បីមួយនៅខេត្ត កែប</p>
+                        <a href="#"
+                            class="bg-[#104127] text-white text-[20px] px-6 py-3 rounded-[10px] w-fit inline-flex items-center gap-2">មើលបន្ថែម
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+                <article class="grid lg:grid-cols-[420px_1fr] gap-8 items-center bg-white rounded-[20px] shadow-sm p-6">
+                    <div class="rounded-[20px] overflow-hidden h-[280px]">
+                        <img src="https://www.figma.com/api/mcp/asset/b34df5f9-9be0-461c-897b-ecbf87c285fe"
+                            alt="Palate Angkor" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <h3 class="text-[#ad343e] text-[30px]">Palate Angkor Restaurant Angkor Siem Reap</h3>
+                        <p class="text-[#104127] text-[22px]">ទីតាំង ៖ ខេត្តសៀមរាប</p>
+                        <p class="text-[#104127] text-[22px]">ជាភោជនីយដ្ឋានល្បីមួយនៅ ខេត្តសៀមរាប</p>
+                        <a href="#"
+                            class="bg-[#104127] text-white text-[20px] px-6 py-3 rounded-[10px] w-fit inline-flex items-center gap-2">មើលបន្ថែម
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Recognition -->
+        <section class="bg-[#104127] py-12 mt-20">
+            <div class="max-w-[1367px] mx-auto px-4 md:px-6 lg:px-10 text-white text-center">
+                <h2 class="text-[34px] md:text-[40px]">មានការទទួលស្គាល់ដោយ</h2>
+                <div class="grid md:grid-cols-3 gap-8 mt-10">
+                    <article class="flex flex-col items-center gap-4">
+                        <img src="https://www.figma.com/api/mcp/asset/16f2a089-511f-4fa3-9d93-2ca64f4fa9cf"
+                            alt="Coca Cola" class="h-[110px] object-contain">
+                        <p class="text-[18px] md:text-[20px]">“ជាក្រុមហ៊ុនមួយ ដែលចូលចិត្តវេបសាយមួយនេះ
+                            ប្រេីប្រាស់មានភាពងាយស្រួល”</p>
+                    </article>
+                    <article class="flex flex-col items-center gap-4">
+                        <img src="https://www.figma.com/api/mcp/asset/87b301f8-4fdd-4610-9650-0029eaeb69bc" alt="VISA"
+                            class="h-[110px] object-contain">
+                        <p class="text-[18px] md:text-[20px]">“រៀបរាប់អំពីគ្រឿងផ្សំបានច្បាស់លាស់”</p>
+                    </article>
+                    <article class="flex flex-col items-center gap-4">
+                        <img src="https://www.figma.com/api/mcp/asset/ee3e1d48-268c-4e01-b970-11f989c3dd2b"
+                            alt="Khmer Beverages" class="h-[110px] object-contain">
+                        <p class="text-[18px] md:text-[20px]">“ជាវេបសាយមួយដែលមានជ្រើសច្រើន”</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Cambodia -->
+        <section class="max-w-[1367px] mx-auto px-4 md:px-6 lg:px-10 py-16 grid gap-10 lg:grid-cols-2 items-center">
+            <div class="space-y-4">
+                <h2 class="text-[#ad343e] text-[34px] md:text-[40px]">ភោជនីយដ្ឋានល្បីៗនៅខេត្តសៀមរាប</h2>
+                <p class="text-[18px] md:text-[20px] text-[#104127] leading-relaxed">
+                    គឺជាខេត្តមួយដែលមានទីតាំងភូមិសាស្ត្រយ៉ាងអស្ចារ្យដែលទាក់ទាញភ្ញៀវទេសចរណ៍ជាច្រើននៅប្រទេសកម្ពុជា។
+                    ភោជនីយដ្ឋានស្អាតៗ និង ម្ហូបពេញនិយមជាច្រើនកំពុងរង់ចាំអ្នក។</p>
+                <p class="text-[18px] md:text-[20px] text-[#104127] leading-relaxed">ចុចមើលបន្ថែម
+                    ដើម្បីរកភោជនីយដ្ឋានបន្ថែមនៅខេត្តនេះ។</p>
+                <a href="#"
+                    class="bg-[#104127] text-[#fbf2e8] px-6 py-3 rounded-[20px] inline-flex items-center gap-2 text-[20px] w-fit">ចុចទីនេះ
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14" />
+                        <path d="M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+            <div class="w-full">
+                <img src="images/Cambodia map.png" alt="Cambodia map"
+                    class="w-full object-contain">
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#283b3f] py-6 md:py-8 lg:py-[37px] px-4 md:px-6 lg:px-10">
+        <div class="max-w-[1360px] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <div>
+                    <div class="w-[160px] md:w-[200px] lg:w-[220px] h-[90px] md:h-[110px] lg:h-[120px] mb-3 md:mb-4">
+                        <img src="images/logo1.png" alt="SombobaebKH Logo" class="w-full h-full object-contain">
+                    </div>
+                    <p class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed">
+                        ការរក្សាទុកនិងអភិរក្សម្ហូបដ៏សម្បូរបែប<br>នៅប្រទេសកម្ពុជា
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-[#fbf2e8] text-[24px] md:text-[28px] lg:text-[32px] mb-4 md:mb-5 lg:mb-[24px]">
+                        តំណភ្ជាប់</h4>
+                    <ul class="space-y-2 md:space-y-[10px]">
+                        <li><a href="index.html"
+                                class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] hover:text-white transition-colors">ទំព័រដើម</a>
+                        </li>
+                        <li><a href="general_food.html"
+                                class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] hover:text-white transition-colors">មុខម្ហូបទូទៅ</a>
+                        </li>
+                        <li><a href="province.html"
+                                class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] hover:text-white transition-colors">ម្ហូបតាមខេត្ត</a>
+                        </li>
+                        <li><a href="about.html"
+                                class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] hover:text-white transition-colors">អំពីយើង</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-[#fbf2e8] text-[24px] md:text-[28px] lg:text-[32px] mb-4 md:mb-5 lg:mb-[24px]">
+                        ទំនាក់ទំនងពួកយើង</h4>
+                    <div class="flex gap-4 mb-[28px]">
+                        <a href="#" aria-label="Facebook"
+                            class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                            <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                                <path
+                                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram"
+                            class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                            <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter"
+                            class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                            <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                                <path
+                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="YouTube"
+                            class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                            <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.441 16.892c-2.102.144-6.784.144-8.883 0C5.282 16.736 5.017 15.622 5 12c.017-3.629.285-4.736 2.558-4.892 2.099-.144 6.782-.144 8.883 0C18.718 7.264 18.982 8.378 19 12c-.018 3.629-.285 4.736-2.559 4.892zM10 9.658l4.917 2.338L10 14.342V9.658z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="bg-[#d9d9d9] rounded-[25px] h-[42px] flex items-center px-4 gap-2">
+                        <input type="email" placeholder="Your email address"
+                            class="flex-1 bg-transparent text-[13px] text-black/40 outline-none">
+                        <button class="text-[#ad343e] text-[13px] font-medium">Subscribe</button>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-white text-[28px] mb-[30px]">ឧបត្ថម្ភ និង គាំទ្រដោយ</p>
+                    <div class="w-[200px] h-[72px]">
+                        <img src="images/istad-logo.png" alt="ISTAD" class="w-full h-full object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const hamburgerLines = hamburger.querySelectorAll('.hamburger-line');
+        let isMenuOpen = false;
+
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
+                navMenu.style.opacity = '1';
+                hamburgerLines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                hamburgerLines[1].style.opacity = '0';
+                hamburgerLines[1].style.transform = 'translateX(20px)';
+                hamburgerLines[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+            } else {
+                navMenu.style.maxHeight = '0';
+                navMenu.style.opacity = '0';
+                hamburgerLines[0].style.transform = '';
+                hamburgerLines[1].style.opacity = '1';
+                hamburgerLines[1].style.transform = '';
+                hamburgerLines[2].style.transform = '';
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (isMenuOpen && !hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                isMenuOpen = false;
+                navMenu.style.maxHeight = '0';
+                navMenu.style.opacity = '0';
+                hamburgerLines[0].style.transform = '';
+                hamburgerLines[1].style.opacity = '1';
+                hamburgerLines[1].style.transform = '';
+                hamburgerLines[2].style.transform = '';
+            }
+        });
+
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                navMenu.style.maxHeight = '0';
+                navMenu.style.opacity = '0';
+                hamburgerLines[0].style.transform = '';
+                hamburgerLines[1].style.opacity = '1';
+                hamburgerLines[1].style.transform = '';
+                hamburgerLines[2].style.transform = '';
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024 && isMenuOpen) {
+                isMenuOpen = false;
+                navMenu.style.maxHeight = '0';
+                navMenu.style.opacity = '0';
+                hamburgerLines[0].style.transform = '';
+                hamburgerLines[1].style.opacity = '1';
+                hamburgerLines[1].style.transform = '';
+                hamburgerLines[2].style.transform = '';
+            }
+        });
+    </script>
+</body>
+
+</html>

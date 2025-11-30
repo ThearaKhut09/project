@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>សម្បូរបែប - ផ្ទាំងគ្រប់គ្រង</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Siemreap&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body,
+        .font-siemreap {
+            font-family: 'Siemreap', 'Khmer OS Siemreap', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#f4f3ef] font-siemreap text-[#171717]">
+    <div class="min-h-screen flex bg-[#f6f5f2]">
+        <aside
+            class="hidden lg:flex w-[280px] flex-col border-r border-[#e5e5e5] bg-white/90 backdrop-blur-sm px-6 py-8 gap-8">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-[76px] h-[76px] rounded-full overflow-hidden bg-[#f1f1f1] flex items-center justify-center">
+                    <img src="https://www.figma.com/api/mcp/asset/c252dfad-bf2a-48c7-ad45-28e13978fba5"
+                        alt="CuisineKH Logo" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <p class="text-lg font-semibold text-[#222]">CuisineKH</p>
+                    <p class="text-sm text-[#868686]">Admin Console</p>
+                </div>
+            </div>
+            <nav class="space-y-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#f4f4f7] text-[#111]">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                        <path d="M3 11L12 3L21 11V21H3V11Z" />
+                        <path d="M9 21V13H15V21" />
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-2xl text-[#5d5d5d] hover:bg-[#f6f6f6] transition">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                        <path d="M3 7H21" />
+                        <path d="M3 12H21" />
+                        <path d="M3 17H21" />
+                    </svg>
+                    <span>Food</span>
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-2xl text-[#5d5d5d] hover:bg-[#f6f6f6] transition">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 21C5.333 17 8.333 15 12 15C15.667 15 18.667 17 20 21" />
+                    </svg>
+                    <span>User</span>
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-2xl text-[#5d5d5d] hover:bg-[#f6f6f6] transition">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                        <path
+                            d="M12 17L13.09 18.26L14.82 18.63L13.64 19.74L13.88 21.45L12 20.8L10.12 21.45L10.36 19.74L9.18 18.63L10.91 18.26L12 17Z" />
+                        <path d="M8 11H16" />
+                        <path d="M12 3L14 7H10L12 3Z" />
+                    </svg>
+                    <span>Review</span>
+                </a>
+            </nav>
+            <div class="mt-auto space-y-4">
+                <div class="rounded-2xl bg-gradient-to-r from-[#ffdccc] to-[#ffeac6] p-4 text-sm text-[#723b16]">
+                    <p class="font-semibold mb-1">ស្ថានភាពប្រចាំថ្ងៃ</p>
+                    <p>Visitors +8% | Rating 4.9</p>
+                </div>
+                <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-2xl text-[#c0351d] hover:bg-[#fff4f1]">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                        <path
+                            d="M9 6V4C9 2.895 9.895 2 11 2H19C20.105 2 21 2.895 21 4V20C21 21.105 20.105 22 19 22H11C9.895 22 9 21.105 9 20V18" />
+                        <path d="M13 12H3L6 9" />
+                        <path d="M3 12L6 15" />
+                    </svg>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col">
+            <header class="bg-white border-b border-[#ececec] px-4 sm:px-6 lg:px-10 py-4 flex items-center gap-4">
+                <button id="mobileMenuBtn"
+                    class="lg:hidden w-11 h-11 rounded-xl border border-[#e2e2e2] flex items-center justify-center text-[#4a4a4a]"
+                    aria-label="Toggle sidebar">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M4 7H20" />
+                        <path d="M4 12H20" />
+                        <path d="M4 17H12" />
+                    </svg>
+                </button>
+                <div class="flex-1 flex items-center gap-3 bg-[#f3f3f3] rounded-2xl px-4 py-3">
+                    <svg class="w-5 h-5 text-[#909090]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M16.5 16.5L21 21" />
+                    </svg>
+                    <input type="text" placeholder="ស្វែងរកមុខម្ហូប"
+                        class="bg-transparent flex-1 text-sm focus:outline-none">
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="relative text-[#525252]" aria-label="Notifications">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M18 8A6 6 0 0 0 6 8C6 13 3 15 3 15H21C21 15 18 13 18 8Z" />
+                            <path
+                                d="M13.73 21C13.554 21.3033 13.3014 21.5542 12.9981 21.7292C12.6948 21.9042 12.3514 21.9974 12 21.9974C11.6486 21.9974 11.3052 21.9042 11.0019 21.7292C10.6986 21.5542 10.446 21.3033 10.27 21" />
+                        </svg>
+                        <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#dd070c]"></span>
+                    </button>
+                    <div class="hidden sm:flex flex-col text-sm text-[#5b5b5b]">
+                        <span class="text-[#111] font-semibold">ឆាយា</span>
+                        <span>Super Admin</span>
+                    </div>
+                    <button class="w-11 h-11 rounded-full overflow-hidden border border-[#e0e0e0]">
+                        <img src="https://www.figma.com/api/mcp/asset/646e6186-9aed-486a-9ad0-d4154cfe0563"
+                            alt="Admin Avatar" class="w-full h-full object-cover">
+                    </button>
+                </div>
+            </header>
+
+            <main class="flex-1 px-4 sm:px-6 lg:px-10 py-8">
+                <div class="flex flex-col gap-8">
+                    <div class="flex flex-col gap-2">
+                        <p class="text-sm uppercase tracking-[0.2em] text-[#b26b40]">CuisineKH</p>
+                        <h1 class="text-2xl md:text-[30px] font-semibold text-[#111]
+                        ">ផ្ទាំងគ្រប់គ្រង</h1>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-6 lg:gap-8 items-start">
+                        <section class="space-y-6">
+                            <div class="bg-white rounded-[22px] border border-[#ececec] shadow-sm p-6">
+                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                                    <div>
+                                        <h2 class="text-[22px] font-semibold text-[#111]">Overview</h2>
+                                        <p class="text-sm text-[#7a7a7a]">សង្ខេបលទ្ធផលប្រចាំថ្ងៃ</p>
+                                    </div>
+                                    <div class="flex flex-wrap gap-3">
+                                        <button
+                                            class="flex items-center gap-2 bg-[#f4f4f4] px-4 py-2 rounded-xl text-sm">
+                                            <span>All Time</span>
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.8">
+                                                <path d="M6 9L12 15L18 9" />
+                                            </svg>
+                                        </button>
+                                        <button
+                                            class="px-4 py-2 rounded-xl border border-[#e0e0e0] text-sm">Export</button>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <article
+                                        class="rounded-2xl bg-[#f8f8f8] p-4 flex items-center justify-between shadow-[inset_0_1px_0_rgba(0,0,0,0.04)]">
+                                        <div>
+                                            <p class="text-sm text-[#787878]">User</p>
+                                            <p class="text-3xl font-semibold text-[#111]">168</p>
+                                        </div>
+                                        <span
+                                            class="text-[#0e7c2c] bg-[#dff5e5] text-xs px-3 py-1 rounded-full">+8%</span>
+                                    </article>
+                                    <article
+                                        class="rounded-2xl bg-[#f8f8f8] p-4 flex items-center justify-between shadow-[inset_0_1px_0_rgba(0,0,0,0.04)]">
+                                        <div>
+                                            <p class="text-sm text-[#787878]">Visitors</p>
+                                            <p class="text-3xl font-semibold text-[#111]">10390</p>
+                                        </div>
+                                        <span
+                                            class="text-[#0e7c2c] bg-[#dff5e5] text-xs px-3 py-1 rounded-full">+8%</span>
+                                    </article>
+                                    <article
+                                        class="rounded-2xl bg-[#f8f8f8] p-4 flex items-center justify-between shadow-[inset_0_1px_0_rgba(0,0,0,0.04)]">
+                                        <div>
+                                            <p class="text-sm text-[#787878]">Rating Count</p>
+                                            <p class="text-3xl font-semibold text-[#111]">168</p>
+                                        </div>
+                                        <span
+                                            class="text-[#0e7c2c] bg-[#dff5e5] text-xs px-3 py-1 rounded-full">+8%</span>
+                                    </article>
+                                    <article
+                                        class="rounded-2xl bg-[#f8f8f8] p-4 flex items-center justify-between shadow-[inset_0_1px_0_rgba(0,0,0,0.04)]">
+                                        <div>
+                                            <p class="text-sm text-[#787878]">Guest Visitors</p>
+                                            <p class="text-3xl font-semibold text-[#111]">10390</p>
+                                        </div>
+                                        <span
+                                            class="text-[#0e7c2c] bg-[#dff5e5] text-xs px-3 py-1 rounded-full">+8%</span>
+                                    </article>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-[22px] border border-[#ececec] shadow-sm p-6">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div>
+                                        <h2 class="text-[22px] font-semibold text-[#111]">ការវិភាគទិន្នន័យ</h2>
+                                        <p class="text-sm text-[#7a7a7a]">សកម្មភាពភ្ញៀវ សប្តាហ៍ចុងក្រោយ</p>
+                                    </div>
+                                    <button class="text-sm text-[#b26b40]">ទាញយករបាយការណ៍</button>
+                                </div>
+                                <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_220px] gap-6">
+                                    <div class="space-y-4">
+                                        <div class="flex items-center gap-4 text-[#8a8a8a] text-xs">
+                                            <span class="flex items-center gap-1"><span
+                                                    class="w-3 h-3 rounded-full bg-[#104127]"></span>ភ្ញៀវទូទៅ</span>
+                                            <span class="flex items-center gap-1"><span
+                                                    class="w-3 h-3 rounded-full bg-[#b26b40]"></span>ភ្ញៀវថ្មី</span>
+                                        </div>
+                                        <div
+                                            class="relative h-64 bg-gradient-to-b from-[#fdfbf8] to-[#f6f5f2] rounded-2xl border border-[#f0f0f0] p-6">
+                                            <div
+                                                class="absolute inset-x-6 top-10 bottom-10 grid grid-rows-4 text-[11px] text-[#c0c0c0]">
+                                                <span class="border-t border-dashed border-[#e2e2e2]">4k</span>
+                                                <span class="border-t border-dashed border-[#e2e2e2]">3k</span>
+                                                <span class="border-t border-dashed border-[#e2e2e2]">2k</span>
+                                                <span class="border-t border-dashed border-[#e2e2e2]">1k</span>
+                                            </div>
+                                            <div class="absolute inset-0 px-8 py-8 flex items-end gap-4">
+                                                <div class="flex-1 flex items-end gap-1">
+                                                    <div class="w-3 rounded-full bg-[#104127] h-[65%]"></div>
+                                                    <div class="w-3 rounded-full bg-[#b26b40]/80 h-[40%]"></div>
+                                                </div>
+                                                <div class="flex-1 flex items-end gap-1">
+                                                    <div class="w-3 rounded-full bg-[#104127] h-[80%]"></div>
+                                                    <div class="w-3 rounded-full bg-[#b26b40]/80 h-[55%]"></div>
+                                                </div>
+                                                <div class="flex-1 flex items-end gap-1">
+                                                    <div class="w-3 rounded-full bg-[#104127] h-[70%]"></div>
+                                                    <div class="w-3 rounded-full bg-[#b26b40]/80 h-[45%]"></div>
+                                                </div>
+                                                <div class="flex-1 flex items-end gap-1">
+                                                    <div class="w-3 rounded-full bg-[#104127] h-[90%]"></div>
+                                                    <div class="w-3 rounded-full bg-[#b26b40]/80 h-[60%]"></div>
+                                                </div>
+                                                <div class="flex-1 flex items-end gap-1">
+                                                    <div class="w-3 rounded-full bg-[#104127] h-[75%]"></div>
+                                                    <div class="w-3 rounded-full bg-[#b26b40]/80 h-[52%]"></div>
+                                                </div>
+                                                <div class="flex-1 flex items-end gap-1">
+                                                    <div class="w-3 rounded-full bg-[#104127] h-[82%]"></div>
+                                                    <div class="w-3 rounded-full bg-[#b26b40]/80 h-[57%]"></div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="absolute inset-x-8 bottom-4 flex justify-between text-[11px] text-[#8a8a8a]">
+                                                <span>Mon</span>
+                                                <span>Tue</span>
+                                                <span>Wed</span>
+                                                <span>Thu</span>
+                                                <span>Fri</span>
+                                                <span>Sat</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="border border-[#f0f0f0] rounded-2xl p-4">
+                                            <p class="text-sm text-[#7a7a7a]">ឧស្សាហ៍ភ្ញៀវ</p>
+                                            <p class="text-2xl font-semibold text-[#111]">10,390</p>
+                                            <p class="text-xs text-[#0e7c2c]">+8% vs last week</p>
+                                        </div>
+                                        <div class="border border-[#f0f0f0] rounded-2xl p-4">
+                                            <p class="text-sm text-[#7a7a7a]">ភ្ញៀវថ្មី</p>
+                                            <p class="text-2xl font-semibold text-[#111]">2,145</p>
+                                            <p class="text-xs text-[#b26b40]">-2% vs last week</p>
+                                        </div>
+                                        <div class="border border-[#f0f0f0] rounded-2xl p-4">
+                                            <p class="text-sm text-[#7a7a7a]">Avg. Session</p>
+                                            <p class="text-2xl font-semibold text-[#111]">4m 32s</p>
+                                            <p class="text-xs text-[#7a7a7a]">Stable</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <aside class="w-full bg-white rounded-[22px] border border-[#ececec] shadow-sm p-6 space-y-5">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h2 class="text-[20px] font-semibold text-[#111]">Food</h2>
+                                    <p class="text-sm text-[#858585]">សំណើរពេញនិយម</p>
+                                </div>
+                                <span class="text-sm text-[#6b6b6b]">Favorite</span>
+                            </div>
+                            <div class="space-y-4">
+                                <article class="flex items-center gap-3">
+                                    <img src="https://www.figma.com/api/mcp/asset/8765e04f-f9a6-471c-9f5c-947ebc534cfe"
+                                        alt="សាច់ក្រកចៀន" class="w-16 h-12 rounded-xl object-cover">
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-[#111]">សាច់ក្រកចៀន</p>
+                                        <p class="text-xs text-[#8b8b8b]">Product</p>
+                                    </div>
+                                    <span>61</span>
+                                </article>
+                                <article class="flex items-center gap-3">
+                                    <img src="https://www.figma.com/api/mcp/asset/2a5ee4d4-f346-4f9e-a092-394f437e876d"
+                                        alt="ញុំបង្កង" class="w-16 h-12 rounded-xl object-cover">
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-[#111]">ញុំបង្កង</p>
+                                        <p class="text-xs text-[#8b8b8b]">Product</p>
+                                    </div>
+                                    <span>61</span>
+                                </article>
+                                <article class="flex items-center gap-3">
+                                    <img src="https://www.figma.com/api/mcp/asset/13ebc8af-d61f-409a-a5a4-f092da1d798c"
+                                        alt="ចៀនចួន" class="w-16 h-12 rounded-xl object-cover">
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-[#111]">ចៀនចួន</p>
+                                        <p class="text-xs text-[#8b8b8b]">Product</p>
+                                    </div>
+                                    <span>61</span>
+                                </article>
+                                <article class="flex items-center gap-3">
+                                    <img src="https://www.figma.com/api/mcp/asset/56eed3ea-d786-4703-b7cc-8d6c616f398b"
+                                        alt="ប្រហិតត្រី" class="w-16 h-12 rounded-xl object-cover">
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-[#111]">ប្រហិតត្រី</p>
+                                        <p class="text-xs text-[#8b8b8b]">Product</p>
+                                    </div>
+                                    <span>61</span>
+                                </article>
+                            </div>
+                            <button
+                                class="w-full border border-[#d7d7d7] rounded-2xl py-3 text-sm hover:bg-[#f5f5f5] transition">All
+                                Products</button>
+                        </aside>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="mobileSidebar" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden z-50 lg:hidden" aria-hidden="true">
+        <div class="bg-white w-[260px] h-full shadow-2xl p-6 flex flex-col gap-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="font-semibold text-lg">CuisineKH</p>
+                    <p class="text-xs text-[#8c8c8c]">Admin Console</p>
+                </div>
+                <button id="closeMobileSidebar"
+                    class="w-9 h-9 rounded-full bg-[#f5f5f5] flex items-center justify-center"
+                    aria-label="Close sidebar">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M18 6L6 18" />
+                        <path d="M6 6L18 18" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="space-y-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#f4f4f7] text-[#111]">Dashboard</a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-2xl text-[#5d5d5d] hover:bg-[#f6f6f6]">Food</a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-2xl text-[#5d5d5d] hover:bg-[#f6f6f6]">User</a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-2xl text-[#5d5d5d] hover:bg-[#f6f6f6]">Review</a>
+            </nav>
+            <div class="mt-auto">
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-2 rounded-2xl text-[#c0351d] hover:bg-[#fff4f1]">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const closeMobileSidebar = document.getElementById('closeMobileSidebar');
+
+        const toggleSidebar = (forceState) => {
+            mobileSidebar.classList.toggle('hidden', forceState ?? !mobileSidebar.classList.contains('hidden'));
+            document.body.classList.toggle('overflow-hidden', !mobileSidebar.classList.contains('hidden'));
+        };
+
+        mobileMenuBtn?.addEventListener('click', () => toggleSidebar(false));
+        closeMobileSidebar?.addEventListener('click', () => toggleSidebar(true));
+        mobileSidebar?.addEventListener('click', (event) => {
+            if (event.target === mobileSidebar) toggleSidebar(true);
+        });
+    </script>
+</body>
+
+</html>
