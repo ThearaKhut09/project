@@ -64,14 +64,14 @@ function renderFoodDetail(data) {
   const ingredientsText = formatInlineList(data.ingredients);
   const stepsMarkup = formatStepList(data.step_to_cook);
   const ratingLabel = formatRatingLabel(data.rating_count);
+  const safeFoodNameAttr = escapeHtmlAttr(data.name || "ម្ហូប");
+  const safeFoodIdAttr = escapeHtmlAttr(String(data.id));
 
   foodDetailContainer.innerHTML = `
     <!-- Dish overview -->
     <section class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 py-10 grid lg:grid-cols-[420px_1fr] gap-10 items-start">
       <div class="rounded-[30px] overflow-hidden border border-[#f0d6c4] shadow-sm">
-        <img src="${imageUrl}" alt="${
-    data.name || "ម្ហូប"
-  }" class="w-full h-full object-cover" />
+        <img src="${imageUrl}" alt="${safeFoodNameAttr}" class="w-full h-full object-cover" />
       </div>
       <div class="space-y-6 lg:space-y-8">
         <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between relative">
@@ -95,6 +95,30 @@ function renderFoodDetail(data) {
               </dd>
             </div>
           </dl>
+          <div class="flex flex-wrap gap-3 items-center mt-2 lg:mt-0">
+            <button
+              type="button"
+              class="inline-flex items-center gap-2 border border-[#dd070c] text-[#dd070c] rounded-full px-4 py-2 text-[15px] transition-colors hover:bg-[#dd070c] hover:text-white"
+              data-favorite-food-id="${safeFoodIdAttr}"
+              data-favorite-food-name="${safeFoodNameAttr}"
+              aria-label="បន្ថែមទៅចូលចិត្ត"
+              aria-pressed="false"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"
+                />
+              </svg>
+              <span>បន្ថែមទៅចូលចិត្ត</span>
+            </button>
+          </div>
           <div class="flex items-center gap-3 mt-4 lg:mt-0 text-sm text-[#a4a4a4] lg:absolute lg:right-0 lg:bottom-0">
             <img src="https://www.figma.com/api/mcp/asset/982bc587-7cdc-41fe-bd9d-abb7de7f4ef4" alt="Rating" class="w-[150px] h-7 object-contain" />
             <span>${ratingLabel}</span>
@@ -211,4 +235,16 @@ function renderRatingStars(total) {
       `
     )
     .join("");
+}
+
+function escapeHtmlAttr(value) {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }

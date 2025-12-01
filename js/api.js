@@ -40,8 +40,28 @@
 
     const response = await fetch(buildUrl(endpoint), requestInit);
     const contentType = response.headers.get("Content-Type") || "";
+    const contentLengthHeader = response.headers.get("Content-Length");
     const isJson = contentType.includes("application/json");
-    const payload = isJson ? await response.json() : await response.text();
+    const hasBody =
+      response.status !== 204 &&
+      response.status !== 205 &&
+      response.status !== 304 &&
+      (contentLengthHeader === null || contentLengthHeader !== "0");
+
+    let payload = null;
+
+    if (hasBody) {
+      if (isJson) {
+        try {
+          payload = await response.json();
+        } catch (error) {
+          console.warn("Unable to parse JSON response", error);
+          payload = null;
+        }
+      } else {
+        payload = await response.text();
+      }
+    }
 
     if (!response.ok) {
       const message =
@@ -126,11 +146,16 @@
     };
   }
 
-  async function createFoodPost(foodPostData) {
+  function requireAuthHeaders() {
     const authHeaders = getAuthHeaders();
     if (!authHeaders.Authorization) {
       throw new ApiError("Authentication required. Please log in first.", 401);
     }
+    return authHeaders;
+  }
+
+  async function createFoodPost(foodPostData) {
+    const authHeaders = requireAuthHeaders();
 
     return apiRequest("/food-posts", {
       method: "POST",
@@ -149,10 +174,7 @@
   }
 
   async function getCurrentUser() {
-    const authHeaders = getAuthHeaders();
-    if (!authHeaders.Authorization) {
-      throw new ApiError("Authentication required. Please log in first.", 401);
-    }
+    const authHeaders = requireAuthHeaders();
 
     return apiRequest("/auth/me", {
       method: "GET",
@@ -175,11 +197,18 @@
     });
   }
 
-  async function uploadProfileImage(imageFile, imageType = "profile") {
-    const authHeaders = getAuthHeaders();
-    if (!authHeaders.Authorization) {
-      throw new ApiError("Authentication required. Please log in first.", 401);
+  async function getFoodItem(foodId) {
+    if (!foodId) {
+      throw new ApiError("Food ID is required.", 400);
     }
+
+    return apiRequest(`/food-items/${encodeURIComponent(foodId)}`, {
+      method: "GET",
+    });
+  }
+
+  async function uploadProfileImage(imageFile, imageType = "profile") {
+    const authHeaders = requireAuthHeaders();
 
     const formData = new FormData();
     formData.append("file", imageFile);
@@ -191,6 +220,50 @@
       method: "POST",
       headers: headers,
       body: formData,
+    });
+  }
+
+  async function addFavoriteFood(foodId) {
+    if (!foodId) {
+      throw new ApiError("Food ID is required to add a favorite.", 400);
+    }
+
+    const authHeaders = requireAuthHeaders();
+
+    return apiRequest("/favorites/foods", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...authHeaders,
+      },
+      body: JSON.stringify({ food_item_id: foodId }),
+    });
+  }
+
+  async function removeFavoriteFood(foodId) {
+    if (!foodId) {
+      throw new ApiError("Food ID is required to remove a favorite.", 400);
+    }
+
+    const authHeaders = requireAuthHeaders();
+
+    return apiRequest(`/favorites/foods/${encodeURIComponent(foodId)}`, {
+      method: "DELETE",
+      headers: authHeaders,
+    });
+  }
+
+  async function listFavoriteFoods(skip = 0, limit = 10) {
+    const authHeaders = requireAuthHeaders();
+
+    const searchParams = new URLSearchParams({
+      skip: String(skip),
+      limit: String(limit),
+    });
+
+    return apiRequest(`/favorites/foods?${searchParams.toString()}`, {
+      method: "GET",
+      headers: authHeaders,
     });
   }
 
@@ -208,7 +281,11 @@
     getCurrentUser,
     getUserFoodPosts,
     getFoodPostWithUser,
+    getFoodItem,
     uploadProfileImage,
+    addFavoriteFood,
+    removeFavoriteFood,
+    listFavoriteFoods,
     apiRequest,
   };
 })(window);

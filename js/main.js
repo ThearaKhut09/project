@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initAuthModal();
   initAuthMessaging();
   hydrateAuthState();
+  initFavoriteButtons();
 });
 
 // ========================================
@@ -41,11 +42,11 @@ function initScrollAnimations() {
 const AUTH_MESSAGE_TYPE = "auth:success";
 
 const AUTH_LABELS = {
-  title: "គ្រប់គ្រងគណនី",
+  title: "ចូលចិត្ត",
   signIn: "ចូលគណនី",
   signUp: "បង្កើតគណនី",
   greeting: "សួស្តី",
-  goHome: "គ្រប់គ្រងគណនី",
+  goHome: "ចូលចិត្ត",
   signOut: "ចាកចេញ",
 };
 
@@ -386,10 +387,152 @@ function getUserInitial(user) {
 
 function navigateHome() {
   const path = window.location.pathname;
-  if (path.endsWith("index.html") || path === "/" || path === "") {
+  if (path.endsWith("favorite.html")) {
     return;
   }
-  window.location.href = "index.html";
+  window.location.href = "favorite.html";
+}
+
+// ========================================
+// Favorite Buttons
+// ========================================
+const FAVORITE_BUTTON_SELECTOR = "[data-favorite-food-id]";
+let favoriteToastElement = null;
+let favoriteToastTimer = null;
+
+function initFavoriteButtons() {
+  document.addEventListener("click", handleFavoriteButtonClick);
+}
+
+async function handleFavoriteButtonClick(event) {
+  const button = event.target.closest(FAVORITE_BUTTON_SELECTOR);
+  if (!button) {
+    return;
+  }
+
+  event.preventDefault();
+
+  if (button.dataset.favoriteLoading === "true") {
+    return;
+  }
+
+  const foodId = button.getAttribute("data-favorite-food-id");
+  if (!foodId) {
+    console.warn("Favorite button missing food ID", button);
+    return;
+  }
+
+  if (!window.PteahBayAPI || !window.PteahBayAPI.addFavoriteFood) {
+    showFavoriteToast("សូមព្យាយាមម្តងទៀតក្រោយ។", "error");
+    return;
+  }
+
+  setFavoriteButtonLoading(button, true);
+
+  try {
+    await window.PteahBayAPI.addFavoriteFood(foodId);
+    setFavoriteButtonState(button, "saved");
+
+    const message =
+      button.dataset.favoriteSuccessMessage ||
+      `${
+        button.dataset.favoriteFoodName || "ម្ហូប"
+      } ត្រូវបានបន្ថែមទៅបញ្ជីចូលចិត្ត។`;
+    showFavoriteToast(message, "success");
+  } catch (error) {
+    handleFavoriteError(error, button);
+  } finally {
+    setFavoriteButtonLoading(button, false);
+  }
+}
+
+function setFavoriteButtonLoading(button, isLoading) {
+  button.dataset.favoriteLoading = String(isLoading);
+  button.disabled = isLoading;
+  button.setAttribute("aria-busy", String(isLoading));
+  const icon = button.querySelector("svg");
+  if (icon) {
+    icon.style.opacity = isLoading ? "0.6" : "";
+  }
+}
+
+function setFavoriteButtonState(button, state) {
+  button.dataset.favoriteState = state;
+  button.setAttribute("aria-pressed", state === "saved" ? "true" : "false");
+  const icon = button.querySelector("svg");
+  if (icon) {
+    const baseColor =
+      button.dataset.favoriteBaseColor || button.style.color || "#dd070c";
+    if (state === "saved") {
+      icon.style.fill = "currentColor";
+      icon.style.stroke = "currentColor";
+    } else {
+      icon.style.fill = "none";
+      icon.style.stroke = baseColor;
+    }
+  }
+}
+
+function handleFavoriteError(error, button) {
+  console.error("Unable to add favorite", error);
+  if (error && error.status === 401) {
+    showFavoriteToast("សូមចូលគណនីសិន ដើម្បីបន្ថែមចូលចិត្ត។", "error");
+    openAuthModal("sign-in");
+    return;
+  }
+
+  const message =
+    error?.message ||
+    button.dataset.favoriteErrorMessage ||
+    "ពុំអាចបន្ថែមទៅចូលចិត្តបានទេ។";
+  showFavoriteToast(message, "error");
+}
+
+function showFavoriteToast(message, tone = "success") {
+  const toast = ensureFavoriteToastElement();
+  toast.textContent = message;
+  toast.style.backgroundColor =
+    tone === "error" ? "rgba(173,52,62,0.95)" : "rgba(16,65,39,0.95)";
+
+  requestAnimationFrame(() => {
+    toast.style.opacity = "1";
+    toast.style.transform = "translateX(-50%) translateY(0)";
+  });
+
+  if (favoriteToastTimer) {
+    clearTimeout(favoriteToastTimer);
+  }
+
+  favoriteToastTimer = setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateX(-50%) translateY(10px)";
+  }, 3200);
+}
+
+function ensureFavoriteToastElement() {
+  if (favoriteToastElement) {
+    return favoriteToastElement;
+  }
+
+  const toast = document.createElement("div");
+  toast.className = "favorite-toast";
+  toast.style.position = "fixed";
+  toast.style.bottom = "24px";
+  toast.style.left = "50%";
+  toast.style.transform = "translateX(-50%) translateY(10px)";
+  toast.style.padding = "12px 22px";
+  toast.style.borderRadius = "999px";
+  toast.style.color = "#fff";
+  toast.style.fontSize = "15px";
+  toast.style.fontWeight = "500";
+  toast.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
+  toast.style.opacity = "0";
+  toast.style.zIndex = "9999";
+  toast.style.pointerEvents = "none";
+  toast.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+  document.body.appendChild(toast);
+  favoriteToastElement = toast;
+  return toast;
 }
 
 document.addEventListener("keydown", function (event) {
