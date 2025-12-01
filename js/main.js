@@ -1,5 +1,4 @@
 "use strict";
-
 // ========================================
 // DOM Content Loaded Event
 // ========================================
@@ -7,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollAnimations();
   initUserDropdown();
   initAuthModal();
+  initAuthMessaging();
+  hydrateAuthState();
 });
 
 // ========================================
@@ -37,10 +38,15 @@ function initScrollAnimations() {
 // ========================================
 // Authentication Dropdown + Modal
 // ========================================
+const AUTH_MESSAGE_TYPE = "auth:success";
+
 const AUTH_LABELS = {
   title: "គ្រប់គ្រងគណនី",
   signIn: "ចូលគណនី",
   signUp: "បង្កើតគណនី",
+  greeting: "សួស្តី",
+  goHome: "គ្រប់គ្រងគណនី",
+  signOut: "ចាកចេញ",
 };
 
 const AUTH_FILE_MAP = {
@@ -52,14 +58,12 @@ let authDropdownElement = null;
 let authDropdownTrigger = null;
 let authModalElement = null;
 let authModalFrame = null;
+let currentAuthSession = null;
+let userAvatarImage = null;
+let userAvatarInitial = null;
 
 function initUserDropdown() {
-  const triggerImage = document.querySelector('button img[alt="User"]');
-  if (!triggerImage) {
-    return;
-  }
-
-  const triggerButton = triggerImage.closest("button");
+  const triggerButton = document.querySelector("[data-user-trigger]");
   if (!triggerButton) {
     return;
   }
@@ -68,6 +72,9 @@ function initUserDropdown() {
   authDropdownTrigger.type = "button";
   authDropdownTrigger.setAttribute("aria-haspopup", "true");
   authDropdownTrigger.setAttribute("aria-expanded", "false");
+
+  userAvatarImage = triggerButton.querySelector("[data-user-avatar-img]");
+  userAvatarInitial = triggerButton.querySelector("[data-user-avatar-initial]");
 
   const container = triggerButton.parentElement;
   if (!container) {
@@ -85,11 +92,7 @@ function initUserDropdown() {
 
   authDropdownElement = document.createElement("div");
   authDropdownElement.className = "auth-dropdown auth-dropdown--hidden";
-  authDropdownElement.innerHTML = `
-    <p class="auth-dropdown__title">${AUTH_LABELS.title}</p>
-    <button type="button" class="auth-dropdown__item" data-auth-action="sign-in">${AUTH_LABELS.signIn}</button>
-    <button type="button" class="auth-dropdown__item" data-auth-action="sign-up">${AUTH_LABELS.signUp}</button>
-  `;
+  renderAuthDropdown();
 
   anchor.appendChild(authDropdownElement);
 
@@ -103,8 +106,7 @@ function initUserDropdown() {
     if (!action) {
       return;
     }
-    openAuthModal(action.dataset.authAction);
-    hideAuthDropdown();
+    handleAuthAction(action.dataset.authAction);
   });
 
   document.addEventListener("click", function (event) {
@@ -239,6 +241,155 @@ function handleAuthFrameError() {
   }
 
   authModalFrame?.classList.remove("auth-modal__frame--ready");
+}
+
+function initAuthMessaging() {
+  window.addEventListener("message", function (event) {
+    const data = event.data;
+    if (!data || typeof data !== "object") {
+      return;
+    }
+
+    if (data.type === AUTH_MESSAGE_TYPE) {
+      closeAuthModal();
+      hydrateAuthState();
+      navigateHome();
+    }
+  });
+}
+
+function hydrateAuthState() {
+  if (!window.PteahBayAPI) {
+    currentAuthSession = null;
+    updateAuthUiState();
+    return;
+  }
+
+  currentAuthSession = window.PteahBayAPI.getStoredAuthSession();
+  updateAuthUiState();
+}
+
+function updateAuthUiState() {
+  updateUserAvatar();
+  renderAuthDropdown();
+}
+
+const DEFAULT_USER_AVATAR_SRC = "images/user-icon.svg";
+
+function updateUserAvatar() {
+  if (!authDropdownTrigger) {
+    return;
+  }
+
+  const user = currentAuthSession?.user;
+  const hasProfileImage = Boolean(user?.profile_image);
+
+  if (hasProfileImage && userAvatarImage) {
+    userAvatarImage.src = user.profile_image;
+    userAvatarImage.alt = user.username || user.email || "User";
+    userAvatarImage.classList.remove("hidden");
+    userAvatarInitial?.classList.add("hidden");
+    return;
+  }
+
+  if (user && userAvatarInitial) {
+    userAvatarInitial.textContent = getUserInitial(user);
+    userAvatarInitial.classList.remove("hidden");
+    userAvatarInitial.classList.add("uppercase");
+    userAvatarImage?.classList.add("hidden");
+    return;
+  }
+
+  if (userAvatarImage) {
+    userAvatarImage.src = DEFAULT_USER_AVATAR_SRC;
+    userAvatarImage.alt = "User";
+    userAvatarImage.classList.remove("hidden");
+  }
+  userAvatarInitial?.classList.add("hidden");
+}
+
+function renderAuthDropdown() {
+  if (!authDropdownElement) {
+    return;
+  }
+
+  authDropdownElement.innerHTML = "";
+
+  const title = document.createElement("p");
+  title.className = "auth-dropdown__title";
+  if (currentAuthSession?.user) {
+    title.textContent = `${AUTH_LABELS.greeting} ${getUserDisplayName(
+      currentAuthSession.user
+    )}`;
+  } else {
+    title.textContent = AUTH_LABELS.title;
+  }
+  authDropdownElement.appendChild(title);
+
+  const actions = currentAuthSession?.user
+    ? [
+        { action: "home", label: AUTH_LABELS.goHome },
+        { action: "logout", label: AUTH_LABELS.signOut },
+      ]
+    : [
+        { action: "sign-in", label: AUTH_LABELS.signIn },
+        { action: "sign-up", label: AUTH_LABELS.signUp },
+      ];
+
+  actions.forEach((item) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "auth-dropdown__item";
+    button.dataset.authAction = item.action;
+    button.textContent = item.label;
+    authDropdownElement.appendChild(button);
+  });
+}
+
+function handleAuthAction(action) {
+  switch (action) {
+    case "sign-in":
+      openAuthModal("sign-in");
+      hideAuthDropdown();
+      break;
+    case "sign-up":
+      openAuthModal("sign-up");
+      hideAuthDropdown();
+      break;
+    case "home":
+      hideAuthDropdown();
+      navigateHome();
+      break;
+    case "logout":
+      hideAuthDropdown();
+      performLogout();
+      break;
+    default:
+      break;
+  }
+}
+
+function performLogout() {
+  window.PteahBayAPI?.clearAuthSession();
+  currentAuthSession = null;
+  updateAuthUiState();
+}
+
+function getUserDisplayName(user) {
+  return user.full_name || user.username || user.email || "អ្នកប្រើ";
+}
+
+function getUserInitial(user) {
+  const displayName = getUserDisplayName(user);
+  return displayName ? displayName.charAt(0) : "U";
+}
+
+function navigateHome() {
+  const path = window.location.pathname;
+  if (path.endsWith("index.html") || path === "/" || path === "") {
+    return;
+  }
+  window.location.href = "index.html";
 }
 
 document.addEventListener("keydown", function (event) {

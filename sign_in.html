@@ -34,7 +34,9 @@
   </script>
 
   <style>
-    body { font-family: 'Siemreap', sans-serif; }
+    body {
+      font-family: 'Siemreap', sans-serif;
+    }
   </style>
 </head>
 
@@ -44,9 +46,8 @@
 
     <!-- Left: Beautiful Image -->
     <div class="hidden lg:block relative">
-      <img src="https://www.figma.com/api/mcp/asset/c27b8e77-a9c4-467f-97c9-c27737108ac6"
-           alt="គ្រឿងផ្សំស្រស់ៗ"
-           class="w-full h-full object-cover min-h-[680px]" />
+      <img src="https://www.figma.com/api/mcp/asset/c27b8e77-a9c4-467f-97c9-c27737108ac6" alt="គ្រឿងផ្សំស្រស់ៗ"
+        class="w-full h-full object-cover min-h-[680px]" />
       <div class="absolute inset-0 bg-gradient-to-t from-brand-primary/60 to-transparent"></div>
     </div>
 
@@ -55,39 +56,38 @@
 
       <!-- Logo -->
       <div class="text-center mb-10">
-        <img src="https://www.figma.com/api/mcp/asset/69548312-b6ca-455c-9b72-b74fa077a555"
-             alt="CuisineKH Logo"
-             class="w-32 h-32 mx-auto mb-6 object-contain drop-shadow-lg" />
+        <img src="https://www.figma.com/api/mcp/asset/69548312-b6ca-455c-9b72-b74fa077a555" alt="CuisineKH Logo"
+          class="w-32 h-32 mx-auto mb-6 object-contain drop-shadow-lg" />
         <h1 class="text-4xl md:text-5xl font-bold text-brand-primary">ចូលគណនី</h1>
       </div>
 
       <!-- Form -->
-      <form class="space-y-8">
+      <form class="space-y-8" data-login-form>
         <!-- Email -->
         <div>
           <label class="block text-2xl text-brand-primary mb-3">អុីម៊ែល</label>
-          <input type="email"
-                 required
-                 placeholder="example@gmail.com"
-                 class="w-full h-16 px-6 rounded-2xl border-2 border-brand-border text-xl focus:outline-none focus:border-brand-accent focus:ring-4 focus:ring-brand-accent/20 transition" />
+          <input type="email" required name="email" autocomplete="email" data-login-email
+            placeholder="example@gmail.com"
+            class="w-full h-16 px-6 rounded-2xl border-2 border-brand-border text-xl focus:outline-none focus:border-brand-accent focus:ring-4 focus:ring-brand-accent/20 transition" />
         </div>
 
         <!-- Password -->
         <div>
           <label class="block text-2xl text-brand-primary mb-3">ពាក្យសម្ងាត់</label>
-          <input type="password"
-                 required
-                 placeholder="••••••••"
-                 class="w-full h-16 px-6 rounded-2xl border-2 border-brand-border text-xl focus:outline-none focus:border-brand-accent focus:ring-4 focus:ring-brand-accent/20 transition" />
+          <input type="password" required name="password" autocomplete="current-password" data-login-password
+            placeholder="••••••••"
+            class="w-full h-16 px-6 rounded-2xl border-2 border-brand-border text-xl focus:outline-none focus:border-brand-accent focus:ring-4 focus:ring-brand-accent/20 transition" />
         </div>
 
         <!-- Submit Button -->
         <div class="text-center pt-6">
-          <button type="submit"
-                  class="bg-brand-primary hover:bg-brand-accent text-white font-bold text-2xl px-16 py-5 rounded-2xl shadow-lg transform hover:scale-105 transition duration-200">
+          <button type="submit" data-login-submit
+            class="bg-brand-primary hover:bg-brand-accent text-white font-bold text-2xl px-16 py-5 rounded-2xl shadow-lg transform hover:scale-105 transition duration-200">
             ចូលគណនី
           </button>
         </div>
+
+        <div data-login-status class="hidden text-center text-xl font-semibold px-5 py-4 rounded-2xl border"></div>
       </form>
 
       <!-- Register Link -->
@@ -98,5 +98,96 @@
     </div>
   </div>
 
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const AUTH_MESSAGE_TYPE = "auth:success";
+      const form = document.querySelector("[data-login-form]");
+      const emailInput = document.querySelector("[data-login-email]");
+      const passwordInput = document.querySelector("[data-login-password]");
+      const submitButton = document.querySelector("[data-login-submit]");
+      const statusBox = document.querySelector("[data-login-status]");
+
+      if (!form || !window.PteahBayAPI) {
+        return;
+      }
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        toggleSubmitting(true);
+        clearStatus();
+
+        try {
+          const payload = await window.PteahBayAPI.loginUser({
+            email: emailInput.value.trim(),
+            password: passwordInput.value,
+          });
+
+          setStatus(
+            "success",
+            "ចូលគណនីបានជោគជ័យ! សូមរង់ចាំបន្តិច..."
+          );
+          notifyParent(payload);
+        } catch (error) {
+          const fallbackMessage =
+            "មានបញ្ហាពេលចូលគណនី។ សូមពិនិត្យព័ត៌មានរបស់អ្នកឡើងវិញ។";
+          const message = error && error.message ? error.message : fallbackMessage;
+          setStatus("error", message);
+        } finally {
+          toggleSubmitting(false);
+        }
+      });
+
+      function toggleSubmitting(isSubmitting) {
+        if (!submitButton) {
+          return;
+        }
+        submitButton.disabled = isSubmitting;
+        submitButton.classList.toggle("opacity-70", isSubmitting);
+        submitButton.textContent = isSubmitting ? "កំពុងចូល..." : "ចូលគណនី";
+      }
+
+      function setStatus(type, message) {
+        if (!statusBox) {
+          return;
+        }
+
+        statusBox.className = "text-center text-xl font-semibold px-5 py-4 rounded-2xl border";
+        statusBox.classList.remove("hidden");
+
+        if (type === "success") {
+          statusBox.classList.add("bg-emerald-50", "text-emerald-800", "border-emerald-200");
+        } else if (type === "error") {
+          statusBox.classList.add("bg-red-50", "text-red-800", "border-red-200");
+        }
+
+        statusBox.textContent = message;
+      }
+
+      function clearStatus() {
+        if (!statusBox) {
+          return;
+        }
+        statusBox.className = "hidden text-center text-xl font-semibold px-5 py-4 rounded-2xl border";
+        statusBox.textContent = "";
+      }
+
+      function notifyParent(payload) {
+        if (!window.parent || window.parent === window) {
+          window.location.href = "index.html";
+          return;
+        }
+
+        window.parent.postMessage(
+          {
+            type: AUTH_MESSAGE_TYPE,
+            payload,
+          },
+          "*"
+        );
+      }
+    });
+  </script>
 </body>
+
 </html>

@@ -1,1232 +1,829 @@
 <!DOCTYPE html>
 <html lang="km">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>សម្បូរបែប - ម្ហូបតាមខេត្ត</title>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>សម្បូរបែប - ម្ហូបតាមខេត្ត</title>
 
-    <!-- Khmer OS Siemreap Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Siemreap&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css" />
+  <!-- Khmer OS Siemreap Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Siemreap&display=swap" rel="stylesheet" />
 
-    <style>
-      /* Additional responsive styles */
-      @media (max-width: 768px) {
-        .star-rating svg,
-        .food-card p {
-          font-size: clamp(14px, 3vw, 20px);
-        }
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* Additional responsive styles */
+    @media (max-width: 768px) {
+
+      .star-rating svg,
+      .food-card p {
+        font-size: clamp(14px, 3vw, 20px);
       }
+    }
 
-      /* Make all remaining food cards consistent */
+    /* Make all remaining food cards consistent */
+    .bg-neutral-50 .h-\[372px\] {
+      height: 250px;
+    }
+
+    @media (min-width: 768px) {
       .bg-neutral-50 .h-\[372px\] {
-        height: 250px;
+        height: 320px;
       }
+    }
 
-      @media (min-width: 768px) {
-        .bg-neutral-50 .h-\[372px\] {
-          height: 320px;
-        }
+    @media (min-width: 1024px) {
+      .bg-neutral-50 .h-\[372px\] {
+        height: 372px;
       }
+    }
+  </style>
+</head>
 
-      @media (min-width: 1024px) {
-        .bg-neutral-50 .h-\[372px\] {
-          height: 372px;
-        }
-      }
-    </style>
-  </head>
-
-  <body class="bg-white font-siemreap">
-    <!-- Header -->
-    <header
-      class="bg-[#F5F5F5] h-auto md:h-[89px] py-3 md:py-0 sticky top-0 z-50 shadow-sm"
-    >
-      <nav
-        class="max-w-[1360px] mx-auto flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 lg:px-10 relative"
-      >
-        <!-- Logo -->
-        <div
-          class="h-[60px] w-[120px] md:h-[90px] md:w-[165px] flex items-center"
-        >
-          <a href="index.html" class="block h-full w-full">
-            <img
-              src="images/logo.png"
-              alt="SombobaebKH Logo"
-              class="w-full h-full object-contain"
-            />
-          </a>
-        </div>
-
-        <!-- Navigation Menu (Desktop) -->
-        <div
-          class="hidden lg:flex gap-4 xl:gap-[26px] items-center text-[14px] xl:text-[16px]"
-        >
-          <a
-            href="index.html"
-            class="text-[#642f28] hover:text-[#dd070c] transition-colors"
-            >ទំព័រដើម</a
-          >
-          <a
-            href="general_food.html"
-            class="text-[#642f28] hover:text-[#dd070c] transition-colors"
-            >មុខម្ហូបទូទៅ</a
-          >
-          <a href="province.html" class="text-[#dd070c] font-semibold"
-            >ម្ហូបតាមខេត្ត</a
-          >
-          <a
-            href="about.html"
-            class="text-[#642f28] hover:text-[#dd070c] transition-colors"
-            >អំពីយើង</a
-          >
-        </div>
-
-        <!-- Right Side Actions -->
-        <div class="flex gap-2 md:gap-[15px] items-center">
-          <!-- Upload Button -->
-          <a
-            href="#"
-            id="uploadBtn"
-            class="hidden md:flex group border border-[#642f28] rounded-[5px] px-3 md:px-6 py-1.5 md:py-2 items-center gap-1 md:gap-2 hover:bg-[#dd070c] hover:text-white transition-colors"
-          >
-            <svg
-              class="w-[9px] h-[10px] text-[#642f28] group-hover:text-white transition-colors"
-              viewBox="0 0 9 10"
-              fill="none"
-            >
-              <path
-                d="M4.5 0L4.5 7M4.5 0L1.5 3M4.5 0L7.5 3M0 10H9"
-                stroke="currentColor"
-                stroke-width="1"
-              />
-            </svg>
-
-            <span
-              class="text-[#642f28] text-[13px] md:text-[15px] group-hover:text-white transition-colors"
-            >
-              បង្ហោះ
-            </span>
-          </a>
-
-          <!-- Dark Mode Moon Icon -->
-          <button id="darkModeBtn" class="relative hidden md:block">
-            <svg
-              class="w-[28px] h-[32px] md:w-[34px] md:h-[38px]"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 640 640"
-              fill="#000000"
-            >
-              <path
-                d="M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z"
-              />
-            </svg>
-          </button>
-
-          <!-- User Profile -->
-          <button
-            class="w-[38px] h-[38px] md:w-[47px] md:h-[47px] rounded-full overflow-hidden"
-          >
-            <img
-              src="images/user-icon.svg"
-              alt="User"
-              class="w-full h-full object-cover"
-            />
-          </button>
-
-          <!-- Hamburger Menu Button (Mobile) -->
-          <button
-            id="hamburger"
-            class="lg:hidden flex flex-col justify-center items-center w-10 h-10 rounded-md hover:bg-[#e5d5c4] transition-colors relative z-[60]"
-            aria-label="Toggle menu"
-          >
-            <span
-              class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out"
-            ></span>
-            <span
-              class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out mt-1.5"
-            ></span>
-            <span
-              class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out mt-1.5"
-            ></span>
-          </button>
-        </div>
-      </nav>
-
-      <!-- Mobile Navigation Menu (Dropdown) -->
-      <div
-        id="navMenu"
-        class="lg:hidden overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 absolute top-full left-0 right-0 z-40 w-full"
-      >
-        <div class="bg-white border-t-2 border-[#642f28] shadow-lg w-full">
-          <div class="max-w-[1360px] mx-auto px-4 py-4 flex flex-col gap-1">
-            <a
-              href="#"
-              class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium"
-              >ទំព័រដើម</a
-            >
-            <a
-              href="#"
-              class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium"
-              >មុខម្ហូបទូទៅ</a
-            >
-            <a
-              href="province.html"
-              class="bg-[#f3e9dd] text-[#dd070c] px-4 py-3 rounded-md text-[15px] font-semibold"
-              >ម្ហូបតាមខេត្ត</a
-            >
-            <a
-              href="about.html"
-              class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium"
-              >អំពីយើង</a
-            >
-
-            <!-- Mobile Actions (Only show on phone) -->
-            <div
-              class="md:hidden border-t border-gray-200 mt-2 pt-3 flex flex-col gap-2"
-            >
-              <a
-                href="#"
-                class="flex items-center gap-2 text-[#642f28] hover:bg-[#f3e9dd] px-4 py-3 rounded-md transition-colors"
-              >
-                <svg class="w-5 h-5" viewBox="0 0 9 10" fill="none">
-                  <path
-                    d="M4.5 0L4.5 7M4.5 0L1.5 3M4.5 0L7.5 3M0 10H9"
-                    stroke="currentColor"
-                    stroke-width="1"
-                  />
-                </svg>
-                <span class="text-[15px] font-medium">បង្ហោះ</span>
-              </a>
-              <button
-                class="flex items-center gap-2 text-[#642f28] hover:bg-[#f3e9dd] px-4 py-3 rounded-md transition-colors"
-              >
-                <svg
-                  class="w-5 h-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 640 640"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z"
-                  />
-                </svg>
-                <span class="text-[15px] font-medium">ងងឹត</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- Hero Section with Search -->
-    <section
-      class="relative h-[400px] md:h-[500px] lg:h-[645px] flex items-center justify-center overflow-hidden"
-    >
-      <!-- Background Image -->
-      <div class="absolute inset-0 w-full h-full">
-        <img
-          src="images/hero.jpg"
-          alt="Hero Background"
-          class="w-full h-full object-cover"
-        />
+<body class="bg-white font-siemreap">
+  <!-- Header -->
+  <header class="bg-[#F5F5F5] h-auto md:h-[89px] py-3 md:py-0 sticky top-0 z-50 shadow-sm">
+    <nav
+      class="max-w-[1360px] mx-auto flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 lg:px-10 relative">
+      <!-- Logo -->
+      <div class="h-[60px] w-[120px] md:h-[90px] md:w-[165px] flex items-center">
+        <a href="index.html" class="block h-full w-full">
+          <img src="images/logo.png" alt="SombobaebKH Logo" class="w-full h-full object-contain" />
+        </a>
       </div>
 
-      <!-- Dark Overlay -->
-      <div class="absolute inset-0 bg-black/40"></div>
+      <!-- Navigation Menu (Desktop) -->
+      <div class="hidden lg:flex gap-4 xl:gap-[26px] items-center text-[14px] xl:text-[16px]">
+        <a href="index.html" class="text-[#642f28] hover:text-[#dd070c] transition-colors">ទំព័រដើម</a>
+        <a href="general_food.html" class="text-[#642f28] hover:text-[#dd070c] transition-colors">មុខម្ហូបទូទៅ</a>
+        <a href="province.html" class="text-[#dd070c] font-semibold">ម្ហូបតាមខេត្ត</a>
+        <a href="about.html" class="text-[#642f28] hover:text-[#dd070c] transition-colors">អំពីយើង</a>
+      </div>
 
-      <!-- Content -->
-      <div class="relative z-10 text-center px-4">
-        <h1
-          class="text-[#f8d3bd] text-[24px] md:text-[32px] lg:text-[40px] font-normal mb-[15px] md:mb-[20px]"
-        >
-          ស្វែងរកបន្ថែមទៀត
-        </h1>
-
-        <!-- Search Bar -->
-        <div
-          class="bg-[#F5F5F5] rounded-[10px] w-full max-w-[90vw] md:max-w-[600px] lg:w-[764px] h-auto md:h-[94px] flex flex-col md:flex-row items-center p-4 md:px-[34px] gap-3 md:gap-4"
-        >
-          <!-- Search Icon -->
-          <svg
-            class="w-[24px] h-[24px] md:w-[30px] md:h-[30px] flex-shrink-0"
-            viewBox="0 0 30 30"
-            fill="none"
-          >
-            <path
-              d="M21 21L27 27M12 23C6.201 23 1.5 18.299 1.5 12.5C1.5 6.701 6.201 2 12 2C17.799 2 22.5 6.701 22.5 12.5C22.5 18.299 17.799 23 12 23Z"
-              stroke="#55504c"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+      <!-- Right Side Actions -->
+      <div class="flex gap-2 md:gap-[15px] items-center">
+        <!-- Upload Button -->
+        <a href="#" id="uploadBtn"
+          class="hidden md:flex group border border-[#642f28] rounded-[5px] px-3 md:px-6 py-1.5 md:py-2 items-center gap-1 md:gap-2 hover:bg-[#dd070c] hover:text-white transition-colors">
+          <svg class="w-[9px] h-[10px] text-[#642f28] group-hover:text-white transition-colors" viewBox="0 0 9 10"
+            fill="none">
+            <path d="M4.5 0L4.5 7M4.5 0L1.5 3M4.5 0L7.5 3M0 10H9" stroke="currentColor" stroke-width="1" />
           </svg>
 
-          <!-- Input -->
-          <input
-            type="text"
-            placeholder="វាយឈ្មោះខេត្ត (ឧ. សៀមរាប, កំពត, បាត់ដំបង...)"
-            class="flex-1 w-full md:w-auto bg-transparent text-[#55504c] text-[16px] md:text-[20px] outline-none placeholder:text-[#55504c]"
-          />
+          <span class="text-[#642f28] text-[13px] md:text-[15px] group-hover:text-white transition-colors">
+            បង្ហោះ
+          </span>
+        </a>
 
-          <!-- Search Button -->
-          <button
-            class="w-full md:w-auto bg-[#104127] text-white px-6 md:px-[40px] py-2 md:py-[10px] rounded-[10px] text-[16px] md:text-[20px] hover:bg-[#0d3620] transition-colors"
-          >
-            ស្វែងរក
-          </button>
+        <!-- Dark Mode Moon Icon -->
+        <button id="darkModeBtn" class="relative hidden md:block" aria-label="Dark mode toggle">
+          <svg class="w-[28px] h-[32px] md:w-[34px] md:h-[38px]" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 640 640" fill="#000000">
+            <path
+              d="M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z" />
+          </svg>
+        </button>
+
+        <!-- User Profile -->
+        <button class="w-[38px] h-[38px] md:w-[47px] md:h-[47px] rounded-full overflow-hidden" data-user-trigger
+          aria-label="User menu">
+          <span
+            class="block w-full h-full rounded-full overflow-hidden bg-[#104127] text-white font-semibold text-lg flex items-center justify-center"
+            data-user-avatar>
+            <img src="images/user-icon.svg" alt="User" class="w-full h-full object-cover" data-user-avatar-img />
+            <span class="hidden" data-user-avatar-initial>U</span>
+          </span>
+        </button>
+
+        <!-- Hamburger Menu Button (Mobile) -->
+        <button id="hamburger"
+          class="lg:hidden flex flex-col justify-center items-center w-10 h-10 rounded-md hover:bg-[#e5d5c4] transition-colors relative z-[60]"
+          aria-label="Toggle menu">
+          <span class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out"></span>
+          <span class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out mt-1.5"></span>
+          <span class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out mt-1.5"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Navigation Menu (Dropdown) -->
+    <div id="navMenu"
+      class="lg:hidden overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 absolute top-full left-0 right-0 z-40 w-full">
+      <div class="bg-white border-t-2 border-[#642f28] shadow-lg w-full">
+        <div class="max-w-[1360px] mx-auto px-4 py-4 flex flex-col gap-1">
+          <a href="#"
+            class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">ទំព័រដើម</a>
+          <a href="#"
+            class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">មុខម្ហូបទូទៅ</a>
+          <a href="province.html"
+            class="bg-[#f3e9dd] text-[#dd070c] px-4 py-3 rounded-md text-[15px] font-semibold">ម្ហូបតាមខេត្ត</a>
+          <a href="about.html"
+            class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">អំពីយើង</a>
+
+          <!-- Mobile Actions (Only show on phone) -->
+          <div class="md:hidden border-t border-gray-200 mt-2 pt-3 flex flex-col gap-2">
+            <a href="#"
+              class="flex items-center gap-2 text-[#642f28] hover:bg-[#f3e9dd] px-4 py-3 rounded-md transition-colors">
+              <svg class="w-5 h-5" viewBox="0 0 9 10" fill="none">
+                <path d="M4.5 0L4.5 7M4.5 0L1.5 3M4.5 0L7.5 3M0 10H9" stroke="currentColor" stroke-width="1" />
+              </svg>
+              <span class="text-[15px] font-medium">បង្ហោះ</span>
+            </a>
+            <button
+              class="flex items-center gap-2 text-[#642f28] hover:bg-[#f3e9dd] px-4 py-3 rounded-md transition-colors">
+              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
+                <path
+                  d="M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z" />
+              </svg>
+              <span class="text-[15px] font-medium">ងងឹត</span>
+            </button>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </header>
 
-    <!-- Section Title -->
-    <h2
-      class="text-[#104127] text-[24px] md:text-[32px] lg:text-[40px] text-center underline decoration-solid mt-[40px] md:mt-[60px] lg:mt-[87px] mb-[30px] md:mb-[40px] lg:mb-[53px] px-4"
-    >
-      ភោជនីយដ្ឋានល្បីតាមបណ្តាខេត្តធំៗ
-    </h2>
+  <!-- Hero Section with Search -->
+  <section class="relative h-[400px] md:h-[500px] lg:h-[645px] flex items-center justify-center overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 w-full h-full">
+      <img src="images/hero.jpg" alt="Hero Background" class="w-full h-full object-cover" />
+    </div>
 
-    <!-- Food Cards Section (Row 1) -->
-    <div
-      class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 mb-[30px] md:mb-[40px] lg:mb-[50px]"
-    >
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black/40"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center px-4">
+      <h1 class="text-[#f8d3bd] text-[24px] md:text-[32px] lg:text-[40px] font-normal mb-[15px] md:mb-[20px]">
+        ស្វែងរកបន្ថែមទៀត
+      </h1>
+
+      <!-- Search Bar -->
       <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 lg:gap-[68px]"
-      >
-        <!-- Food Card 1 -->
-        <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
-          <!-- Heart Button -->
-          <button
-            class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10"
-          >
-            <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
-              <path
-                d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
-                stroke="#642f28"
-                stroke-width="1.5"
-                fill="none"
-              />
-            </svg>
-          </button>
+        class="bg-[#F5F5F5] rounded-[10px] w-full max-w-[90vw] md:max-w-[600px] lg:w-[764px] h-auto md:h-[94px] flex flex-col md:flex-row items-center p-4 md:px-[34px] gap-3 md:gap-4">
+        <!-- Search Icon -->
+        <svg class="w-[24px] h-[24px] md:w-[30px] md:h-[30px] flex-shrink-0" viewBox="0 0 30 30" fill="none">
+          <path
+            d="M21 21L27 27M12 23C6.201 23 1.5 18.299 1.5 12.5C1.5 6.701 6.201 2 12 2C17.799 2 22.5 6.701 22.5 12.5C22.5 18.299 17.799 23 12 23Z"
+            stroke="#55504c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
 
-          <!-- Image -->
-          <div class="h-[250px] md:h-[320px] lg:h-[372px] overflow-hidden">
-            <img
-              src="./img/kontuy hes.jpg"
-              alt="បុកកន្ទុយហេស"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
+        <!-- Input -->
+        <input type="text" placeholder="វាយឈ្មោះខេត្ត (ឧ. សៀមរាប, កំពត, បាត់ដំបង...)"
+          class="flex-1 w-full md:w-auto bg-transparent text-[#55504c] text-[16px] md:text-[20px] outline-none placeholder:text-[#55504c]" />
 
-          <!-- Card Content -->
-          <div class="p-3 md:p-[15px] pt-4 md:pt-[17px]">
-            <div class="mb-3 md:mb-[20px]">
-              <p
-                class="text-[16px] md:text-[18px] lg:text-[20px] text-black mb-2 md:mb-[10px]"
-              >
-                មុខម្ហូប​: បុកកន្ទុយហេស
-              </p>
-              <p class="text-[16px] md:text-[18px] lg:text-[20px] text-black">
-                ប្រភពភោជនីយដ្ឋាន:​ Sokkhak River Restaurant
-              </p>
-            </div>
-
-            <div
-              class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
-            >
-              <!-- Star Rating -->
-              <div class="flex gap-1 md:gap-[6px]">
-                <svg
-                  class="w-[20px] h-[20px] md:w-[24px] md:h-[24px] lg:w-[30px] lg:h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[20px] h-[20px] md:w-[24px] md:h-[24px] lg:w-[30px] lg:h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[20px] h-[20px] md:w-[24px] md:h-[24px] lg:w-[30px] lg:h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[20px] h-[20px] md:w-[24px] md:h-[24px] lg:w-[30px] lg:h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[20px] h-[20px] md:w-[24px] md:h-[24px] lg:w-[30px] lg:h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#d3d3d3"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-              </div>
-
-              <!-- Location -->
-              <p
-                class="text-[#ad343e] text-[16px] md:text-[18px] lg:text-[22px]"
-              >
-                ទីតាំង: ខេត្ត សៀមរាប
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Food Card 2 -->
-        <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
-          <!-- Heart Button -->
-          <button
-            class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10"
-          >
-            <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
-              <path
-                d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
-                stroke="#642f28"
-                stroke-width="1.5"
-                fill="none"
-              />
-            </svg>
-          </button>
-
-          <!-- Image -->
-          <div class="h-[372px] overflow-hidden">
-            <img
-              src="./img/somlor koko2.jpg"
-              alt="somlor koko2"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-
-          <!-- Card Content -->
-          <div class="p-[15px] pt-[17px]">
-            <div class="mb-[20px]">
-              <p class="text-[20px] text-black mb-[10px]">
-                មុខម្ហូប​: សម្លកកូរ
-              </p>
-              <p class="text-[20px] text-black">
-                ប្រភពភោជនីយដ្ឋាន:​ Palate Angkor Restaurant
-              </p>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <!-- Star Rating -->
-              <div class="flex gap-[6px]">
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#d3d3d3"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-              </div>
-
-              <!-- Location -->
-              <p class="text-[#ad343e] text-[22px]">ទីតាំង: ខេត្ត សៀមរាប</p>
-            </div>
-          </div>
-        </div>
+        <!-- Search Button -->
+        <button
+          class="w-full md:w-auto bg-[#104127] text-white px-6 md:px-[40px] py-2 md:py-[10px] rounded-[10px] text-[16px] md:text-[20px] hover:bg-[#0d3620] transition-colors">
+          ស្វែងរក
+        </button>
       </div>
     </div>
+  </section>
 
-    <!-- Food Cards Section (Row 2) -->
-    <div
-      class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 mb-[30px] md:mb-[40px] lg:mb-[50px]"
-    >
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 lg:gap-[68px]"
-      >
-        <!-- Food Card 3 -->
-        <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
-          <button
-            class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10"
-          >
-            <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
-              <path
-                d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
-                stroke="#642f28"
-                stroke-width="1.5"
-                fill="none"
-              />
-            </svg>
-          </button>
+  <!-- Section Title -->
+  <h2
+    class="text-[#104127] text-[24px] md:text-[32px] lg:text-[40px] text-center underline decoration-solid mt-[40px] md:mt-[60px] lg:mt-[87px] mb-[30px] md:mb-[40px] lg:mb-[53px] px-4">
+    ភោជនីយដ្ឋានល្បីតាមបណ្តាខេត្តធំៗ
+  </h2>
 
-          <div class="h-[372px] overflow-hidden">
-            <img
-              src="./img/kjorng.jpg"
-              alt="ស៊ុបស្ពៃខ្មៅ"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
+  <!-- Food Cards Section (Row 1) -->
+  <div class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 mb-[30px] md:mb-[40px] lg:mb-[50px]">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 lg:gap-[68px]">
+      <!-- Food Card 1 -->
+      <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
+        <!-- Heart Button -->
+        <button
+          class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10">
+          <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
+            <path
+              d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
+              stroke="#642f28" stroke-width="1.5" fill="none" />
+          </svg>
+        </button>
 
-          <div class="p-[15px] pt-[17px]">
-            <div class="mb-[20px]">
-              <p class="text-[20px] text-black mb-[10px]">
-                មុខម្ហូប​: អាម៉ុកខ្យង
-              </p>
-              <p class="text-[20px] text-black">
-                ប្រភពភោជនីយដ្ឋាន:​ Old Maison Eatery and Lounge
-              </p>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div class="flex gap-[6px]">
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#d3d3d3"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-              </div>
-              <p class="text-[#ad343e] text-[22px]">ទីតាំង: ខេត្ត សៀមរាប</p>
-            </div>
-          </div>
+        <!-- Image -->
+        <div class="h-[250px] md:h-[320px] lg:h-[372px] overflow-hidden">
+          <img src="./img/kontuy hes.jpg" alt="បុកកន្ទុយហេស"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
         </div>
 
-        <!-- Food Card 4 -->
-        <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
-          <button
-            class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10"
-          >
-            <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
-              <path
-                d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
-                stroke="#642f28"
-                stroke-width="1.5"
-                fill="none"
-              />
-            </svg>
-          </button>
-
-          <div class="h-[372px] overflow-hidden">
-            <img
-              src="./img/mee kola.jpg"
-              alt="លីងហ្គីណេ ប៉េស្តូ"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-
-          <div class="p-[15px] pt-[17px]">
-            <div class="mb-[20px]">
-              <p class="text-[20px] text-black mb-[10px]">
-                មុខម្ហូប​: មីកូឡា
-              </p>
-              <p class="text-[20px] text-black">
-                ប្រភពភោជនីយដ្ឋាន:​ Sokkhak River Restaurant
-              </p>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div class="flex gap-[6px]">
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#d3d3d3"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-              </div>
-              <p class="text-[#ad343e] text-[22px]">ទីតាំង: ខេត្ត សៀមរាប</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Food Cards Section (Row 3) -->
-    <div
-      class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 mb-[50px] md:mb-[70px] lg:mb-[90px]"
-    >
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 lg:gap-[68px]"
-      >
-        <!-- Food Card 5 -->
-        <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
-          <button
-            class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10"
-          >
-            <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
-              <path
-                d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
-                stroke="#642f28"
-                stroke-width="1.5"
-                fill="none"
-              />
-            </svg>
-          </button>
-
-          <div class="h-[372px] overflow-hidden">
-            <img
-              src="./img/koung.jpg"
-              alt="លីងហ្គីណេ ប៉េស្តូ"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-
-          <div class="p-[15px] pt-[17px]">
-            <div class="mb-[20px]">
-              <p class="text-[20px] text-black mb-[10px]">
-                មុខម្ហូប​: គួង
-              </p>
-              <p class="text-[20px] text-black">
-                ប្រភពភោជនីយដ្ឋាន:​ Sokkhak River Restaurant
-              </p>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div class="flex gap-[6px]">
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#d3d3d3"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-              </div>
-              <p class="text-[#ad343e] text-[22px]">ទីតាំង: ខេត្ត សៀមរាប</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Food Card 6 -->
-        <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
-          <button
-            class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10"
-          >
-            <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
-              <path
-                d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
-                stroke="#642f28"
-                stroke-width="1.5"
-                fill="none"
-              />
-            </svg>
-          </button>
-
-          <div class="h-[372px] overflow-hidden">
-            <img
-              src="./img/bompong resey food.png"
-              alt="លីងហ្គីណេ ប៉េស្តូ"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-
-          <div class="p-[15px] pt-[17px]">
-            <div class="mb-[20px]">
-              <p class="text-[20px] text-black mb-[10px]">
-                មុខម្ហូប​: សម្លព្រូងបំពង់ឬស្សី
-              </p>
-              <p class="text-[20px] text-black">
-                ប្រភពភោជនីយដ្ឋាន:​ Palate Angkor Restaurant and Bar
-              </p>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div class="flex gap-[6px]">
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#FFCA28"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-                <svg
-                  class="w-[30px] h-[30px]"
-                  viewBox="0 0 30 30"
-                  fill="#d3d3d3"
-                >
-                  <path
-                    d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z"
-                  />
-                </svg>
-              </div>
-              <p class="text-[#ad343e] text-[22px]">ទីតាំង: ខេត្ត សៀមរាប</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pagination -->
-    <div
-      class="flex justify-center items-center gap-0 mb-[30px] md:mb-[40px] lg:mb-[48px] px-4"
-    >
-      <button
-        class="px-3 md:px-6 py-2 md:py-3 bg-[#eeeeee] text-[#104127] text-[16px] md:text-[18px] lg:text-[20px] rounded-[4px] hover:bg-[#d9d9d9] transition-colors"
-      >
-        Previous
-      </button>
-      <button
-        class="px-3 md:px-6 py-2 md:py-3 text-[#4f4f4f] text-[16px] md:text-[18px] lg:text-[20px] hover:bg-[#eeeeee] rounded-[4px] transition-colors"
-      >
-        1
-      </button>
-      <button
-        class="px-3 md:px-6 py-2 md:py-3 text-[#4f4f4f] text-[16px] md:text-[18px] lg:text-[20px] hover:bg-[#eeeeee] rounded-[4px] transition-colors"
-      >
-        2
-      </button>
-      <button
-        class="px-3 md:px-6 py-2 md:py-3 text-[#ad343e] text-[16px] md:text-[18px] lg:text-[20px] hover:bg-[#eeeeee] rounded-[4px] transition-colors"
-      >
-        Next
-      </button>
-    </div>
-
-    <!-- Restaurant Carousel -->
-    <div class="overflow-hidden mb-[50px] md:mb-[70px] lg:mb-[90px] relative">
-      <div
-        class="carousel-container flex gap-6 md:gap-8 lg:gap-[50px] px-4 md:px-6 lg:px-10"
-      >
-        <!-- Restaurant 1 -->
-        <div
-          class="relative flex-shrink-0 w-[280px] md:w-[400px] lg:w-[556px] h-[210px] md:h-[300px] lg:h-[416px] rounded-[10px] overflow-hidden cursor-pointer group"
-        >
-          <a href="detail.html" class="absolute inset-0 z-10"></a>
-
-          <img
-            src="images/SOKKHAK-RIVER-RESTAURANT-ENTRANCE-0097-Edit.jpg"
-            alt="Sokkhak River restaurant"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"
-          ></div>
-
-          <p
-            class="absolute bottom-[15px] md:bottom-[30px] lg:bottom-[40px] left-1/2 -translate-x-1/2 text-white text-[18px] md:text-[24px] lg:text-[32px] text-center px-4 pointer-events-none z-20"
-          >
-            Sokkhak River restaurant
-          </p>
-        </div>
-
-        <!-- Restaurant 2 -->
-
-        <div
-          class="relative flex-shrink-0 w-[280px] md:w-[400px] lg:w-[556px] h-[210px] md:h-[300px] lg:h-[416px] rounded-[10px] overflow-hidden cursor-pointer group"
-        >
-          <a href="detail.html" class="absolute inset-0 z-10"></a>
-          <img
-            src="images/the-bean-embassy-coffee.jpg"
-            alt="The Bean Embassy"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
-          ></div>
-          <p
-            class="absolute bottom-[15px] md:bottom-[30px] lg:bottom-[40px] left-[50%] -translate-x-1/2 text-white text-[18px] md:text-[24px] lg:text-[32px] text-center px-4"
-          >
-            The Bean Embassy
-          </p>
-        </div>
-
-        <!-- Restaurant 3 -->
-        <div
-          class="relative flex-shrink-0 w-[280px] md:w-[400px] lg:w-[556px] h-[210px] md:h-[300px] lg:h-[416px] rounded-[10px] overflow-hidden cursor-pointer group"
-        >
-          <a href="detail.html" class="absolute inset-0 z-10"></a>
-          <img
-            src="images/welcome-to-the-grill.jpg"
-            alt="The Grill lounge"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
-          ></div>
-          <p
-            class="absolute bottom-[15px] md:bottom-[30px] lg:bottom-[40px] left-[50%] -translate-x-1/2 text-white text-[18px] md:text-[24px] lg:text-[32px] text-center px-4"
-          >
-            The Grill lounge
-          </p>
-        </div>
-
-        <!-- Restaurant 4 -->
-        <div
-          class="relative flex-shrink-0 w-[280px] md:w-[400px] lg:w-[556px] h-[210px] md:h-[300px] lg:h-[416px] rounded-[10px] overflow-hidden cursor-pointer group"
-        >
-          <a href="detail.html" class="absolute inset-0 z-10"></a>
-          <img
-            src="images/palate-s-main-entrance.jpg"
-            alt="Palate Angkor Restaurant & Bar"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
-          ></div>
-          <p
-            class="absolute bottom-[15px] md:bottom-[30px] lg:bottom-[40px] left-[50%] -translate-x-1/2 text-white text-[18px] md:text-[24px] lg:text-[32px] text-center px-4"
-          >
-            Palate Angkor Restaurant & Bar
-          </p>
-        </div>
-
-        <!-- Restaurant 5 -->
-        <div
-          class="relative flex-shrink-0 w-[280px] md:w-[400px] lg:w-[556px] h-[210px] md:h-[300px] lg:h-[416px] rounded-[10px] overflow-hidden cursor-pointer group"
-        >
-          <a href="province_detail.html" class="absolute inset-0 z-10"></a>
-          <img
-            src="images/in-house-seating-areas.jpg"
-            alt="Old Maison Eatery & Lounge"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
-          ></div>
-          <p
-            class="absolute bottom-[15px] md:bottom-[30px] lg:bottom-[40px] left-[50%] -translate-x-1/2 text-white text-[18px] md:text-[24px] lg:text-[32px] text-center px-4"
-          >
-            Old Maison Eatery & Lounge
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer
-      class="bg-[#283b3f] py-6 md:py-8 lg:py-[37px] px-4 md:px-6 lg:px-10"
-    >
-      <div class="max-w-[1360px] mx-auto">
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
-        >
-          <!-- Logo and Description -->
-          <div>
-            <div
-              class="w-[160px] md:w-[200px] lg:w-[220px] h-[90px] md:h-[110px] lg:h-[120px] mb-3 md:mb-4"
-            >
-              <img
-                src="images/logo1.png"
-                alt="SombobaebKH Logo"
-                class="w-full h-full object-contain"
-              />
-            </div>
-            <p
-              class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed"
-            >
-              ការរក្សាទុកនិងអភិរក្សម្ហូបដ៏សម្បូរបែប<br />នៅប្រទេសកម្ពុជា
+        <!-- Card Content -->
+        <div class="p-3 md:p-[15px] pt-4 md:pt-[17px]">
+          <div class="mb-3 md:mb-[20px]">
+            <p class="text-[16px] md:text-[18px] lg:text-[20px] text-black mb-2 md:mb-[10px]">
+              មុខម្ហូប​: បុកកន្ទុយហេស
+            </p>
+            <p class="text-[16px] md:text-[18px] lg:text-[20px] text-black">
+              ប្រភពភោជនីយដ្ឋាន:​ Sokkhak River Restaurant
             </p>
           </div>
 
-          <!-- Links -->
-          <div>
-            <h3
-              class="text-[#fbf2e8] text-[24px] md:text-[28px] lg:text-[32px] mb-4 md:mb-5 lg:mb-[24px]"
-            >
-              តំណភ្ជាប់
-            </h3>
-            <ul class="space-y-2 md:space-y-[10px]">
-              <li>
-                <a
-                  href="#"
-                  class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] hover:text-white transition-colors"
-                  >ទំព័រដើម</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-[#fbf2e8] text-[20px] hover:text-white transition-colors"
-                  >មុខម្ហូបទូទៅ</a
-                >
-              </li>
-              <li>
-                <a
-                  href="province.html"
-                  class="text-[#fbf2e8] text-[20px] hover:text-white transition-colors"
-                  >ម្ហូបតាមខេត្ត</a
-                >
-              </li>
-              <li>
-                <a
-                  href="about.html"
-                  class="text-[#fbf2e8] text-[20px] hover:text-white transition-colors"
-                  >អំពីយើង</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Contact -->
-          <div>
-            <h3
-              class="text-[#fbf2e8] text-[24px] md:text-[28px] lg:text-[32px] mb-4 md:mb-5 lg:mb-[24px]"
-            >
-              ទំនាក់ទំនងពួកយើង
-            </h3>
-
-            <!-- Social Icons -->
-            <div class="flex gap-3 md:gap-4 mb-5 md:mb-6 lg:mb-[28px]">
-              <a
-                href="#"
-                class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
-              >
-                <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
-                  <path
-                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="#"
-                class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
-              >
-                <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
-                  <path
-                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="#"
-                class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
-              >
-                <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
-                  <path
-                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="#"
-                class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
-              >
-                <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
-                  <path
-                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.441 16.892c-2.102.144-6.784.144-8.883 0C5.282 16.736 5.017 15.622 5 12c.017-3.629.285-4.736 2.558-4.892 2.099-.144 6.782-.144 8.883 0C18.718 7.264 18.982 8.378 19 12c-.018 3.629-.285 4.736-2.559 4.892zM10 9.658l4.917 2.338L10 14.342V9.658z"
-                  />
-                </svg>
-              </a>
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <!-- Star Rating -->
+            <div class="flex gap-1 md:gap-[6px]">
+              <svg class="w-[20px] h-[20px] md:w-[24px] md:h-[24px] lg:w-[30px] lg:h-[30px]" viewBox="0 0 30 30"
+                fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[20px] h-[20px] md:w-[24px] md:h-[24px] lg:w-[30px] lg:h-[30px]" viewBox="0 0 30 30"
+                fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[20px] h-[20px] md:w-[24px] md:h-[24px] lg:w-[30px] lg:h-[30px]" viewBox="0 0 30 30"
+                fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[20px] h-[20px] md:w-[24px] md:h-[24px] lg:w-[30px] lg:h-[30px]" viewBox="0 0 30 30"
+                fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[20px] h-[20px] md:w-[24px] md:h-[24px] lg:w-[30px] lg:h-[30px]" viewBox="0 0 30 30"
+                fill="#d3d3d3">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
             </div>
 
-            <!-- Newsletter -->
-            <div
-              class="bg-[#d9d9d9] rounded-[25px] h-[42px] flex items-center px-4 gap-2"
-            >
-              <input
-                type="email"
-                placeholder="Your email address"
-                class="flex-1 bg-transparent text-[13px] text-[rgba(0,0,0,0.25)] outline-none"
-              />
-              <button class="text-[#ad343e] text-[13px] font-medium">
-                Subscribe
-              </button>
-            </div>
-          </div>
-
-          <!-- Sponsor -->
-          <div>
-            <p
-              class="text-white text-[20px] md:text-[24px] lg:text-[28px] mb-5 md:mb-6 lg:mb-[30px]"
-            >
-              ឧបត្ថម្ភ និង គាំទ្រដោយ
+            <!-- Location -->
+            <p class="text-[#ad343e] text-[16px] md:text-[18px] lg:text-[22px]">
+              ទីតាំង: ខេត្ត សៀមរាប
             </p>
-            <div
-              class="w-[150px] md:w-[180px] lg:w-[200px] h-[54px] md:h-[65px] lg:h-[72px]"
-            >
-              <img
-                src="images/istad-logo.png"
-                alt="ISTAD"
-                class="w-full h-full object-contain"
-              />
-            </div>
           </div>
         </div>
       </div>
-    </footer>
 
-    <!-- JavaScript -->
-    <script src="js/main.js"></script>
-    <script>
-      // Hamburger menu toggle with smooth dropdown animation
-      const hamburger = document.getElementById("hamburger");
-      const navMenu = document.getElementById("navMenu");
-      const hamburgerLines = hamburger.querySelectorAll(".hamburger-line");
-      let isMenuOpen = false;
+      <!-- Food Card 2 -->
+      <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
+        <!-- Heart Button -->
+        <button
+          class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10">
+          <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
+            <path
+              d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
+              stroke="#642f28" stroke-width="1.5" fill="none" />
+          </svg>
+        </button>
 
-      hamburger.addEventListener("click", (e) => {
-        e.stopPropagation();
-        isMenuOpen = !isMenuOpen;
+        <!-- Image -->
+        <div class="h-[372px] overflow-hidden">
+          <img src="./img/somlor koko2.jpg" alt="somlor koko2"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+        </div>
 
-        if (isMenuOpen) {
-          // Open menu with smooth dropdown
-          navMenu.style.maxHeight = navMenu.scrollHeight + "px";
-          navMenu.style.opacity = "1";
+        <!-- Card Content -->
+        <div class="p-[15px] pt-[17px]">
+          <div class="mb-[20px]">
+            <p class="text-[20px] text-black mb-[10px]">
+              មុខម្ហូប​: សម្លកកូរ
+            </p>
+            <p class="text-[20px] text-black">
+              ប្រភពភោជនីយដ្ឋាន:​ Palate Angkor Restaurant
+            </p>
+          </div>
 
-          // Animate hamburger to X
-          hamburgerLines[0].style.transform =
-            "rotate(45deg) translate(5px, 5px)";
-          hamburgerLines[1].style.opacity = "0";
-          hamburgerLines[1].style.transform = "translateX(20px)";
-          hamburgerLines[2].style.transform =
-            "rotate(-45deg) translate(5px, -5px)";
-        } else {
-          // Close menu
-          navMenu.style.maxHeight = "0";
-          navMenu.style.opacity = "0";
+          <div class="flex items-center justify-between">
+            <!-- Star Rating -->
+            <div class="flex gap-[6px]">
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#d3d3d3">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+            </div>
 
-          // Reset hamburger
-          hamburgerLines[0].style.transform = "";
-          hamburgerLines[1].style.opacity = "1";
-          hamburgerLines[1].style.transform = "";
-          hamburgerLines[2].style.transform = "";
-        }
+            <!-- Location -->
+            <p class="text-[#ad343e] text-[22px]">ទីតាំង: ខេត្ត សៀមរាប</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Food Cards Section (Row 2) -->
+  <div class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 mb-[30px] md:mb-[40px] lg:mb-[50px]">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 lg:gap-[68px]">
+      <!-- Food Card 3 -->
+      <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
+        <button
+          class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10">
+          <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
+            <path
+              d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
+              stroke="#642f28" stroke-width="1.5" fill="none" />
+          </svg>
+        </button>
+
+        <div class="h-[372px] overflow-hidden">
+          <img src="./img/kjorng.jpg" alt="ស៊ុបស្ពៃខ្មៅ"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+        </div>
+
+        <div class="p-[15px] pt-[17px]">
+          <div class="mb-[20px]">
+            <p class="text-[20px] text-black mb-[10px]">
+              មុខម្ហូប​: អាម៉ុកខ្យង
+            </p>
+            <p class="text-[20px] text-black">
+              ប្រភពភោជនីយដ្ឋាន:​ Old Maison Eatery and Lounge
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div class="flex gap-[6px]">
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#d3d3d3">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+            </div>
+            <p class="text-[#ad343e] text-[22px]">ទីតាំង: ខេត្ត សៀមរាប</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Food Card 4 -->
+      <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
+        <button
+          class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10">
+          <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
+            <path
+              d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
+              stroke="#642f28" stroke-width="1.5" fill="none" />
+          </svg>
+        </button>
+
+        <div class="h-[372px] overflow-hidden">
+          <img src="./img/mee kola.jpg" alt="លីងហ្គីណេ ប៉េស្តូ"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+        </div>
+
+        <div class="p-[15px] pt-[17px]">
+          <div class="mb-[20px]">
+            <p class="text-[20px] text-black mb-[10px]">
+              មុខម្ហូប​: មីកូឡា
+            </p>
+            <p class="text-[20px] text-black">
+              ប្រភពភោជនីយដ្ឋាន:​ Sokkhak River Restaurant
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div class="flex gap-[6px]">
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#d3d3d3">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+            </div>
+            <p class="text-[#ad343e] text-[22px]">ទីតាំង: ខេត្ត សៀមរាប</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Food Cards Section (Row 3) -->
+  <div class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 mb-[50px] md:mb-[70px] lg:mb-[90px]">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 lg:gap-[68px]">
+      <!-- Food Card 5 -->
+      <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
+        <button
+          class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10">
+          <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
+            <path
+              d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
+              stroke="#642f28" stroke-width="1.5" fill="none" />
+          </svg>
+        </button>
+
+        <div class="h-[372px] overflow-hidden">
+          <img src="./img/koung.jpg" alt="លីងហ្គីណេ ប៉េស្តូ"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+        </div>
+
+        <div class="p-[15px] pt-[17px]">
+          <div class="mb-[20px]">
+            <p class="text-[20px] text-black mb-[10px]">
+              មុខម្ហូប​: គួង
+            </p>
+            <p class="text-[20px] text-black">
+              ប្រភពភោជនីយដ្ឋាន:​ Sokkhak River Restaurant
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div class="flex gap-[6px]">
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#d3d3d3">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+            </div>
+            <p class="text-[#ad343e] text-[22px]">ទីតាំង: ខេត្ត សៀមរាប</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Food Card 6 -->
+      <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
+        <button
+          class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10">
+          <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
+            <path
+              d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
+              stroke="#642f28" stroke-width="1.5" fill="none" />
+          </svg>
+        </button>
+
+        <div class="h-[372px] overflow-hidden">
+          <img src="./img/bompong resey food.png" alt="លីងហ្គីណេ ប៉េស្តូ"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+        </div>
+
+        <div class="p-[15px] pt-[17px]">
+          <div class="mb-[20px]">
+            <p class="text-[20px] text-black mb-[10px]">
+              មុខម្ហូប​: សម្លព្រូងបំពង់ឬស្សី
+            </p>
+            <p class="text-[20px] text-black">
+              ប្រភពភោជនីយដ្ឋាន:​ Palate Angkor Restaurant and Bar
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div class="flex gap-[6px]">
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#FFCA28">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+              <svg class="w-[30px] h-[30px]" viewBox="0 0 30 30" fill="#d3d3d3">
+                <path
+                  d="M15 2.5L18.09 11.59L27.5 12.82L21.25 18.86L22.77 28.2L15 23.77L7.23 28.2L8.75 18.86L2.5 12.82L11.91 11.59L15 2.5Z" />
+              </svg>
+            </div>
+            <p class="text-[#ad343e] text-[22px]">ទីតាំង: ខេត្ត សៀមរាប</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex justify-center items-center gap-0 mb-[30px] md:mb-[40px] lg:mb-[48px] px-4">
+    <button
+      class="px-3 md:px-6 py-2 md:py-3 bg-[#eeeeee] text-[#104127] text-[16px] md:text-[18px] lg:text-[20px] rounded-[4px] hover:bg-[#d9d9d9] transition-colors">
+      Previous
+    </button>
+    <button
+      class="px-3 md:px-6 py-2 md:py-3 text-[#4f4f4f] text-[16px] md:text-[18px] lg:text-[20px] hover:bg-[#eeeeee] rounded-[4px] transition-colors">
+      1
+    </button>
+    <button
+      class="px-3 md:px-6 py-2 md:py-3 text-[#4f4f4f] text-[16px] md:text-[18px] lg:text-[20px] hover:bg-[#eeeeee] rounded-[4px] transition-colors">
+      2
+    </button>
+    <button
+      class="px-3 md:px-6 py-2 md:py-3 text-[#ad343e] text-[16px] md:text-[18px] lg:text-[20px] hover:bg-[#eeeeee] rounded-[4px] transition-colors">
+      Next
+    </button>
+  </div>
+
+  <!-- Restaurant Carousel -->
+  <div class="overflow-hidden mb-[50px] md:mb-[70px] lg:mb-[90px] relative">
+    <div class="carousel-container flex gap-6 md:gap-8 lg:gap-[50px] px-4 md:px-6 lg:px-10">
+      <!-- Restaurant 1 -->
+      <div
+        class="relative flex-shrink-0 w-[280px] md:w-[400px] lg:w-[556px] h-[210px] md:h-[300px] lg:h-[416px] rounded-[10px] overflow-hidden cursor-pointer group">
+        <a href="detail.html" class="absolute inset-0 z-10"></a>
+
+        <img src="images/SOKKHAK-RIVER-RESTAURANT-ENTRANCE-0097-Edit.jpg" alt="Sokkhak River restaurant"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"></div>
+
+        <p
+          class="absolute bottom-[15px] md:bottom-[30px] lg:bottom-[40px] left-1/2 -translate-x-1/2 text-white text-[18px] md:text-[24px] lg:text-[32px] text-center px-4 pointer-events-none z-20">
+          Sokkhak River restaurant
+        </p>
+      </div>
+
+      <!-- Restaurant 2 -->
+
+      <div
+        class="relative flex-shrink-0 w-[280px] md:w-[400px] lg:w-[556px] h-[210px] md:h-[300px] lg:h-[416px] rounded-[10px] overflow-hidden cursor-pointer group">
+        <a href="detail.html" class="absolute inset-0 z-10"></a>
+        <img src="images/the-bean-embassy-coffee.jpg" alt="The Bean Embassy"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <p
+          class="absolute bottom-[15px] md:bottom-[30px] lg:bottom-[40px] left-[50%] -translate-x-1/2 text-white text-[18px] md:text-[24px] lg:text-[32px] text-center px-4">
+          The Bean Embassy
+        </p>
+      </div>
+
+      <!-- Restaurant 3 -->
+      <div
+        class="relative flex-shrink-0 w-[280px] md:w-[400px] lg:w-[556px] h-[210px] md:h-[300px] lg:h-[416px] rounded-[10px] overflow-hidden cursor-pointer group">
+        <a href="detail.html" class="absolute inset-0 z-10"></a>
+        <img src="images/welcome-to-the-grill.jpg" alt="The Grill lounge"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <p
+          class="absolute bottom-[15px] md:bottom-[30px] lg:bottom-[40px] left-[50%] -translate-x-1/2 text-white text-[18px] md:text-[24px] lg:text-[32px] text-center px-4">
+          The Grill lounge
+        </p>
+      </div>
+
+      <!-- Restaurant 4 -->
+      <div
+        class="relative flex-shrink-0 w-[280px] md:w-[400px] lg:w-[556px] h-[210px] md:h-[300px] lg:h-[416px] rounded-[10px] overflow-hidden cursor-pointer group">
+        <a href="detail.html" class="absolute inset-0 z-10"></a>
+        <img src="images/palate-s-main-entrance.jpg" alt="Palate Angkor Restaurant & Bar"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <p
+          class="absolute bottom-[15px] md:bottom-[30px] lg:bottom-[40px] left-[50%] -translate-x-1/2 text-white text-[18px] md:text-[24px] lg:text-[32px] text-center px-4">
+          Palate Angkor Restaurant & Bar
+        </p>
+      </div>
+
+      <!-- Restaurant 5 -->
+      <div
+        class="relative flex-shrink-0 w-[280px] md:w-[400px] lg:w-[556px] h-[210px] md:h-[300px] lg:h-[416px] rounded-[10px] overflow-hidden cursor-pointer group">
+        <a href="province_detail.html" class="absolute inset-0 z-10"></a>
+        <img src="images/in-house-seating-areas.jpg" alt="Old Maison Eatery & Lounge"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <p
+          class="absolute bottom-[15px] md:bottom-[30px] lg:bottom-[40px] left-[50%] -translate-x-1/2 text-white text-[18px] md:text-[24px] lg:text-[32px] text-center px-4">
+          Old Maison Eatery & Lounge
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#283b3f] py-6 md:py-8 lg:py-[37px] px-4 md:px-6 lg:px-10">
+    <div class="max-w-[1360px] mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <!-- Logo and Description -->
+        <div>
+          <div class="w-[160px] md:w-[200px] lg:w-[220px] h-[90px] md:h-[110px] lg:h-[120px] mb-3 md:mb-4">
+            <img src="images/logo1.png" alt="SombobaebKH Logo" class="w-full h-full object-contain" />
+          </div>
+          <p class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed">
+            ការរក្សាទុកនិងអភិរក្សម្ហូបដ៏សម្បូរបែប<br />នៅប្រទេសកម្ពុជា
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h3 class="text-[#fbf2e8] text-[24px] md:text-[28px] lg:text-[32px] mb-4 md:mb-5 lg:mb-[24px]">
+            តំណភ្ជាប់
+          </h3>
+          <ul class="space-y-2 md:space-y-[10px]">
+            <li>
+              <a href="#"
+                class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] hover:text-white transition-colors">ទំព័រដើម</a>
+            </li>
+            <li>
+              <a href="#" class="text-[#fbf2e8] text-[20px] hover:text-white transition-colors">មុខម្ហូបទូទៅ</a>
+            </li>
+            <li>
+              <a href="province.html"
+                class="text-[#fbf2e8] text-[20px] hover:text-white transition-colors">ម្ហូបតាមខេត្ត</a>
+            </li>
+            <li>
+              <a href="about.html" class="text-[#fbf2e8] text-[20px] hover:text-white transition-colors">អំពីយើង</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h3 class="text-[#fbf2e8] text-[24px] md:text-[28px] lg:text-[32px] mb-4 md:mb-5 lg:mb-[24px]">
+            ទំនាក់ទំនងពួកយើង
+          </h3>
+
+          <!-- Social Icons -->
+          <div class="flex gap-3 md:gap-4 mb-5 md:mb-6 lg:mb-[28px]">
+            <a href="#"
+              class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+              <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                <path
+                  d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+              </svg>
+            </a>
+            <a href="#"
+              class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+              <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+            </a>
+            <a href="#"
+              class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+              <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                <path
+                  d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+              </svg>
+            </a>
+            <a href="#"
+              class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+              <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.441 16.892c-2.102.144-6.784.144-8.883 0C5.282 16.736 5.017 15.622 5 12c.017-3.629.285-4.736 2.558-4.892 2.099-.144 6.782-.144 8.883 0C18.718 7.264 18.982 8.378 19 12c-.018 3.629-.285 4.736-2.559 4.892zM10 9.658l4.917 2.338L10 14.342V9.658z" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Newsletter -->
+          <div class="bg-[#d9d9d9] rounded-[25px] h-[42px] flex items-center px-4 gap-2">
+            <input type="email" placeholder="Your email address"
+              class="flex-1 bg-transparent text-[13px] text-[rgba(0,0,0,0.25)] outline-none" />
+            <button class="text-[#ad343e] text-[13px] font-medium">
+              Subscribe
+            </button>
+          </div>
+        </div>
+
+        <!-- Sponsor -->
+        <div>
+          <p class="text-white text-[20px] md:text-[24px] lg:text-[28px] mb-5 md:mb-6 lg:mb-[30px]">
+            ឧបត្ថម្ភ និង គាំទ្រដោយ
+          </p>
+          <div class="w-[150px] md:w-[180px] lg:w-[200px] h-[54px] md:h-[65px] lg:h-[72px]">
+            <img src="images/istad-logo.png" alt="ISTAD" class="w-full h-full object-contain" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Hamburger menu toggle with smooth dropdown animation
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+    const hamburgerLines = hamburger.querySelectorAll(".hamburger-line");
+    let isMenuOpen = false;
+
+    hamburger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      isMenuOpen = !isMenuOpen;
+
+      if (isMenuOpen) {
+        // Open menu with smooth dropdown
+        navMenu.style.maxHeight = navMenu.scrollHeight + "px";
+        navMenu.style.opacity = "1";
+
+        // Animate hamburger to X
+        hamburgerLines[0].style.transform =
+          "rotate(45deg) translate(5px, 5px)";
+        hamburgerLines[1].style.opacity = "0";
+        hamburgerLines[1].style.transform = "translateX(20px)";
+        hamburgerLines[2].style.transform =
+          "rotate(-45deg) translate(5px, -5px)";
+      } else {
+        // Close menu
+        navMenu.style.maxHeight = "0";
+        navMenu.style.opacity = "0";
+
+        // Reset hamburger
+        hamburgerLines[0].style.transform = "";
+        hamburgerLines[1].style.opacity = "1";
+        hamburgerLines[1].style.transform = "";
+        hamburgerLines[2].style.transform = "";
+      }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        isMenuOpen &&
+        !hamburger.contains(e.target) &&
+        !navMenu.contains(e.target)
+      ) {
+        isMenuOpen = false;
+        navMenu.style.maxHeight = "0";
+        navMenu.style.opacity = "0";
+        hamburgerLines[0].style.transform = "";
+        hamburgerLines[1].style.opacity = "1";
+        hamburgerLines[1].style.transform = "";
+        hamburgerLines[2].style.transform = "";
+      }
+    });
+
+    // Close menu when clicking on a link
+    navMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        isMenuOpen = false;
+        navMenu.style.maxHeight = "0";
+        navMenu.style.opacity = "0";
+        hamburgerLines[0].style.transform = "";
+        hamburgerLines[1].style.opacity = "1";
+        hamburgerLines[1].style.transform = "";
+        hamburgerLines[2].style.transform = "";
       });
+    });
 
-      // Close menu when clicking outside
-      document.addEventListener("click", (e) => {
-        if (
-          isMenuOpen &&
-          !hamburger.contains(e.target) &&
-          !navMenu.contains(e.target)
-        ) {
-          isMenuOpen = false;
-          navMenu.style.maxHeight = "0";
-          navMenu.style.opacity = "0";
-          hamburgerLines[0].style.transform = "";
-          hamburgerLines[1].style.opacity = "1";
-          hamburgerLines[1].style.transform = "";
-          hamburgerLines[2].style.transform = "";
-        }
-      });
+    // Handle window resize
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 1024 && isMenuOpen) {
+        isMenuOpen = false;
+        navMenu.style.maxHeight = "0";
+        navMenu.style.opacity = "0";
+        hamburgerLines[0].style.transform = "";
+        hamburgerLines[1].style.opacity = "1";
+        hamburgerLines[1].style.transform = "";
+        hamburgerLines[2].style.transform = "";
+      }
+    });
+  </script>
+</body>
 
-      // Close menu when clicking on a link
-      navMenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          isMenuOpen = false;
-          navMenu.style.maxHeight = "0";
-          navMenu.style.opacity = "0";
-          hamburgerLines[0].style.transform = "";
-          hamburgerLines[1].style.opacity = "1";
-          hamburgerLines[1].style.transform = "";
-          hamburgerLines[2].style.transform = "";
-        });
-      });
-
-      // Handle window resize
-      window.addEventListener("resize", () => {
-        if (window.innerWidth >= 1024 && isMenuOpen) {
-          isMenuOpen = false;
-          navMenu.style.maxHeight = "0";
-          navMenu.style.opacity = "0";
-          hamburgerLines[0].style.transform = "";
-          hamburgerLines[1].style.opacity = "1";
-          hamburgerLines[1].style.transform = "";
-          hamburgerLines[2].style.transform = "";
-        }
-      });
-    </script>
-  </body>
 </html>

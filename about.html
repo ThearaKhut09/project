@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="km">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +55,7 @@
                 </a>
 
                 <!-- Dark Mode Moon Icon -->
-                <button id="darkModeBtn" class="relative hidden md:block">
+                <button id="darkModeBtn" class="relative hidden md:block" aria-label="Dark mode toggle">
                     <svg class="w-[28px] h-[32px] md:w-[34px] md:h-[38px]" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 640 640" fill="#000000">
                         <path
@@ -63,8 +64,15 @@
                 </button>
 
                 <!-- User Profile -->
-                <button class="w-[38px] h-[38px] md:w-[47px] md:h-[47px] rounded-full overflow-hidden">
-                    <img src="images/user-icon.svg" alt="User" class="w-full h-full object-cover">
+                <button class="w-[38px] h-[38px] md:w-[47px] md:h-[47px] rounded-full overflow-hidden" data-user-trigger
+                    aria-label="User menu">
+                    <span
+                        class="block w-full h-full rounded-full overflow-hidden bg-[#104127] text-white font-semibold text-lg flex items-center justify-center"
+                        data-user-avatar>
+                        <img src="images/user-icon.svg" alt="User" class="w-full h-full object-cover"
+                            data-user-avatar-img>
+                        <span class="hidden" data-user-avatar-initial>U</span>
+                    </span>
                 </button>
 
                 <!-- Hamburger Menu Button (Mobile) -->
@@ -139,10 +147,12 @@
                 <div class="max-w-[640px]">
                     <p class="text-[#ad343e] text-[18px] md:text-[20px] lg:text-[22px] mb-3 md:mb-4">រឿងរ៉ាវរបស់យើង</p>
                     <p class="text-[16px] md:text-[17px] lg:text-[18px] leading-loose text-[#4f2620]">
-                     <span class="text-[#ad343e] text-[25px]"> សម្បូរបែប</span> 
-                       មិនត្រឺមតែជាគេហទំព័រធម្មតានោះទេ តែវាជាគេហទំព័រមួយដែលអាចស្វែងរកអ្វីៗគ្រប់យ៉ាងទាក់ទងនឹងម្ហូបខ្មែរជាច្រេីនក្នុងគេហទំព័រមួយលឿននិងឆាប់រហ័ស ងាយស្រួលក្នុងការទទួលព័ត៍មានលឿននិងឆាប់រហ័ស។
+                        <span class="text-[#ad343e] text-[25px]"> សម្បូរបែប</span>
+                        មិនត្រឺមតែជាគេហទំព័រធម្មតានោះទេ
+                        តែវាជាគេហទំព័រមួយដែលអាចស្វែងរកអ្វីៗគ្រប់យ៉ាងទាក់ទងនឹងម្ហូបខ្មែរជាច្រេីនក្នុងគេហទំព័រមួយលឿននិងឆាប់រហ័ស
+                        ងាយស្រួលក្នុងការទទួលព័ត៍មានលឿននិងឆាប់រហ័ស។
                     </p>
-                    
+
                 </div>
                 <div class="relative flex justify-center lg:justify-end mt-8 lg:mt-0">
                     <div class="w-full max-w-[350px] md:max-w-[420px] lg:max-w-[520px]">
@@ -299,15 +309,18 @@
                         <h4 class="text-[16px] md:text-[17px] lg:text-[18px] text-[#104127] mb-1">Yann Kimhorng</h4>
                         <p class="text-[14px] md:text-[15px] text-[#4f2620] mb-2">Presenter</p>
                         <div class="flex gap-2 justify-center">
-                            <a href="https://www.facebook.com/viizii.kaa" aria-label="Facebook"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://www.facebook.com/viizii.kaa" aria-label="Facebook"><svg class="w-5 h-5"
+                                    fill="#000" viewBox="0 0 24 24">
                                     <path
                                         d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                                 </svg></a>
-                            <a href="https://t.me/KimmHorngg" aria-label="Telegram"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://t.me/KimmHorngg" aria-label="Telegram"><svg class="w-5 h-5" fill="#000"
+                                    viewBox="0 0 24 24">
                                     <path
                                         d="M21.47 4.37L18.1 20.33c-.2.98-.96 1.31-1.95.78l-4.47-3.09-2.14 2.05c-.32.32-.6.48-.97.48l.38-5.22L18.7 7.39c.41-.37-.09-.54-.64-.2L7.02 13.78 2.58 12.4c-.97-.3-.99-.96.2-1.43L20.26 2.97c.86-.34 1.63.23 1.21 1.4z" />
                                 </svg></a>
-                            <a href="https://github.com/Kimhorngg" aria-label="GitHub"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://github.com/Kimhorngg" aria-label="GitHub"><svg class="w-5 h-5" fill="#000"
+                                    viewBox="0 0 24 24">
                                     <path
                                         d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 008 10.94c.59.11.82-.24.82-.54 0-.27-.01-.97-.02-1.91-3.26.71-3.95-1.41-3.95-1.41-.54-1.36-1.33-1.72-1.33-1.72-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.8 1.31 3.48 1.01.11-.79.42-1.31.77-1.61-2.6-.3-5.33-1.29-5.33-5.74 0-1.27.45-2.31 1.19-3.13-.12-.3-.52-1.52.11-3.17 0 0 .98-.32 3.2 1.2a11 11 0 015.82 0c2.21-1.52 3.2-1.2 3.2-1.2.63 1.65.23 2.87.11 3.17.74.82 1.19 1.86 1.19 3.13 0 4.46-2.73 5.44-5.34 5.73.42.36.81 1.06.81 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.22.66.83.54A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z" />
                                 </svg></a>
@@ -320,15 +333,18 @@
                         <h4 class="text-[18px] text-[#104127] mb-1">Uon Sovannarith</h4>
                         <p class="text-[15px] text-[#4f2620] mb-2">Coding</p>
                         <div class="flex gap-2 justify-center">
-                            <a href="https://www.facebook.com/sovannarith.uon.2025" aria-label="Facebook"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://www.facebook.com/sovannarith.uon.2025" aria-label="Facebook"><svg
+                                    class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
                                     <path
                                         d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                                 </svg></a>
-                            <a href="https://t.me/KO_KOO" aria-label="Telegram"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://t.me/KO_KOO" aria-label="Telegram"><svg class="w-5 h-5" fill="#000"
+                                    viewBox="0 0 24 24">
                                     <path
                                         d="M21.47 4.37L18.1 20.33c-.2.98-.96 1.31-1.95.78l-4.47-3.09-2.14 2.05c-.32.32-.6.48-.97.48l.38-5.22L18.7 7.39c.41-.37-.09-.54-.64-.2L7.02 13.78 2.58 12.4c-.97-.3-.99-.96.2-1.43L20.26 2.97c.86-.34 1.63.23 1.21 1.4z" />
                                 </svg></a>
-                            <a href="https://github.com/Sokvannrith-Uon" aria-label="GitHub"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://github.com/Sokvannrith-Uon" aria-label="GitHub"><svg class="w-5 h-5"
+                                    fill="#000" viewBox="0 0 24 24">
                                     <path
                                         d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 008 10.94c.59.11.82-.24.82-.54 0-.27-.01-.97-.02-1.91-3.26.71-3.95-1.41-3.95-1.41-.54-1.36-1.33-1.72-1.33-1.72-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.8 1.31 3.48 1.01.11-.79.42-1.31.77-1.61-2.6-.3-5.33-1.29-5.33-5.74 0-1.27.45-2.31 1.19-3.13-.12-.3-.52-1.52.11-3.17 0 0 .98-.32 3.2 1.2a11 11 0 015.82 0c2.21-1.52 3.2-1.2 3.2-1.2.63 1.65.23 2.87.11 3.17.74.82 1.19 1.86 1.19 3.13 0 4.46-2.73 5.44-5.34 5.73.42.36.81 1.06.81 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.22.66.83.54A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z" />
                                 </svg></a>
@@ -346,15 +362,18 @@
                         <h4 class="text-[18px] text-[#104127] mb-1">Ath Kunthea</h4>
                         <p class="text-[15px] text-[#4f2620] mb-2">UX/UI</p>
                         <div class="flex gap-2 justify-center">
-                            <a href="https://www.facebook.com/ath.kunthea" aria-label="Facebook"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://www.facebook.com/ath.kunthea" aria-label="Facebook"><svg class="w-5 h-5"
+                                    fill="#000" viewBox="0 0 24 24">
                                     <path
                                         d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                                 </svg></a>
-                            <a href="https://t.me/ath_kunthea" aria-label="Telegram"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://t.me/ath_kunthea" aria-label="Telegram"><svg class="w-5 h-5" fill="#000"
+                                    viewBox="0 0 24 24">
                                     <path
                                         d="M21.47 4.37L18.1 20.33c-.2.98-.96 1.31-1.95.78l-4.47-3.09-2.14 2.05c-.32.32-.6.48-.97.48l.38-5.22L18.7 7.39c.41-.37-.09-.54-.64-.2L7.02 13.78 2.58 12.4c-.97-.3-.99-.96.2-1.43L20.26 2.97c.86-.34 1.63.23 1.21 1.4z" />
                                 </svg></a>
-                            <a href="https://github.com/kun-thea" aria-label="GitHub"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://github.com/kun-thea" aria-label="GitHub"><svg class="w-5 h-5" fill="#000"
+                                    viewBox="0 0 24 24">
                                     <path
                                         d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 008 10.94c.59.11.82-.24.82-.54 0-.27-.01-.97-.02-1.91-3.26.71-3.95-1.41-3.95-1.41-.54-1.36-1.33-1.72-1.33-1.72-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.8 1.31 3.48 1.01.11-.79.42-1.31.77-1.61-2.6-.3-5.33-1.29-5.33-5.74 0-1.27.45-2.31 1.19-3.13-.12-.3-.52-1.52.11-3.17 0 0 .98-.32 3.2 1.2a11 11 0 015.82 0c2.21-1.52 3.2-1.2 3.2-1.2.63 1.65.23 2.87.11 3.17.74.82 1.19 1.86 1.19 3.13 0 4.46-2.73 5.44-5.34 5.73.42.36.81 1.06.81 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.22.66.83.54A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z" />
                                 </svg></a>
@@ -367,15 +386,18 @@
                         <h4 class="text-[18px] text-[#104127] mb-1">Tol Mengkorng</h4>
                         <p class="text-[15px] text-[#4f2620] mb-2">UX/UI</p>
                         <div class="flex gap-2 justify-center">
-                            <a href="https://www.facebook.com/T.MENGKORNG?mibextid=wwXIfr&rdid=Bq2cptGI1mxJK2iX#" aria-label="Facebook"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://www.facebook.com/T.MENGKORNG?mibextid=wwXIfr&rdid=Bq2cptGI1mxJK2iX#"
+                                aria-label="Facebook"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
                                     <path
                                         d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                                 </svg></a>
-                            <a href="https://t.me/Mengmeng_korng" aria-label="Telegram"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://t.me/Mengmeng_korng" aria-label="Telegram"><svg class="w-5 h-5" fill="#000"
+                                    viewBox="0 0 24 24">
                                     <path
                                         d="M21.47 4.37L18.1 20.33c-.2.98-.96 1.31-1.95.78l-4.47-3.09-2.14 2.05c-.32.32-.6.48-.97.48l.38-5.22L18.7 7.39c.41-.37-.09-.54-.64-.2L7.02 13.78 2.58 12.4c-.97-.3-.99-.96.2-1.43L20.26 2.97c.86-.34 1.63.23 1.21 1.4z" />
                                 </svg></a>
-                            <a href="https://github.com/meng-korng-git" aria-label="GitHub"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://github.com/meng-korng-git" aria-label="GitHub"><svg class="w-5 h-5"
+                                    fill="#000" viewBox="0 0 24 24">
                                     <path
                                         d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 008 10.94c.59.11.82-.24.82-.54 0-.27-.01-.97-.02-1.91-3.26.71-3.95-1.41-3.95-1.41-.54-1.36-1.33-1.72-1.33-1.72-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.8 1.31 3.48 1.01.11-.79.42-1.31.77-1.61-2.6-.3-5.33-1.29-5.33-5.74 0-1.27.45-2.31 1.19-3.13-.12-.3-.52-1.52.11-3.17 0 0 .98-.32 3.2 1.2a11 11 0 015.82 0c2.21-1.52 3.2-1.2 3.2-1.2.63 1.65.23 2.87.11 3.17.74.82 1.19 1.86 1.19 3.13 0 4.46-2.73 5.44-5.34 5.73.42.36.81 1.06.81 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.22.66.83.54A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z" />
                                 </svg></a>
@@ -388,15 +410,18 @@
                         <h4 class="text-[18px] text-[#104127] mb-1">Khut TheaRa</h4>
                         <p class="text-[15px] text-[#4f2620] mb-2">Coding</p>
                         <div class="flex gap-2 justify-center">
-                            <a href="https://www.facebook.com/KhutThearaaa" aria-label="Facebook"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://www.facebook.com/KhutThearaaa" aria-label="Facebook"><svg class="w-5 h-5"
+                                    fill="#000" viewBox="0 0 24 24">
                                     <path
                                         d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                                 </svg></a>
-                            <a href="https://t.me/Thearakhut" aria-label="Telegram"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://t.me/Thearakhut" aria-label="Telegram"><svg class="w-5 h-5" fill="#000"
+                                    viewBox="0 0 24 24">
                                     <path
                                         d="M21.47 4.37L18.1 20.33c-.2.98-.96 1.31-1.95.78l-4.47-3.09-2.14 2.05c-.32.32-.6.48-.97.48l.38-5.22L18.7 7.39c.41-.37-.09-.54-.64-.2L7.02 13.78 2.58 12.4c-.97-.3-.99-.96.2-1.43L20.26 2.97c.86-.34 1.63.23 1.21 1.4z" />
                                 </svg></a>
-                            <a href="https://github.com/ThearaKhut09" aria-label="GitHub"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://github.com/ThearaKhut09" aria-label="GitHub"><svg class="w-5 h-5"
+                                    fill="#000" viewBox="0 0 24 24">
                                     <path
                                         d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 008 10.94c.59.11.82-.24.82-.54 0-.27-.01-.97-.02-1.91-3.26.71-3.95-1.41-3.95-1.41-.54-1.36-1.33-1.72-1.33-1.72-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.8 1.31 3.48 1.01.11-.79.42-1.31.77-1.61-2.6-.3-5.33-1.29-5.33-5.74 0-1.27.45-2.31 1.19-3.13-.12-.3-.52-1.52.11-3.17 0 0 .98-.32 3.2 1.2a11 11 0 015.82 0c2.21-1.52 3.2-1.2 3.2-1.2.63 1.65.23 2.87.11 3.17.74.82 1.19 1.86 1.19 3.13 0 4.46-2.73 5.44-5.34 5.73.42.36.81 1.06.81 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.22.66.83.54A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z" />
                                 </svg></a>
@@ -413,7 +438,8 @@
                         <h4 class="text-[18px] text-[#104127] mb-1">Seang Longhour</h4>
                         <p class="text-[15px] text-[#4f2620] mb-2">UX/UI</p>
                         <div class="flex gap-2 justify-center">
-                            <a href="https://www.facebook.com/seang.longhour.7" aria-label="Facebook"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://www.facebook.com/seang.longhour.7" aria-label="Facebook"><svg
+                                    class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
                                     <path
                                         d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                                 </svg></a>
@@ -434,7 +460,8 @@
                         <h4 class="text-[18px] text-[#104127] mb-1">Vok Visak</h4>
                         <p class="text-[15px] text-[#4f2620] mb-2">Coding</p>
                         <div class="flex gap-2 justify-center">
-                            <a href="https://www.facebook.com/vi.sak.988" aria-label="Facebook"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://www.facebook.com/vi.sak.988" aria-label="Facebook"><svg class="w-5 h-5"
+                                    fill="#000" viewBox="0 0 24 24">
                                     <path
                                         d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                                 </svg></a>
@@ -455,15 +482,18 @@
                         <h4 class="text-[18px] text-[#104127] mb-1">Poek Sreyleak</h4>
                         <p class="text-[15px] text-[#4f2620] mb-2">UX/UI</p>
                         <div class="flex gap-2 justify-center">
-                            <a href="https://t.me/seeyleakk" aria-label="Facebook"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://t.me/seeyleakk" aria-label="Facebook"><svg class="w-5 h-5" fill="#000"
+                                    viewBox="0 0 24 24">
                                     <path
                                         d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                                 </svg></a>
-                            <a href="https://t.me/seeyleakk" aria-label="Telegram"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://t.me/seeyleakk" aria-label="Telegram"><svg class="w-5 h-5" fill="#000"
+                                    viewBox="0 0 24 24">
                                     <path
                                         d="M21.47 4.37L18.1 20.33c-.2.98-.96 1.31-1.95.78l-4.47-3.09-2.14 2.05c-.32.32-.6.48-.97.48l.38-5.22L18.7 7.39c.41-.37-.09-.54-.64-.2L7.02 13.78 2.58 12.4c-.97-.3-.99-.96.2-1.43L20.26 2.97c.86-.34 1.63.23 1.21 1.4z" />
                                 </svg></a>
-                            <a href="https://github.com/leak70476-a11y" aria-label="GitHub"><svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24">
+                            <a href="https://github.com/leak70476-a11y" aria-label="GitHub"><svg class="w-5 h-5"
+                                    fill="#000" viewBox="0 0 24 24">
                                     <path
                                         d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 008 10.94c.59.11.82-.24.82-.54 0-.27-.01-.97-.02-1.91-3.26.71-3.95-1.41-3.95-1.41-.54-1.36-1.33-1.72-1.33-1.72-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.8 1.31 3.48 1.01.11-.79.42-1.31.77-1.61-2.6-.3-5.33-1.29-5.33-5.74 0-1.27.45-2.31 1.19-3.13-.12-.3-.52-1.52.11-3.17 0 0 .98-.32 3.2 1.2a11 11 0 015.82 0c2.21-1.52 3.2-1.2 3.2-1.2.63 1.65.23 2.87.11 3.17.74.82 1.19 1.86 1.19 3.13 0 4.46-2.73 5.44-5.34 5.73.42.36.81 1.06.81 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.22.66.83.54A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z" />
                                 </svg></a>
@@ -630,6 +660,7 @@
         </div>
     </footer>
 
+    <script src="js/api.js"></script>
     <script src="js/main.js"></script>
     <script>
         // Hamburger menu toggle with smooth dropdown animation
