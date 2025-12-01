@@ -55,7 +55,7 @@
                 </a>
 
                 <!-- Dark Mode Moon Icon -->
-                <button id="darkModeBtn" class="relative hidden md:block">
+                <button id="darkModeBtn" class="relative hidden md:block" aria-label="Dark mode toggle">
                     <svg class="w-[28px] h-[32px] md:w-[34px] md:h-[38px]" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 640 640" fill="#000000">
                         <path
@@ -64,8 +64,15 @@
                 </button>
 
                 <!-- User Profile -->
-                <button class="w-[38px] h-[38px] md:w-[47px] md:h-[47px] rounded-full overflow-hidden">
-                    <img src="images/user-icon.svg" alt="User" class="w-full h-full object-cover">
+                <button class="w-[38px] h-[38px] md:w-[47px] md:h-[47px] rounded-full overflow-hidden" data-user-trigger
+                    aria-label="User menu">
+                    <span
+                        class="block w-full h-full rounded-full overflow-hidden bg-[#104127] text-white font-semibold text-lg flex items-center justify-center"
+                        data-user-avatar>
+                        <img src="images/user-icon.svg" alt="User" class="w-full h-full object-cover"
+                            data-user-avatar-img>
+                        <span class="hidden" data-user-avatar-initial>U</span>
+                    </span>
                 </button>
 
                 <!-- Hamburger Menu Button (Mobile) -->
@@ -332,6 +339,7 @@
         </div>
     </footer>
 
+    <script src="js/api.js"></script>
     <script src="js/main.js"></script>
     <script>
         // Hamburger menu toggle with smooth dropdown animation
