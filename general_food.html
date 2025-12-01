@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="km">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,14 +29,14 @@
       </div>
 
       <div class="flex gap-2 md:gap-[15px] items-center">
-        <a href="upload.html"
-          class="hidden md:flex group border border-[#642f28] rounded-[5px] px-3 md:px-6 py-1.5 md:py-2 items-center gap-2 hover:bg-[#dd070c] hover:text-white transition-colors">
+        <button id="uploadBtn" onclick="checkAuthAndUpload()"
+          class="hidden md:flex group border border-[#642f28] rounded-[5px] px-3 md:px-6 py-1.5 md:py-2 items-center gap-2 hover:bg-[#dd070c] hover:text-white transition-colors cursor-pointer">
           <svg class="w-[9px] h-[10px] text-[#642f28] group-hover:text-white transition-colors" viewBox="0 0 9 10"
             fill="none">
             <path d="M4.5 0L4.5 7M4.5 0L1.5 3M4.5 0L7.5 3M0 10H9" stroke="currentColor" stroke-width="1" />
           </svg>
           <span class="text-[#642f28] text-[13px] md:text-[15px] group-hover:text-white transition-colors">បង្ហោះ</span>
-        </a>
+        </button>
 
         <button id="darkModeBtn" class="relative hidden md:block" aria-label="Dark mode toggle">
           <svg class="w-[28px] h-[32px] md:w-[34px] md:h-[38px]" xmlns="http://www.w3.org/2000/svg"
@@ -45,8 +46,11 @@
           </svg>
         </button>
 
-        <button class="w-[38px] h-[38px] md:w-[47px] md:h-[47px] rounded-full overflow-hidden">
-          <img src="images/user-icon.svg" alt="User" class="w-full h-full object-cover" />
+        <button data-user-trigger
+          class="w-[38px] h-[38px] md:w-[47px] md:h-[47px] rounded-full overflow-hidden hover:ring-2 hover:ring-[#dd070c] transition-all">
+          <img data-user-avatar-img src="images/user-icon.svg" alt="User" class="w-full h-full object-cover" />
+          <span data-user-avatar-initial
+            class="hidden w-full h-full flex items-center justify-center bg-[#f3e9dd] text-[#104127] font-semibold text-lg"></span>
         </button>
 
         <button id="gf-hamburger"
@@ -73,13 +77,13 @@
           <a href="about.html"
             class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">អំពីយើង</a>
           <div class="md:hidden border-t border-gray-200 mt-2 pt-3 flex flex-col gap-2">
-            <a href="informationuser.html"
+            <button onclick="checkAuthAndUpload()"
               class="flex items-center gap-2 text-[#642f28] hover:bg-[#f3e9dd] px-4 py-3 rounded-md transition-colors">
               <svg class="w-5 h-5" viewBox="0 0 9 10" fill="none">
                 <path d="M4.5 0L4.5 7M4.5 0L1.5 3M4.5 0L7.5 3M0 10H9" stroke="currentColor" stroke-width="1" />
               </svg>
               <span class="text-[15px] font-medium">បង្ហោះ</span>
-            </a>
+            </button>
             <button
               class="flex items-center gap-2 text-[#642f28] hover:bg-[#f3e9dd] px-4 py-3 rounded-md transition-colors">
               <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
@@ -654,6 +658,250 @@
         });
       }
     });
+
+    // Check authentication before allowing upload
+    function checkAuthAndUpload() {
+      const session = window.PteahBayAPI?.getStoredAuthSession();
+      if (!session || !session.accessToken) {
+        // Show alert and prompt to login
+        if (confirm('សូមចូលគណនីជាមុនសិនដើម្បីបង្ហោះរូបមន្ត។ តើអ្នកចង់ចូលគណនីឥឡូវនេះទេ?')) {
+          window.location.href = 'sign_in.html';
+        }
+        return false;
+      }
+      // User is authenticated, allow upload
+      window.location.href = 'upload.html';
+    }
+
+    // Load Community Food Posts from API and merge with mock data
+    document.addEventListener("DOMContentLoaded", async function () {
+      await loadCommunityPosts();
+
+      // Also check authentication on upload button in community section
+      const communityUploadBtn = document.querySelector('section a[href="upload.html"]');
+      if (communityUploadBtn) {
+        communityUploadBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          checkAuthAndUpload();
+        });
+      }
+    });
+
+    async function loadCommunityPosts() {
+      try {
+        if (!window.PteahBayAPI) {
+          console.log("API not available, showing mock data only");
+          return;
+        }
+
+        // Get community section grid
+        const communitySection = Array.from(document.querySelectorAll('section')).find(section =>
+          section.textContent.includes('សហគមន៍')
+        );
+
+        if (!communitySection) {
+          return;
+        }
+
+        const communityGrid = communitySection.querySelector('.grid');
+        if (!communityGrid) {
+          return;
+        }
+
+        // Fetch food posts from API
+        const posts = await window.PteahBayAPI.listFoodPosts(0, 20);
+
+        if (!posts || posts.length === 0) {
+          console.log("No posts from API, showing mock data only");
+          return;
+        }
+
+        console.log("Fetched posts from API:", posts.length);
+
+        // Filter posts with "សហគមន៍" tag
+        const communityPosts = posts.filter(post =>
+          post.tags && post.tags.includes("សហគមន៍")
+        );
+
+        if (communityPosts.length === 0) {
+          console.log("No community posts found, showing mock data only");
+          return;
+        }
+
+        console.log("Community posts found:", communityPosts.length);
+
+        // Fetch user info for each post by getting user posts which includes user data
+        const userCache = {};
+        const postsWithUsers = await Promise.all(
+          communityPosts.map(async (post) => {
+            try {
+              // Check if we already fetched this user
+              if (!userCache[post.user_id]) {
+                try {
+                  // Fetch user's posts to get user info
+                  const userPosts = await window.PteahBayAPI.getUserFoodPosts(post.user_id, 0, 1);
+
+                  // The API should return posts with user info, extract user from first post
+                  if (userPosts && userPosts.length > 0 && userPosts[0].user) {
+                    userCache[post.user_id] = userPosts[0].user;
+                  } else {
+                    // Fallback: check if it's current user
+                    const session = window.PteahBayAPI.getStoredAuthSession();
+                    if (session && session.user && session.user.id === post.user_id) {
+                      userCache[post.user_id] = session.user;
+                    } else {
+                      // Last resort: create generic user
+                      userCache[post.user_id] = {
+                        id: post.user_id,
+                        username: `User${post.user_id.substring(0, 6)}`,
+                        full_name: null
+                      };
+                    }
+                  }
+                } catch (userError) {
+                  console.log(`Could not fetch user ${post.user_id}, using fallback`);
+                  // Check session as fallback
+                  const session = window.PteahBayAPI.getStoredAuthSession();
+                  if (session && session.user && session.user.id === post.user_id) {
+                    userCache[post.user_id] = session.user;
+                  } else {
+                    userCache[post.user_id] = {
+                      id: post.user_id,
+                      username: `User${post.user_id.substring(0, 6)}`,
+                      full_name: null
+                    };
+                  }
+                }
+              }
+              return {
+                ...post,
+                user: userCache[post.user_id]
+              };
+            } catch (error) {
+              console.error(`Error processing post ${post.id}:`, error);
+              return post;
+            }
+          })
+        );
+
+        // Get existing mock cards
+        const existingCards = Array.from(communityGrid.children);
+
+        // Clear grid
+        communityGrid.innerHTML = '';
+
+        // Add API posts first (newest first)
+        const sortedPosts = postsWithUsers.sort((a, b) =>
+          new Date(b.created_at) - new Date(a.created_at)
+        );
+
+        sortedPosts.slice(0, 4).forEach(post => {
+          const card = createCommunityCard(post);
+          communityGrid.appendChild(card);
+        });
+
+        // Add remaining space with mock data if needed
+        const remainingSpace = 4 - sortedPosts.slice(0, 4).length;
+        if (remainingSpace > 0) {
+          existingCards.slice(0, remainingSpace).forEach(card => {
+            communityGrid.appendChild(card);
+          });
+        }
+
+        console.log(`Loaded ${sortedPosts.slice(0, 4).length} community posts from API`);
+
+      } catch (error) {
+        console.error("Error loading community posts:", error);
+        // Keep existing mock data if API fails
+      }
+    }
+
+    function createCommunityCard(post) {
+      const article = document.createElement("article");
+      article.className = "bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow";
+
+      // Get user info
+      const user = post.user || {};
+      const username = user.full_name || user.username || user.email || "អ្នកប្រើប្រាស់";
+      const userInitial = username.charAt(0).toUpperCase();
+
+      // Format date
+      const postDate = new Date(post.created_at);
+      const now = new Date();
+      const diffTime = Math.abs(now - postDate);
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+      const diffMinutes = Math.floor(diffTime / (1000 * 60));
+
+      let timeText = "";
+      if (diffMinutes < 1) {
+        timeText = "ទើបតែនេះ";
+      } else if (diffMinutes < 60) {
+        timeText = `${diffMinutes} នាទីមុន`;
+      } else if (diffHours < 24) {
+        timeText = `${diffHours} ម៉ោងមុន`;
+      } else if (diffDays === 0) {
+        timeText = "ថ្ងៃនេះ";
+      } else if (diffDays === 1) {
+        timeText = "ម្សិលមិញ";
+      } else if (diffDays < 7) {
+        timeText = `${diffDays} ថ្ងៃមុន`;
+      } else if (diffDays < 30) {
+        timeText = `${Math.floor(diffDays / 7)} សប្តាហ៍មុន`;
+      } else {
+        timeText = `${Math.floor(diffDays / 30)} ខែមុន`;
+      }
+
+      // Use default image if no image_url
+      const imageUrl = post.image_url || "images/Fish stew.jpg";
+
+      // Escape HTML to prevent XSS
+      const escapeHtml = (text) => {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      };
+
+      const title = escapeHtml(post.title || "គ្មានចំណងជើង");
+      const description = escapeHtml(post.description || "គ្មានការពិពណ៌នា");
+      const displayName = escapeHtml(username);
+
+      article.innerHTML = `
+        <img src="${imageUrl}" alt="${title}" class="w-full h-48 object-cover" onerror="this.src='images/Fish stew.jpg'" />
+        <div class="p-4">
+          <h3 class="text-[18px] text-[#104127] font-semibold mb-2">${title}</h3>
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+              <span class="text-[14px] text-[#104127]">${userInitial}</span>
+            </div>
+            <div>
+              <p class="text-[14px] text-[#642f28] font-medium">${displayName}</p>
+              <p class="text-[12px] text-[#55504c]">${timeText}</p>
+            </div>
+          </div>
+          <p class="text-[14px] text-[#55504c] line-clamp-2">
+            ${description}
+          </p>
+          <div class="flex items-center gap-4 mt-3 pt-3 border-t border-gray-200">
+            <div class="flex items-center gap-1 text-[#ad343e]">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+              </svg>
+              <span class="text-[14px]">${post.likes_count || 0}</span>
+            </div>
+            <div class="flex items-center gap-1 text-[#55504c]">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              <span class="text-[14px]">${post.cooking_time_minutes ? post.cooking_time_minutes + ' នាទី' : 'មើល'}</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      return article;
+    }
   </script>
 </body>
 

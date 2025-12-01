@@ -116,6 +116,84 @@
     localStorage.removeItem(AUTH_STORAGE_KEY);
   }
 
+  function getAuthHeaders() {
+    const session = getStoredAuthSession();
+    if (!session || !session.accessToken) {
+      return {};
+    }
+    return {
+      Authorization: `${session.tokenType || "Bearer"} ${session.accessToken}`,
+    };
+  }
+
+  async function createFoodPost(foodPostData) {
+    const authHeaders = getAuthHeaders();
+    if (!authHeaders.Authorization) {
+      throw new ApiError("Authentication required. Please log in first.", 401);
+    }
+
+    return apiRequest("/food-posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...authHeaders,
+      },
+      body: JSON.stringify(foodPostData),
+    });
+  }
+
+  async function listFoodPosts(skip = 0, limit = 10) {
+    return apiRequest(`/food-posts?skip=${skip}&limit=${limit}`, {
+      method: "GET",
+    });
+  }
+
+  async function getCurrentUser() {
+    const authHeaders = getAuthHeaders();
+    if (!authHeaders.Authorization) {
+      throw new ApiError("Authentication required. Please log in first.", 401);
+    }
+
+    return apiRequest("/auth/me", {
+      method: "GET",
+      headers: authHeaders,
+    });
+  }
+
+  async function getUserFoodPosts(userId, skip = 0, limit = 10) {
+    return apiRequest(
+      `/users/${userId}/food-posts?skip=${skip}&limit=${limit}`,
+      {
+        method: "GET",
+      }
+    );
+  }
+
+  async function getFoodPostWithUser(postId) {
+    return apiRequest(`/food-posts/${postId}`, {
+      method: "GET",
+    });
+  }
+
+  async function uploadProfileImage(imageFile, imageType = "profile") {
+    const authHeaders = getAuthHeaders();
+    if (!authHeaders.Authorization) {
+      throw new ApiError("Authentication required. Please log in first.", 401);
+    }
+
+    const formData = new FormData();
+    formData.append("file", imageFile);
+
+    // Remove Content-Type header to let browser set it with boundary
+    const headers = { ...authHeaders };
+
+    return apiRequest(`/auth/profile/upload-image?image_type=${imageType}`, {
+      method: "POST",
+      headers: headers,
+      body: formData,
+    });
+  }
+
   global.PteahBayAPI = {
     API_BASE_URL,
     AUTH_STORAGE_KEY,
@@ -124,6 +202,13 @@
     registerAndLogin,
     getStoredAuthSession,
     clearAuthSession,
+    getAuthHeaders,
+    createFoodPost,
+    listFoodPosts,
+    getCurrentUser,
+    getUserFoodPosts,
+    getFoodPostWithUser,
+    uploadProfileImage,
     apiRequest,
   };
 })(window);
