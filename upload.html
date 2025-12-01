@@ -78,23 +78,8 @@
 
       <!-- Upload Image -->
       <div class="grid grid-cols-4 gap-4 items-center">
-        <label class="font-medium">រូបភាព</label>
-
+        <label class="font-medium" for="imageUrl">តំណរូបភាព</label>
         <div class="col-span-3 space-y-3">
-          <label id="imageUploadLabel"
-            class="border-2 border-dashed border-gray-400 rounded-xl py-10 flex flex-col items-center cursor-pointer hover:border-[#104127] transition-colors">
-            <input type="file" id="imageFile" accept="image/*" class="hidden" onchange="handleImageSelect(event)" />
-            <img src="https://cdn-icons-png.flaticon.com/512/126/126477.png" alt="Upload icon"
-              class="w-12 opacity-50 mb-2" />
-            <span id="uploadText" class="text-gray-600">Upload a File here</span>
-            <span id="fileName" class="text-[#104127] text-sm mt-2 hidden"></span>
-          </label>
-          <div id="imagePreview" class="hidden">
-            <img id="previewImg" alt="Image preview" class="w-full h-48 object-cover rounded-lg" />
-            <button type="button" onclick="removeImage()"
-              class="mt-2 text-red-500 hover:text-red-700 text-sm">លុបរូបភាព</button>
-          </div>
-          <p class="text-sm text-gray-500">ឬបញ្ចូល URL របស់រូបភាព៖</p>
           <input type="url" id="imageUrl" name="image_url" placeholder="https://example.com/image.jpg"
             class="border px-4 py-3 rounded-lg w-full" />
         </div>
@@ -179,52 +164,7 @@
   <!-- JavaScript -->
   <script src="js/api.js"></script>
   <script>
-    // Image Upload Management
-    let uploadedImageUrl = null;
 
-    function handleImageSelect(event) {
-      const file = event.target.files[0];
-      if (file) {
-        // Show file name
-        document.getElementById('fileName').textContent = file.name;
-        document.getElementById('fileName').classList.remove('hidden');
-
-        // Show preview
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          document.getElementById('previewImg').src = e.target.result;
-          document.getElementById('imagePreview').classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function removeImage() {
-      document.getElementById('imageFile').value = '';
-      document.getElementById('fileName').classList.add('hidden');
-      document.getElementById('imagePreview').classList.add('hidden');
-      uploadedImageUrl = null;
-    }
-
-    async function uploadImage() {
-      const fileInput = document.getElementById('imageFile');
-      const file = fileInput.files[0];
-
-      if (!file) {
-        return null;
-      }
-
-      try {
-        const response = await window.PteahBayAPI.uploadProfileImage(file, 'location');
-        if (response && response.url) {
-          return response.url;
-        }
-        return null;
-      } catch (error) {
-        console.error('Error uploading image:', error);
-        throw error;
-      }
-    }
 
     // Ingredient Management
     function addIngredient() {
@@ -289,32 +229,14 @@
         submitBtn.textContent = "កំពុងបញ្ចូន...";
 
         try {
-          // Upload image first if a file is selected
-          const fileInput = document.getElementById('imageFile');
-          let uploadedImageUrl = null;
-
-          if (fileInput.files.length > 0) {
-            submitBtn.textContent = "កំពុងបង្ហោះរូបភាព...";
-            try {
-              const response = await uploadImage();
-              if (response) {
-                uploadedImageUrl = response;
-              }
-            } catch (error) {
-              console.error('Error uploading image:', error);
-              showMessage("មានបញ្ហាក្នុងការបង្ហោះរូបភាព។ សូមព្យាយាមម្តងទៀត។", "error");
-              submitBtn.disabled = false;
-              submitBtn.textContent = "បញ្ចូន";
-              return;
-            }
-          }
-
           submitBtn.textContent = "កំពុងបង្ហោះរូបមន្ត...";
-          const formData = collectFormData(uploadedImageUrl);
+          const formData = collectFormData();
 
           // Validate required fields
           if (!formData.title || !formData.description || !formData.recipe) {
             showMessage("សូមបំពេញព័ត៌មានចាំបាច់ទាំងអស់!", "error");
+            submitBtn.disabled = false;
+            submitBtn.textContent = "បញ្ចូន";
             return;
           }
 
@@ -325,7 +247,6 @@
 
           // Reset form
           form.reset();
-          removeImage();
           document.getElementById("ingredientList").innerHTML = `
               <input 
                 type="text" 
@@ -365,21 +286,16 @@
       });
     });
 
-    function collectFormData(uploadedImageUrl) {
+    function collectFormData() {
       // Get basic form fields
       const title = document.getElementById("foodName").value.trim();
       const description = document.getElementById("description").value.trim();
       const recipe = document.getElementById("recipe").value.trim();
       const cookingTime = document.getElementById("cookingTime").value;
       const servings = document.getElementById("servings").value;
-      const imageUrlInput = document.getElementById("imageUrl").value.trim();
+      const imageUrl = document.getElementById("imageUrl").value.trim();
       const category = document.getElementById("foodCategory").value;
-      const difficultyLevel = document.querySelector('input[name="difficulty_level"]:checked')?.value || "medium";
-
-      // Use uploaded image URL if available, otherwise use URL input
-      const imageUrl = uploadedImageUrl || imageUrlInput;
-
-      // Collect ingredients
+      const difficultyLevel = document.querySelector('input[name="difficulty_level"]:checked')?.value || "medium";      // Collect ingredients
       const ingredientInputs = document.querySelectorAll(".ingredient-input");
       const ingredients = Array.from(ingredientInputs)
         .map(input => input.value.trim())
