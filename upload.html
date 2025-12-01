@@ -52,6 +52,13 @@
           class="col-span-3 border px-4 py-3 rounded-lg w-full" />
       </div>
 
+      <!-- Servings -->
+      <div class="grid grid-cols-4 gap-4 items-center">
+        <label class="font-medium" for="servings">ចំនួនមនុស្ស</label>
+        <input type="number" id="servings" name="servings" min="1" placeholder="ex: 4"
+          class="col-span-3 border px-4 py-3 rounded-lg w-full" />
+      </div>
+
       <!-- Difficulty Level -->
       <div class="grid grid-cols-4 gap-4 items-center">
         <label class="font-medium">កម្រិតលំបាក</label>
@@ -288,7 +295,8 @@
       const servings = document.getElementById("servings").value;
       const imageUrl = document.getElementById("imageUrl").value.trim();
       const category = document.getElementById("foodCategory").value;
-      const difficultyLevel = document.querySelector('input[name="difficulty_level"]:checked')?.value || "medium";      // Collect ingredients
+      const difficultyLevel = document.querySelector('input[name="difficulty_level"]:checked')?.value || "medium";
+      // Collect ingredients
       const ingredientInputs = document.querySelectorAll(".ingredient-input");
       const ingredients = Array.from(ingredientInputs)
         .map(input => input.value.trim())

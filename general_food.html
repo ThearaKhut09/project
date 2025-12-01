@@ -551,6 +551,23 @@
     </section>
   </main>
 
+  <!-- Food Detail Modal -->
+  <div id="foodDetailModal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+      <button onclick="closeFoodModal()"
+        class="absolute top-4 right-4 w-10 h-10 bg-red-500 text-white rounded-full hover:bg-red-600 flex items-center justify-center z-10">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div id="modalContent" class="p-6 md:p-8">
+        <!-- Content will be dynamically loaded -->
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="bg-[#283b3f] py-6 md:py-8 lg:py-[37px] px-4 md:px-6 lg:px-10">
     <div class="max-w-[1360px] mx-auto">
@@ -899,8 +916,175 @@
         </div>
       `;
 
+      // Make card clickable
+      article.style.cursor = 'pointer';
+      article.addEventListener('click', () => openFoodModal(post));
+
       return article;
     }
+
+    // Modal Functions
+    function openFoodModal(post) {
+      const modal = document.getElementById('foodDetailModal');
+      const modalContent = document.getElementById('modalContent');
+
+      // Get user info
+      const user = post.user || {};
+      const username = user.full_name || user.username || user.email || "អ្នកប្រើប្រាស់";
+      const userInitial = username.charAt(0).toUpperCase();
+
+      // Escape HTML
+      const escapeHtml = (text) => {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      };
+
+      const title = escapeHtml(post.title || "គ្មានចំណងជើង");
+      const description = escapeHtml(post.description || "គ្មានការពិពណ៌នា");
+      const recipe = escapeHtml(post.recipe || "គ្មានរូបមន្ត");
+      const displayName = escapeHtml(username);
+      const imageUrl = post.image_url || "images/Fish stew.jpg";
+
+      // Build ingredients list
+      let ingredientsHTML = '';
+      if (post.ingredients && post.ingredients.length > 0) {
+        ingredientsHTML = post.ingredients.map(ing =>
+          `<li class="flex items-start gap-2">
+            <span class="text-green-600 mt-1">✓</span>
+            <span>${escapeHtml(ing)}</span>
+          </li>`
+        ).join('');
+      } else {
+        ingredientsHTML = '<li class="text-gray-500">គ្មានគ្រឿងផ្សំ</li>';
+      }
+
+      // Build cooking steps
+      let stepsHTML = '';
+      if (post.step_to_cook && post.step_to_cook.length > 0) {
+        stepsHTML = post.step_to_cook.map((step, index) =>
+          `<li class="flex gap-3">
+            <span class="flex-shrink-0 w-8 h-8 bg-[#104127] text-white rounded-full flex items-center justify-center font-semibold">${index + 1}</span>
+            <p class="flex-1 pt-1">${escapeHtml(step)}</p>
+          </li>`
+        ).join('');
+      } else {
+        stepsHTML = '<li class="text-gray-500">គ្មានជំហាន</li>';
+      }
+
+      // Build tags
+      let tagsHTML = '';
+      if (post.tags && post.tags.length > 0) {
+        tagsHTML = post.tags.map(tag =>
+          `<span class="px-3 py-1 bg-[#f3e9dd] text-[#104127] rounded-full text-sm">${escapeHtml(tag)}</span>`
+        ).join('');
+      }
+
+      modalContent.innerHTML = `
+        <div class="space-y-6">
+          <!-- Image -->
+          <img src="${imageUrl}" alt="${title}" class="w-full h-64 md:h-96 object-cover rounded-xl" onerror="this.src='images/Fish stew.jpg'" />
+          
+          <!-- Title and User -->
+          <div>
+            <h2 class="text-3xl font-bold text-[#104127] mb-4">${title}</h2>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+                <span class="text-xl text-[#104127] font-semibold">${userInitial}</span>
+              </div>
+              <div>
+                <p class="font-medium text-[#642f28]">${displayName}</p>
+                <p class="text-sm text-gray-500">អ្នកចែករំលែក</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Info Stats -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-[#f8f8f8] rounded-xl">
+            ${post.cooking_time_minutes ? `
+              <div class="text-center">
+                <p class="text-2xl font-bold text-[#104127]">${post.cooking_time_minutes}</p>
+                <p class="text-sm text-gray-600">នាទី</p>
+              </div>
+            ` : ''}
+            ${post.servings ? `
+              <div class="text-center">
+                <p class="text-2xl font-bold text-[#104127]">${post.servings}</p>
+                <p class="text-sm text-gray-600">មនុស្ស</p>
+              </div>
+            ` : ''}
+            ${post.difficulty_level ? `
+              <div class="text-center">
+                <p class="text-lg font-bold text-[#104127] capitalize">${escapeHtml(post.difficulty_level)}</p>
+                <p class="text-sm text-gray-600">កម្រិត</p>
+              </div>
+            ` : ''}
+            <div class="text-center">
+              <p class="text-2xl font-bold text-[#ad343e]">${post.likes_count || 0}</p>
+              <p class="text-sm text-gray-600">ចូលចិត្ត</p>
+            </div>
+          </div>
+          
+          <!-- Tags -->
+          ${tagsHTML ? `
+            <div class="flex flex-wrap gap-2">
+              ${tagsHTML}
+            </div>
+          ` : ''}
+          
+          <!-- Description -->
+          <div>
+            <h3 class="text-xl font-semibold text-[#104127] mb-3">ការពិពណ៌នា</h3>
+            <p class="text-gray-700 leading-relaxed">${description}</p>
+          </div>
+          
+          <!-- Recipe -->
+          <div>
+            <h3 class="text-xl font-semibold text-[#104127] mb-3">រូបមន្ត</h3>
+            <p class="text-gray-700 leading-relaxed whitespace-pre-wrap">${recipe}</p>
+          </div>
+          
+          <!-- Ingredients -->
+          <div>
+            <h3 class="text-xl font-semibold text-[#104127] mb-3">គ្រឿងផ្សំ</h3>
+            <ul class="space-y-2 text-gray-700">
+              ${ingredientsHTML}
+            </ul>
+          </div>
+          
+          <!-- Cooking Steps -->
+          <div>
+            <h3 class="text-xl font-semibold text-[#104127] mb-4">ជំហានធ្វើ</h3>
+            <ol class="space-y-4">
+              ${stepsHTML}
+            </ol>
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFoodModal() {
+      const modal = document.getElementById('foodDetailModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal on background click
+    document.getElementById('foodDetailModal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeFoodModal();
+      }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeFoodModal();
+      }
+    });
   </script>
 </body>
 
