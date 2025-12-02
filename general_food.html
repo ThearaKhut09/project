@@ -803,25 +803,25 @@
         // Clear grid
         communityGrid.innerHTML = '';
 
-        // Add API posts first (newest first)
+        // Add API posts first (newest first) without limiting to four cards
         const sortedPosts = postsWithUsers.sort((a, b) =>
           new Date(b.created_at) - new Date(a.created_at)
         );
 
-        sortedPosts.slice(0, 4).forEach(post => {
+        sortedPosts.forEach(post => {
           const card = createCommunityCard(post);
           communityGrid.appendChild(card);
         });
 
-        // Add remaining space with mock data if needed
-        const remainingSpace = 4 - sortedPosts.slice(0, 4).length;
+        // Keep mock cards if there are fewer than four posts
+        const remainingSpace = Math.max(0, 4 - sortedPosts.length);
         if (remainingSpace > 0) {
           existingCards.slice(0, remainingSpace).forEach(card => {
             communityGrid.appendChild(card);
           });
         }
 
-        console.log(`Loaded ${sortedPosts.slice(0, 4).length} community posts from API`);
+        console.log(`Loaded ${sortedPosts.length} community posts from API`);
 
       } catch (error) {
         console.error("Error loading community posts:", error);
