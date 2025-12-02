@@ -59,7 +59,7 @@ async function listFood() {
                 <p class="text-[#ad343e] text-[22px] mb-2">
                   ${items.name}
                 </p>
-                <p class="text-[16px] text-[#55504c] mb-4">
+                <p class="text-[16px] text-[#55504c] mb-4 line-clamp-3">
                   ${items.description}
                 </p>
                 <a
