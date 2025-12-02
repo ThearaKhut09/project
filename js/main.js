@@ -60,6 +60,7 @@ let authDropdownTrigger = null;
 let authModalElement = null;
 let authModalFrame = null;
 let currentAuthSession = null;
+let authSessionValidationId = 0;
 let userAvatarImage = null;
 let userAvatarInitial = null;
 
@@ -259,15 +260,48 @@ function initAuthMessaging() {
   });
 }
 
-function hydrateAuthState() {
+async function hydrateAuthState() {
   if (!window.PteahBayAPI) {
     currentAuthSession = null;
     updateAuthUiState();
     return;
   }
 
-  currentAuthSession = window.PteahBayAPI.getStoredAuthSession();
+  const storedSession = window.PteahBayAPI.getStoredAuthSession?.();
+  if (!storedSession || !storedSession.accessToken) {
+    currentAuthSession = null;
+    updateAuthUiState();
+    return;
+  }
+
+  currentAuthSession = storedSession;
   updateAuthUiState();
+  await validateStoredSession(storedSession);
+}
+
+async function validateStoredSession(referenceSession) {
+  const validationId = ++authSessionValidationId;
+
+  try {
+    const user = await window.PteahBayAPI.getCurrentUser();
+    if (validationId !== authSessionValidationId) {
+      return;
+    }
+    currentAuthSession = {
+      ...referenceSession,
+      user: user || referenceSession.user,
+    };
+    updateAuthUiState();
+  } catch (error) {
+    if (validationId !== authSessionValidationId) {
+      return;
+    }
+    if (error && error.status === 401) {
+      clearInvalidSession();
+      return;
+    }
+    console.warn("Unable to validate auth session", error);
+  }
 }
 
 function updateAuthUiState() {
@@ -376,6 +410,12 @@ function performLogout() {
   updateAuthUiState();
 }
 
+function clearInvalidSession() {
+  window.PteahBayAPI?.clearAuthSession();
+  currentAuthSession = null;
+  updateAuthUiState();
+}
+
 function getUserDisplayName(user) {
   return user.full_name || user.username || user.email || "អ្នកប្រើ";
 }
@@ -477,6 +517,7 @@ function handleFavoriteError(error, button) {
   console.error("Unable to add favorite", error);
   if (error && error.status === 401) {
     showFavoriteToast("សូមចូលគណនីសិន ដើម្បីបន្ថែមចូលចិត្ត។", "error");
+    clearInvalidSession();
     openAuthModal("sign-in");
     return;
   }
