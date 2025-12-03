@@ -381,9 +381,9 @@
           </h2>
         </div>
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="communityGrid">
           <!-- Community Card 1 -->
-          <article
+          <article data-community-card
             class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
             <img src="images/Fish stew.jpg" alt="ទឹកគ្រឿង" class="w-full h-48 object-cover" />
             <div class="p-4">
@@ -422,7 +422,7 @@
           </article>
 
           <!-- Community Card 2 -->
-          <article
+          <article data-community-card
             class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
             <img src="images/Chicken soup.png" alt="សម្លមាន់" class="w-full h-48 object-cover" />
             <div class="p-4">
@@ -461,7 +461,7 @@
           </article>
 
           <!-- Community Card 3 -->
-          <article
+          <article data-community-card
             class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
             <img src="images/Sweet corn.png" alt="បង្អែមពោត" class="w-full h-48 object-cover" />
             <div class="p-4">
@@ -500,7 +500,7 @@
           </article>
 
           <!-- Community Card 4 -->
-          <article
+          <article data-community-card
             class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
             <img src="images/Nom banh chok.jpg" alt="នំបញ្ចុក" class="w-full h-48 object-cover" />
             <div class="p-4">
@@ -537,6 +537,170 @@
               </div>
             </div>
           </article>
+
+          <!-- Community Card 5 -->
+          <article data-community-card
+            class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="images/Fish stew.jpg" alt="អាម៉ុក" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="text-[18px] text-[#104127] font-semibold mb-2">អាម៉ុកត្រី</h3>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+                  <span class="text-[14px] text-[#104127]">PT</span>
+                </div>
+                <div>
+                  <p class="text-[14px] text-[#642f28] font-medium">ពិសី</p>
+                  <p class="text-[12px] text-[#55504c]">៣ សប្តាហ៍មុន</p>
+                </div>
+              </div>
+              <p class="text-[14px] text-[#55504c] line-clamp-2">
+                អាម៉ុកត្រីបែបខ្មែរ ក្រអូបឆ្ងាញ់
+              </p>
+              <div class="flex items-center gap-4 mt-3 pt-3 border-t border-gray-200">
+                <div class="flex items-center gap-1 text-[#ad343e]">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                  </svg>
+                  <span class="text-[14px]">145</span>
+                </div>
+                <div class="flex items-center gap-1 text-[#55504c]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <span class="text-[14px]">723</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Community Card 6 -->
+          <article data-community-card
+            class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="images/Chicken soup.png" alt="បបរ" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="text-[18px] text-[#104127] font-semibold mb-2">បបរសាច់គោ</h3>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+                  <span class="text-[14px] text-[#104127]">RV</span>
+                </div>
+                <div>
+                  <p class="text-[14px] text-[#642f28] font-medium">រដ្ឋា</p>
+                  <p class="text-[12px] text-[#55504c]">១ ខែមុន</p>
+                </div>
+              </div>
+              <p class="text-[14px] text-[#55504c] line-clamp-2">
+                បបរសាច់គោឆ្ងាញ់ ពិសេសសម្រាប់ពេលព្រឹក
+              </p>
+              <div class="flex items-center gap-4 mt-3 pt-3 border-t border-gray-200">
+                <div class="flex items-center gap-1 text-[#ad343e]">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                  </svg>
+                  <span class="text-[14px]">89</span>
+                </div>
+                <div class="flex items-center gap-1 text-[#55504c]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <span class="text-[14px]">456</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Community Card 7 -->
+          <article data-community-card
+            class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="images/Sweet corn.png" alt="លត់ចា" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="text-[18px] text-[#104127] font-semibold mb-2">លត់ចាខ្មែរ</h3>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+                  <span class="text-[14px] text-[#104127]">DN</span>
+                </div>
+                <div>
+                  <p class="text-[14px] text-[#642f28] font-medium">ដារ៉ា</p>
+                  <p class="text-[12px] text-[#55504c]">១ ខែមុន</p>
+                </div>
+              </div>
+              <p class="text-[14px] text-[#55504c] line-clamp-2">
+                លត់ចាឆ្ងាញ់ពីគ្រួសារខ្ញុំ
+              </p>
+              <div class="flex items-center gap-4 mt-3 pt-3 border-t border-gray-200">
+                <div class="flex items-center gap-1 text-[#ad343e]">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                  </svg>
+                  <span class="text-[14px]">112</span>
+                </div>
+                <div class="flex items-center gap-1 text-[#55504c]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <span class="text-[14px]">634</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Community Card 8 -->
+          <article data-community-card
+            class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="images/Nom banh chok.jpg" alt="កុយទាវ" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="text-[18px] text-[#104127] font-semibold mb-2">កុយទាវ</h3>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+                  <span class="text-[14px] text-[#104127]">SM</span>
+                </div>
+                <div>
+                  <p class="text-[14px] text-[#642f28] font-medium">សុផល</p>
+                  <p class="text-[12px] text-[#55504c]">២ ខែមុន</p>
+                </div>
+              </div>
+              <p class="text-[14px] text-[#55504c] line-clamp-2">
+                កុយទាវផ្អែមឆ្ងាញ់ និងល្អសម្រាប់សុខភាព
+              </p>
+              <div class="flex items-center gap-4 mt-3 pt-3 border-t border-gray-200">
+                <div class="flex items-center gap-1 text-[#ad343e]">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                  </svg>
+                  <span class="text-[14px]">67</span>
+                </div>
+                <div class="flex items-center gap-1 text-[#55504c]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <span class="text-[14px]">378</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Show More Button -->
+        <div class="text-center mt-10" id="showMoreContainer">
+          <button id="showMoreBtn" onclick="showMoreCommunityPosts()"
+            class="bg-[#104127] text-white text-[16px] md:text-[18px] px-8 py-3 rounded-[10px] hover:bg-[#0d3320] transition-colors">
+            មើលបន្ថែម
+          </button>
         </div>
       </div>
     </section>
@@ -819,6 +983,9 @@
 
         console.log(`Loaded ${sortedPosts.length} community posts from API`);
 
+        // Reinitialize display to show only first 6 cards
+        initializeCommunityDisplay();
+
       } catch (error) {
         console.error("Error loading community posts:", error);
         // Keep existing mock data if API fails
@@ -828,6 +995,7 @@
     function createCommunityCard(post) {
       const article = document.createElement("article");
       article.className = "bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow";
+      article.setAttribute('data-community-card', '');
 
       // Get user info
       const user = post.user || {};
@@ -1076,6 +1244,61 @@
       if (e.key === 'Escape') {
         closeFoodModal();
       }
+    });
+
+    // Show More Community Posts functionality
+    let showingAllPosts = false;
+
+    function initializeCommunityDisplay() {
+      const communityGrid = document.getElementById('communityGrid');
+      const cards = communityGrid.querySelectorAll('[data-community-card]');
+      const showMoreBtn = document.getElementById('showMoreBtn');
+      const showMoreContainer = document.getElementById('showMoreContainer');
+
+      // Hide cards beyond the first 6
+      cards.forEach((card, index) => {
+        if (index >= 6) {
+          card.style.display = 'none';
+        }
+      });
+
+      // Hide button if 6 or fewer cards
+      if (cards.length <= 6) {
+        showMoreContainer.style.display = 'none';
+      }
+    }
+
+    function showMoreCommunityPosts() {
+      const communityGrid = document.getElementById('communityGrid');
+      const cards = communityGrid.querySelectorAll('[data-community-card]');
+      const showMoreBtn = document.getElementById('showMoreBtn');
+
+      if (!showingAllPosts) {
+        // Show all cards
+        cards.forEach(card => {
+          card.style.display = 'block';
+        });
+        showMoreBtn.textContent = 'បង្ហាញតិច';
+        showingAllPosts = true;
+      } else {
+        // Hide cards beyond first 6
+        cards.forEach((card, index) => {
+          if (index >= 6) {
+            card.style.display = 'none';
+          }
+        });
+        showMoreBtn.textContent = 'មើលបន្ថែម';
+        showingAllPosts = false;
+
+        // Scroll to community section
+        const communitySection = document.getElementById('communityGrid').closest('section');
+        communitySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeCommunityDisplay();
     });
   </script>
 </body>
