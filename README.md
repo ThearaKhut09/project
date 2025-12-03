@@ -1,1 +1,1 @@
-# cusine-kh-platform
+# cuisine-kh-platform
