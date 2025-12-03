@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>សម្បូរបែប - មុខម្ហូបទូទៅ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="images/logo1.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Siemreap&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-white font-siemreap text-[#4f2620]">
+  <!-- ==================== HEADER ==================== -->
+  <header class="bg-[#F5F5F5] h-auto md:h-[89px] py-3 md:py-0 sticky top-0 z-50 shadow-sm">
+    <nav
+      class="max-w-[1360px] mx-auto flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 lg:px-10 relative">
+      <div class="h-[60px] w-[120px] md:h-[90px] md:w-[165px] flex items-center">
+        <a href="index.html" class="block h-full w-full">
+          <img src="images/logo.png" alt="SombobaebKH Logo" class="w-full h-full object-contain" />
+        </a>
+      </div>
+
+      <div class="hidden lg:flex gap-4 xl:gap-[26px] items-center text-[14px] xl:text-[16px]">
+        <a href="index.html" class="text-[#642f28] hover:text-[#dd070c] transition-colors">ទំព័រដើម</a>
+        <a href="general_food.html" class="text-[#dd070c] font-semibold">មុខម្ហូបទូទៅ</a>
+        <a href="province.html" class="text-[#642f28] hover:text-[#dd070c] transition-colors">ម្ហូបតាមខេត្ត</a>
+        <a href="about.html" class="text-[#642f28] hover:text-[#dd070c] transition-colors">អំពីយើង</a>
+      </div>
+
+      <div class="flex gap-2 md:gap-[15px] items-center">
+        <button id="uploadBtn" onclick="checkAuthAndUpload()"
+          class="hidden md:flex group border border-[#642f28] rounded-[5px] px-3 md:px-6 py-1.5 md:py-2 items-center gap-2 hover:bg-[#dd070c] hover:text-white transition-colors cursor-pointer">
+          <svg class="w-[9px] h-[10px] text-[#642f28] group-hover:text-white transition-colors" viewBox="0 0 9 10"
+            fill="none">
+            <path d="M4.5 0L4.5 7M4.5 0L1.5 3M4.5 0L7.5 3M0 10H9" stroke="currentColor" stroke-width="1" />
+          </svg>
+          <span class="text-[#642f28] text-[13px] md:text-[15px] group-hover:text-white transition-colors">បង្ហោះ</span>
+        </button>
+
+        <button id="darkModeBtn" class="relative hidden md:block" aria-label="Dark mode toggle">
+          <svg class="w-[28px] h-[32px] md:w-[34px] md:h-[38px]" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 640 640" fill="#000000">
+            <path
+              d="M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z" />
+          </svg>
+        </button>
+
+        <button data-user-trigger
+          class="w-[38px] h-[38px] md:w-[47px] md:h-[47px] rounded-full overflow-hidden hover:ring-2 hover:ring-[#dd070c] transition-all">
+          <img data-user-avatar-img src="images/user-icon.svg" alt="User" class="w-full h-full object-cover" />
+          <span data-user-avatar-initial
+            class="hidden w-full h-full flex items-center justify-center bg-[#f3e9dd] text-[#104127] font-semibold text-lg"></span>
+        </button>
+
+        <button id="gf-hamburger"
+          class="lg:hidden flex flex-col justify-center items-center w-10 h-10 rounded-md hover:bg-[#e5d5c4] transition-colors relative z-[60]"
+          aria-label="Toggle menu">
+          <span class="w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out"></span>
+          <span class="w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out mt-1.5"></span>
+          <span class="w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out mt-1.5"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="gf-nav"
+      class="lg:hidden overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 absolute top-full left-0 right-0 z-40 w-full">
+      <div class="bg-white border-t-2 border-[#642f28] shadow-lg w-full">
+        <div class="max-w-[1360px] mx-auto px-4 py-4 flex flex-col gap-1">
+          <a href="index.html"
+            class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">ទំព័រដើម</a>
+          <a href="general_food.html"
+            class="bg-[#f3e9dd] text-[#dd070c] px-4 py-3 rounded-md text-[15px] font-semibold">មុខម្ហូបទូទៅ</a>
+          <a href="province.html"
+            class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">ម្ហូបតាមខេត្ត</a>
+          <a href="about.html"
+            class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">អំពីយើង</a>
+          <div class="md:hidden border-t border-gray-200 mt-2 pt-3 flex flex-col gap-2">
+            <button onclick="checkAuthAndUpload()"
+              class="flex items-center gap-2 text-[#642f28] hover:bg-[#f3e9dd] px-4 py-3 rounded-md transition-colors">
+              <svg class="w-5 h-5" viewBox="0 0 9 10" fill="none">
+                <path d="M4.5 0L4.5 7M4.5 0L1.5 3M4.5 0L7.5 3M0 10H9" stroke="currentColor" stroke-width="1" />
+              </svg>
+              <span class="text-[15px] font-medium">បង្ហោះ</span>
+            </button>
+            <button
+              class="flex items-center gap-2 text-[#642f28] hover:bg-[#f3e9dd] px-4 py-3 rounded-md transition-colors">
+              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
+                <path
+                  d="M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z" />
+              </svg>
+              <span class="text-[15px] font-medium">ងងឹត</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main>
+    <!-- Hero Section -->
+    <section class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 py-10 md:py-16 grid lg:grid-cols-2 gap-10">
+      <div>
+        <p class="text-[#ad343e] text-[18px] md:text-[22px] mb-3">មុខម្ហូបទូទៅខ្មែរ</p>
+        <h1 class="text-[#104127] text-[32px] md:text-[48px] leading-tight mb-4">ស្វែងរកមុខម្ហូបដែលមានប្រវត្តិ
+          និងគ្រឿងផ្សំលម្អិត</h1>
+        <p class="text-[16px] md:text-[18px] leading-relaxed text-[#55504c] mb-6">
+          ប្រជាជនខ្មែរនិយមចម្អិនម្ហូបជាច្រើនបែប ផ្អែកលើតំបន់ និងធាតុធម្មជាតិ។ ទំព័រនេះជួយអ្នកសិក្សា
+          និងរកមើលមុខម្ហូបដែលមានប្រជាប្រិយភាពបំផុត និងរៀនពីគ្រឿងផ្សំដ៏សម្បូរបែប។</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#popular-dishes"
+            class="bg-[#104127] text-white px-6 py-3 rounded-full text-[16px]">មើលមុខម្ហូបពេញនិយម</a>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-3">
+        <img src="./img/trey khor.png" alt="ត្រីខ្ទះ" class="rounded-xl object-cover h-28 md:h-32 w-full" />
+        <img src="./img/somlor morn.png" alt="សម្លមាន់" class="rounded-xl object-cover h-28 md:h-32 w-full" />
+        <img src="images/Dish collage.png" alt="ម្ហូបចម្រុះ" class="rounded-xl object-cover h-28 md:h-32 w-full" />
+        <img src="./img/fish food.png" alt="ម្ហូបត្រី" class="rounded-xl object-cover h-28 md:h-32 w-full" />
+        <img src="./img/somlor koko.png" alt="សម្លរគោគោ" class="rounded-xl object-cover h-28 md:h-32 w-full" />
+        <img src="./img/carry somlor.png" alt="ការីសម្ល" class="rounded-xl object-cover h-28 md:h-32 w-full" />
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class=" py-10 md:py-14">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+
+        <div class="flex flex-wrap items-center justify-between gap-6 mb-10">
+          <p class="text-[#104127] text-[26px] md:text-[36px]">ប្រភេទអាហារសំខាន់ៗ</p>
+
+          <div class="flex items-center border border-[#104127] rounded-[10px] px-4 py-2 w-full md:w-[420px]">
+            <input type="text" placeholder="ស្វែងរកម្ហូប..."
+              class="flex-1 bg-transparent outline-none text-[15px] text-[#55504c]">
+            <svg class="w-6 h-6 text-[#104127]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="m21 21-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Soup Category -->
+          <article
+            class="bg-white rounded-[16px] border border-[#d9d9d9] p-6 text-center flex flex-col items-center gap-3">
+            <div class="w-16 h-16 rounded-full bg-[#f3e9dd] flex items-center justify-center overflow-hidden">
+              <img src="images/icons8-soup-50.png" alt="Soup Icon" class="w-10 h-10 object-contain">
+            </div>
+            <h3 class="text-[22px] text-[#ad343e]">មុខម្ហូប "សម្ល"</h3>
+            <p class="text-[15px] text-[#55504c]">សម្លខ្មែរមានច្រើនប្រភេទ ឆ្ងាញ់ក្នុងរាល់គ្រឿងផ្សំ។</p>
+            <a href="#popular-dishes" class="mt-2 bg-[#104127] text-white px-5 py-2 rounded-full text-[15px]">ចូលមើល</a>
+          </article>
+
+          <!-- Dessert Category -->
+          <article
+            class="bg-white rounded-[16px] border border-[#d9d9d9] p-6 text-center flex flex-col items-center gap-3">
+            <div class="w-16 h-16 rounded-full bg-[#f3e9dd] flex items-center justify-center overflow-hidden">
+              <img src="images/icons8-dessert-50.png" alt="Dessert Icon" class="w-10 h-10 object-contain">
+            </div>
+            <h3 class="text-[22px] text-[#ad343e]">មុខម្ហូប "បង្អែម"</h3>
+            <p class="text-[15px] text-[#55504c]">បង្អែមផ្អែមឈ្ងុយពីគ្រឿងផ្លែឈើ និងធាតុធម្មជាតិ។</p>
+            <a href="#sweet-section" class="mt-2 bg-[#104127] text-white px-5 py-2 rounded-full text-[15px]">ចូលមើល</a>
+          </article>
+
+          <!-- Cake Category -->
+          <article
+            class="bg-white rounded-[16px] border border-[#d9d9d9] p-6 text-center flex flex-col items-center gap-3">
+            <div class="w-16 h-16 rounded-full bg-[#f3e9dd] flex items-center justify-center overflow-hidden">
+              <img src="images/icons8-cake-50.png" alt="Cake Icon" class="w-10 h-10 object-contain">
+            </div>
+            <h3 class="text-[22px] text-[#ad343e]">មុខម្ហូប "នំ"</h3>
+            <p class="text-[15px] text-[#55504c]">នំខ្មែរទន់ល្មើយ ឆ្ងាញ់ ហើយមានរូបរាងប្លែក។</p>
+            <a href="#cake-gallery" class="mt-2 bg-[#104127] text-white px-5 py-2 rounded-full text-[15px]">ចូលមើល</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Dishes -->
+    <section id="popular-dishes" class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 py-12 md:py-16">
+      <h2 class="text-[#104127] text-[30px] md:text-[40px] mb-10 ">
+        មុខម្ហូបទូទៅពេញនិយម
+      </h2>
+      <div class="grid gap-8">
+        <div class="grid lg:grid-cols-2 gap-8" id="ImportantFoodBlock">
+          <!-- <article
+              class="bg-neutral-50 rounded-[16px] p-6 flex flex-col md:flex-row gap-6"
+            >
+              <div class="flex-1">
+                <p class="text-[#ad343e] text-[22px] mb-2">
+                  ទឹកគ្រឿង (បាត់ដំបង)
+                </p>
+                <p class="text-[16px] text-[#55504c] mb-4">
+                  ខរត្រីប៉េងប៉ោះគឺជាម្ហូបខ្មែរដែលមានរសជាតិផ្អែម និងជូរបន្តិច
+                  ចូលចិត្តសម្រាប់អាហារពេលព្រឹក។
+                </p>
+                <a
+                  href="food_detail.html"
+                  class="inline-flex items-center gap-2 bg-[#104127] text-white px-5 py-2 rounded-[10px] text-[15px]"
+                  >ព័ត៌មានបន្ថែម</a
+                >
+              </div>
+              <img
+                src="images/Fish stew.jpg"
+                alt="ទឹកគ្រឿង"
+                class="w-full md:w-[260px] h-[190px] object-cover rounded-[12px]"
+              />
+            </article> -->
+
+          <!-- <article class="bg-neutral-50 rounded-[16px] p-6 flex flex-col md:flex-row gap-6">
+            <div class="flex-1">
+              <p class="text-[#ad343e] text-[22px] mb-2">
+                សម្លរស្ងោរជ្រក់សាច់មាន់
+              </p>
+              <p class="text-[16px] text-[#55504c] mb-4">
+                សម្លរស្ងោរជ្រក់ជាមួយសាច់មាន់ផ្កាអម
+                នាំអោយមានរសជាតិពេញនិយមនៅតាមប្រទេស។
+              </p>
+              <a href="food_detail.html"
+                class="inline-flex items-center gap-2 bg-[#104127] text-white px-5 py-2 rounded-[10px] text-[15px]">ព័ត៌មានបន្ថែម</a>
+            </div>
+            <img src="images/Chicken soup.png" alt="សម្លរមាន់"
+              class="w-full md:w-[260px] h-[190px] object-cover rounded-[12px]" />
+          </article> -->
+        </div>
+
+        <!-- <div class="grid lg:grid-cols-2 gap-8">
+          <article class="bg-neutral-50 rounded-[16px] p-6 flex flex-col md:flex-row gap-6">
+            <div class="flex-1">
+              <p class="text-[#ad343e] text-[22px] mb-2">សម្លខរជើងជ្រូក</p>
+              <p class="text-[16px] text-[#55504c] mb-4">
+                ម្ហូបពិសេសដែលប្រើជើងជ្រូក៣ មានរសជាតិខ្លាំង និងជួយបំប៉នកម្លាំង។
+              </p>
+              <a href="food_detail.html"
+                class="inline-flex items-center gap-2 bg-[#104127] text-white px-5 py-2 rounded-[10px] text-[15px]">ព័ត៌មានបន្ថែម</a>
+            </div>
+            <img src="images/Pork soup.png" alt="សម្លជើងជ្រូក"
+              class="w-full md:w-[260px] h-[190px] object-cover rounded-[12px]" />
+          </article>
+
+          <article class="bg-neutral-50 rounded-[16px] p-6 flex flex-col md:flex-row gap-6">
+            <div class="flex-1">
+              <p class="text-[#ad343e] text-[22px] mb-2">
+                នំបញ្ចុកសម្លរប្រហើរ
+              </p>
+              <p class="text-[16px] text-[#55504c] mb-4">
+                នំបញ្ចុកជាប់នឹងវប្បធម៌ ឆ្ងាញ់ជាមួយត្រីស្រស់ និងបន្លែចម្រុះ។
+              </p>
+              <a href="food_detail.html"
+                class="inline-flex items-center gap-2 bg-[#104127] text-white px-5 py-2 rounded-[10px] text-[15px]">ព័ត៌មានបន្ថែម</a>
+            </div>
+            <img src="images/Nom banh chok.jpg" alt="នំបញ្ចុក"
+              class="w-full md:w-[260px] h-[190px] object-cover rounded-[12px]" />
+          </article>
+        </div> -->
+      </div>
+    </section>
+
+    <!-- Desserts Section -->
+    <section id="sweet-section" class=" py-12 md:py-16">
+      <div class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10">
+        <h2 class="text-[#104127] text-[30px] md:text-[36px] mb-10">
+          បង្អែមទូទៅពេញនិយម
+        </h2>
+        <div class="grid lg:grid-cols-2 gap-8">
+          <article class="bg-neutral-50 rounded-[16px] p-6 flex flex-col md:flex-row gap-6">
+            <div class="flex-1">
+              <p class="text-[#ad343e] text-[22px] mb-2">បង្អែមពោត</p>
+              <p class="text-[16px] text-[#55504c] mb-4">
+                បង្អែមពោតមានក្លិនឈ្ងុយពីទឹកដោះគោ និងស្ករត្នោត
+                ផ្តល់អារម្មណ៍កម្រិតថែមលើពេលពិសា។
+              </p>
+              <a href="food_detail.html"
+                class="inline-flex items-center gap-2 bg-[#104127] text-white px-5 py-2 rounded-[10px] text-[15px]">ព័ត៌មានបន្ថែម</a>
+            </div>
+            <img src="images/Sweet corn.png" alt="បង្អែមពោត"
+              class="w-full md:w-[260px] h-[190px] object-cover rounded-[12px]" />
+          </article>
+
+          <article class="bg-neutral-50 rounded-[16px] p-6 flex flex-col md:flex-row gap-6">
+            <div class="flex-1">
+              <p class="text-[#ad343e] text-[22px] mb-2">
+                បង្អែមបបរសណ្ដែកខៀវ
+              </p>
+              <p class="text-[16px] text-[#55504c] mb-4">
+                បបរសណ្ដែកខៀវក្រអូបទឹកដោះគោ និងមានសភាពទន់ល្មើយ
+                ពិសារងាយក្នុងពេលរសៀល។
+              </p>
+              <a href="food_detail.html"
+                class="inline-flex items-center gap-2 bg-[#104127] text-white px-5 py-2 rounded-[10px] text-[15px]">ព័ត៌មានបន្ថែម</a>
+            </div>
+            <img src="images/បង្អែមបបរសណ្ដែកខៀវ.jpg" alt="បង្អែមសណ្តែកខៀវ"
+              class="w-full md:w-[260px] h-[190px] object-cover rounded-[12px]" />
+          </article>
+
+          <article class="bg-neutral-50 rounded-[16px] p-6 flex flex-col md:flex-row gap-6">
+            <div class="flex-1">
+              <p class="text-[#ad343e] text-[22px] mb-2">បង្អែមចេកខ្ទិះ</p>
+              <p class="text-[16px] text-[#55504c] mb-4">
+                ចេកស្រស់ចម្អិនជាមួយទឹកដោះខ្ទិះ និងស្ករត្នោត
+                បញ្ចូលក្លិនបៃតងទន់។
+              </p>
+              <a href="food_detail.html"
+                class="inline-flex items-center gap-2 bg-[#104127] text-white px-5 py-2 rounded-[10px] text-[15px]">ព័ត៌មានបន្ថែម</a>
+            </div>
+            <img src="images/Banana dessert.png" alt="បង្អែមចេក"
+              class="w-full md:w-[260px] h-[190px] object-cover rounded-[12px]" />
+          </article>
+
+          <article class="bg-neutral-50 rounded-[16px] p-6 flex flex-col md:flex-row gap-6">
+            <div class="flex-1">
+              <p class="text-[#ad343e] text-[22px] mb-2">បង្អែមសង្ខ្យា</p>
+              <p class="text-[16px] text-[#55504c] mb-4">
+                សង្ខ្យាធ្វើពីល្ពៅ និងទឹកដោះគោ ជាមួយពងមាន់ និងស្ករត្នោត។
+              </p>
+              <a href="food_detail.html"
+                class="inline-flex items-center gap-2 bg-[#104127] text-white px-5 py-2 rounded-[10px] text-[15px]">ព័ត៌មានបន្ថែម</a>
+            </div>
+            <img src="./img/image.png" alt="សង្ខ្យា"
+              class="w-full md:w-[260px] h-[190px] object-cover rounded-[12px]" />
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Khmer Cakes Gallery -->
+    <section id="cake-gallery" class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 py-12 md:py-16">
+      <h2 class="text-[#104127] text-[30px] md:text-[36px] mb-10 ">
+        នំខ្មែរទូទៅពេញនិយម
+      </h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="food_detail.html">
+          <article class="border border-[#d9d9d9] rounded-[12px] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="https://www.figma.com/api/mcp/asset/48342579-a8e4-4465-8f01-3e559dc81b2d" alt="នំផ្លែអាយ"
+              class="w-full h-48 object-cover" />
+            <div class="p-4 bg-white">
+              <p class="text-[18px] text-[#104127]">នំផ្លែអាយ</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="food_detail.html">
+          <article class="border border-[#d9d9d9] rounded-[12px] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="https://www.figma.com/api/mcp/asset/631ff1b9-f5fa-41f4-9d07-30f4a64bf0cd" alt="នំកង"
+              class="w-full h-48 object-cover" />
+            <div class="p-4 bg-white">
+              <p class="text-[18px] text-[#104127]">នំកង</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="food_detail.html">
+          <article class="border border-[#d9d9d9] rounded-[12px] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="https://www.figma.com/api/mcp/asset/a7e7bdf4-c1ae-4676-9bc0-718d5c2dd2b2" alt="នំក្រូច"
+              class="w-full h-48 object-cover" />
+            <div class="p-4 bg-white">
+              <p class="text-[18px] text-[#104127]">នំក្រូច</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="food_detail.html">
+          <article class="border border-[#d9d9d9] rounded-[12px] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="https://www.figma.com/api/mcp/asset/46f786ed-bde4-4ffd-a906-cd853f06ef55" alt="នំអាកោត្នោត"
+              class="w-full h-48 object-cover" />
+            <div class="p-4 bg-white">
+              <p class="text-[18px] text-[#104127]">នំអាកោត្នោត</p>
+            </div>
+          </article>
+        </a>
+      </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class=" py-12 md:py-16">
+      <div class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10">
+        <div class="flex items-center justify-between mb-10">
+          <h2 class="text-[#104127] text-[30px] md:text-[36px]">
+            សហគមន៍
+          </h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Community Card 1 -->
+          <article
+            class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="images/Fish stew.jpg" alt="ទឹកគ្រឿង" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="text-[18px] text-[#104127] font-semibold mb-2">ទឹកគ្រឿងត្រី</h3>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+                  <span class="text-[14px] text-[#104127]">SK</span>
+                </div>
+                <div>
+                  <p class="text-[14px] text-[#642f28] font-medium">សុខា</p>
+                  <p class="text-[12px] text-[#55504c]">២ ថ្ងៃមុន</p>
+                </div>
+              </div>
+              <p class="text-[14px] text-[#55504c] line-clamp-2">
+                រូបមន្តទឹកគ្រឿងត្រីពីគ្រួសាររបស់ខ្ញុំ ឆ្ងាញ់និងងាយស្រួលធ្វើ
+              </p>
+              <div class="flex items-center gap-4 mt-3 pt-3 border-t border-gray-200">
+                <div class="flex items-center gap-1 text-[#ad343e]">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                  </svg>
+                  <span class="text-[14px]">128</span>
+                </div>
+                <div class="flex items-center gap-1 text-[#55504c]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <span class="text-[14px]">1.2k</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Community Card 2 -->
+          <article
+            class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="images/Chicken soup.png" alt="សម្លមាន់" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="text-[18px] text-[#104127] font-semibold mb-2">សម្លមាន់ស្រស់</h3>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+                  <span class="text-[14px] text-[#104127]">VT</span>
+                </div>
+                <div>
+                  <p class="text-[14px] text-[#642f28] font-medium">វិទូ</p>
+                  <p class="text-[12px] text-[#55504c]">៥ ថ្ងៃមុន</p>
+                </div>
+              </div>
+              <p class="text-[14px] text-[#55504c] line-clamp-2">
+                សម្លមាន់ធម្មជាតិ១០០% ល្អសម្រាប់សុខភាព
+              </p>
+              <div class="flex items-center gap-4 mt-3 pt-3 border-t border-gray-200">
+                <div class="flex items-center gap-1 text-[#ad343e]">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                  </svg>
+                  <span class="text-[14px]">95</span>
+                </div>
+                <div class="flex items-center gap-1 text-[#55504c]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <span class="text-[14px]">856</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Community Card 3 -->
+          <article
+            class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="images/Sweet corn.png" alt="បង្អែមពោត" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="text-[18px] text-[#104127] font-semibold mb-2">បង្អែមពោតទឹកដោះគោ</h3>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+                  <span class="text-[14px] text-[#104127]">SR</span>
+                </div>
+                <div>
+                  <p class="text-[14px] text-[#642f28] font-medium">សុរេយ៉ា</p>
+                  <p class="text-[12px] text-[#55504c]">១ សប្តាហ៍មុន</p>
+                </div>
+              </div>
+              <p class="text-[14px] text-[#55504c] line-clamp-2">
+                បង្អែមពោតផ្អែមឆ្ងាញ់ សមរម្យសម្រាប់រដូវក្តៅ
+              </p>
+              <div class="flex items-center gap-4 mt-3 pt-3 border-t border-gray-200">
+                <div class="flex items-center gap-1 text-[#ad343e]">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                  </svg>
+                  <span class="text-[14px]">203</span>
+                </div>
+                <div class="flex items-center gap-1 text-[#55504c]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <span class="text-[14px]">1.5k</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Community Card 4 -->
+          <article
+            class="bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="images/Nom banh chok.jpg" alt="នំបញ្ចុក" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="text-[18px] text-[#104127] font-semibold mb-2">នំបញ្ចុកខ្មែរ</h3>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+                  <span class="text-[14px] text-[#104127]">CH</span>
+                </div>
+                <div>
+                  <p class="text-[14px] text-[#642f28] font-medium">ចាន់នី</p>
+                  <p class="text-[12px] text-[#55504c]">២ សប្តាហ៍មុន</p>
+                </div>
+              </div>
+              <p class="text-[14px] text-[#55504c] line-clamp-2">
+                នំបញ្ចុកបែបប្រពៃណីពីយាយខ្ញុំ រសជាតិពិតប្រាកដ
+              </p>
+              <div class="flex items-center gap-4 mt-3 pt-3 border-t border-gray-200">
+                <div class="flex items-center gap-1 text-[#ad343e]">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                  </svg>
+                  <span class="text-[14px]">176</span>
+                </div>
+                <div class="flex items-center gap-1 text-[#55504c]">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <span class="text-[14px]">982</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Food Detail Modal -->
+  <div id="foodDetailModal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+      <button onclick="closeFoodModal()"
+        class="absolute top-4 right-4 w-10 h-10 bg-red-500 text-white rounded-full hover:bg-red-600 flex items-center justify-center z-10">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div id="modalContent" class="p-6 md:p-8">
+        <!-- Content will be dynamically loaded -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#283b3f] py-6 md:py-8 lg:py-[37px] px-4 md:px-6 lg:px-10">
+    <div class="max-w-[1360px] mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div>
+          <div class="w-[160px] md:w-[200px] lg:w-[220px] h-[90px] md:h-[110px] lg:h-[120px] mb-3 md:mb-4">
+            <img src="images/logo1.png" alt="SombobaebKH Logo" class="w-full h-full object-contain" />
+          </div>
+          <p class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed">
+            ការរក្សាទុកនិងអភិរក្សម្ហូបដ៏សម្បូរបែប<br />នៅប្រទេសកម្ពុជា
+          </p>
+        </div>
+        <div>
+          <h4 class="text-[#fbf2e8] text-[24px] md:text-[28px] lg:text-[32px] mb-4 md:mb-5 lg:mb-[24px]">
+            តំណភ្ជាប់
+          </h4>
+          <ul class="space-y-2 md:space-y-[10px]">
+            <li>
+              <a href="index.html" class="text-[#fbf2e8] hover:text-white transition-colors">ទំព័រដើម</a>
+            </li>
+            <li>
+              <a href="general_food.html" class="text-[#fbf2e8] hover:text-white transition-colors">មុខម្ហូបទូទៅ</a>
+            </li>
+            <li>
+              <a href="province.html" class="text-[#fbf2e8] hover:text-white transition-colors">ម្ហូបតាមខេត្ត</a>
+            </li>
+            <li>
+              <a href="about.html" class="text-[#fbf2e8] hover:text-white transition-colors">អំពីយើង</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[#fbf2e8] text-[24px] md:text-[28px] lg:text-[32px] mb-4 md:mb-5 lg:mb-[24px]">
+            ទំនាក់ទំនង
+          </h4>
+          <div class="flex gap-4 mb-[28px]">
+            <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-200"><svg
+                class="w-5 h-5" fill="#283b3f" viewBox="0 0 24 24">
+                <path
+                  d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+              </svg></a>
+            <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-200"><svg
+                class="w-5 h-5" fill="#283b3f" viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg></a>
+          </div>
+          <div class="bg-[#d9d9d9] rounded-[25px] h-[42px] flex items-center px-4 gap-2">
+            <input type="email" placeholder="Your email address"
+              class="flex-1 bg-transparent text-[13px] outline-none" />
+            <button class="text-[#ad343e] font-medium">Subscribe</button>
+          </div>
+        </div>
+        <div class="text-center lg:text-left">
+          <p class="text-white text-[28px] mb-[30px]">
+            ឧបត្ថម្ភ និង គាំទ្រដោយ
+          </p>
+          <img src="images/istad-logo.png" alt="ISTAD" class="w-[200px] h-auto mx-auto lg:mx-0" />
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="js/general_food..js"></script>
+  <script src="js/darkmode.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Hamburger Menu Script -->
+  <script>
+    const gfHamburger = document.getElementById("gf-hamburger");
+    const gfNav = document.getElementById("gf-nav");
+    const gfLines = gfHamburger.querySelectorAll("span");
+    let gfOpen = false;
+
+    gfHamburger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      gfOpen = !gfOpen;
+      if (gfOpen) {
+        gfNav.style.maxHeight = gfNav.scrollHeight + "px";
+        gfNav.style.opacity = "1";
+        gfLines[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+        gfLines[1].style.opacity = "0";
+        gfLines[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
+      } else {
+        gfNav.style.maxHeight = "0";
+        gfNav.style.opacity = "0";
+        gfLines.forEach((line) => {
+          line.style.transform = "";
+          line.style.opacity = "1";
+        });
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        gfOpen &&
+        !gfHamburger.contains(e.target) &&
+        !gfNav.contains(e.target)
+      ) {
+        gfOpen = false;
+        gfNav.style.maxHeight = "0";
+        gfNav.style.opacity = "0";
+        gfLines.forEach((line) => {
+          line.style.transform = "";
+          line.style.opacity = "1";
+        });
+      }
+    });
+
+    // Check authentication before allowing upload
+    function checkAuthAndUpload() {
+      const session = window.PteahBayAPI?.getStoredAuthSession();
+      if (!session || !session.accessToken) {
+        // Show alert and prompt to login
+        if (confirm('សូមចូលគណនីជាមុនសិនដើម្បីបង្ហោះរូបមន្ត។ តើអ្នកចង់ចូលគណនីឥឡូវនេះទេ?')) {
+          window.location.href = 'sign_in.html';
+        }
+        return false;
+      }
+      // User is authenticated, allow upload
+      window.location.href = 'upload.html';
+    }
+
+    // Load Community Food Posts from API and merge with mock data
+    document.addEventListener("DOMContentLoaded", async function () {
+      await loadCommunityPosts();
+
+      // Also check authentication on upload button in community section
+      const communityUploadBtn = document.querySelector('section a[href="upload.html"]');
+      if (communityUploadBtn) {
+        communityUploadBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          checkAuthAndUpload();
+        });
+      }
+    });
+
+    async function loadCommunityPosts() {
+      try {
+        if (!window.PteahBayAPI) {
+          console.log("API not available, showing mock data only");
+          return;
+        }
+
+        // Get community section grid
+        const communitySection = Array.from(document.querySelectorAll('section')).find(section =>
+          section.textContent.includes('សហគមន៍')
+        );
+
+        if (!communitySection) {
+          return;
+        }
+
+        const communityGrid = communitySection.querySelector('.grid');
+        if (!communityGrid) {
+          return;
+        }
+
+        // Fetch food posts from API
+        const posts = await window.PteahBayAPI.listFoodPosts(0, 20);
+
+        if (!posts || posts.length === 0) {
+          console.log("No posts from API, showing mock data only");
+          return;
+        }
+
+        console.log("Fetched posts from API:", posts.length);
+
+        // Filter posts with "សហគមន៍" tag
+        const communityPosts = posts.filter(post =>
+          post.tags && post.tags.includes("សហគមន៍")
+        );
+
+        if (communityPosts.length === 0) {
+          console.log("No community posts found, showing mock data only");
+          return;
+        }
+
+        console.log("Community posts found:", communityPosts.length);
+
+        // Fetch user info for each post by getting user posts which includes user data
+        const userCache = {};
+        const postsWithUsers = await Promise.all(
+          communityPosts.map(async (post) => {
+            try {
+              // Check if we already fetched this user
+              if (!userCache[post.user_id]) {
+                try {
+                  // Fetch user's posts to get user info
+                  const userPosts = await window.PteahBayAPI.getUserFoodPosts(post.user_id, 0, 1);
+
+                  // The API should return posts with user info, extract user from first post
+                  if (userPosts && userPosts.length > 0 && userPosts[0].user) {
+                    userCache[post.user_id] = userPosts[0].user;
+                  } else {
+                    // Fallback: check if it's current user
+                    const session = window.PteahBayAPI.getStoredAuthSession();
+                    if (session && session.user && session.user.id === post.user_id) {
+                      userCache[post.user_id] = session.user;
+                    } else {
+                      // Last resort: create generic user
+                      userCache[post.user_id] = {
+                        id: post.user_id,
+                        username: `User${post.user_id.substring(0, 6)}`,
+                        full_name: null
+                      };
+                    }
+                  }
+                } catch (userError) {
+                  console.log(`Could not fetch user ${post.user_id}, using fallback`);
+                  // Check session as fallback
+                  const session = window.PteahBayAPI.getStoredAuthSession();
+                  if (session && session.user && session.user.id === post.user_id) {
+                    userCache[post.user_id] = session.user;
+                  } else {
+                    userCache[post.user_id] = {
+                      id: post.user_id,
+                      username: `User${post.user_id.substring(0, 6)}`,
+                      full_name: null
+                    };
+                  }
+                }
+              }
+              return {
+                ...post,
+                user: userCache[post.user_id]
+              };
+            } catch (error) {
+              console.error(`Error processing post ${post.id}:`, error);
+              return post;
+            }
+          })
+        );
+
+        // Get existing mock cards
+        const existingCards = Array.from(communityGrid.children);
+
+        // Clear grid
+        communityGrid.innerHTML = '';
+
+        // Add API posts first (newest first) without limiting to four cards
+        const sortedPosts = postsWithUsers.sort((a, b) =>
+          new Date(b.created_at) - new Date(a.created_at)
+        );
+
+        sortedPosts.forEach(post => {
+          const card = createCommunityCard(post);
+          communityGrid.appendChild(card);
+        });
+
+        // Keep mock cards if there are fewer than four posts
+        const remainingSpace = Math.max(0, 4 - sortedPosts.length);
+        if (remainingSpace > 0) {
+          existingCards.slice(0, remainingSpace).forEach(card => {
+            communityGrid.appendChild(card);
+          });
+        }
+
+        console.log(`Loaded ${sortedPosts.length} community posts from API`);
+
+      } catch (error) {
+        console.error("Error loading community posts:", error);
+        // Keep existing mock data if API fails
+      }
+    }
+
+    function createCommunityCard(post) {
+      const article = document.createElement("article");
+      article.className = "bg-white rounded-[16px] border border-[#d9d9d9] overflow-hidden hover:shadow-lg transition-shadow";
+
+      // Get user info
+      const user = post.user || {};
+      const username = user.full_name || user.username || user.email || "អ្នកប្រើប្រាស់";
+      const userInitial = username.charAt(0).toUpperCase();
+
+      // Format date
+      const postDate = new Date(post.created_at);
+      const now = new Date();
+      const diffTime = Math.abs(now - postDate);
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+      const diffMinutes = Math.floor(diffTime / (1000 * 60));
+
+      let timeText = "";
+      if (diffMinutes < 1) {
+        timeText = "ទើបតែនេះ";
+      } else if (diffMinutes < 60) {
+        timeText = `${diffMinutes} នាទីមុន`;
+      } else if (diffHours < 24) {
+        timeText = `${diffHours} ម៉ោងមុន`;
+      } else if (diffDays === 0) {
+        timeText = "ថ្ងៃនេះ";
+      } else if (diffDays === 1) {
+        timeText = "ម្សិលមិញ";
+      } else if (diffDays < 7) {
+        timeText = `${diffDays} ថ្ងៃមុន`;
+      } else if (diffDays < 30) {
+        timeText = `${Math.floor(diffDays / 7)} សប្តាហ៍មុន`;
+      } else {
+        timeText = `${Math.floor(diffDays / 30)} ខែមុន`;
+      }
+
+      // Use default image if no image_url
+      const imageUrl = post.image_url || "images/Fish stew.jpg";
+
+      // Escape HTML to prevent XSS
+      const escapeHtml = (text) => {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      };
+
+      const title = escapeHtml(post.title || "គ្មានចំណងជើង");
+      const description = escapeHtml(post.description || "គ្មានការពិពណ៌នា");
+      const displayName = escapeHtml(username);
+
+      article.innerHTML = `
+        <img src="${imageUrl}" alt="${title}" class="w-full h-48 object-cover" onerror="this.src='images/Fish stew.jpg'" />
+        <div class="p-4">
+          <h3 class="text-[18px] text-[#104127] font-semibold mb-2">${title}</h3>
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+              <span class="text-[14px] text-[#104127]">${userInitial}</span>
+            </div>
+            <div>
+              <p class="text-[14px] text-[#642f28] font-medium">${displayName}</p>
+            </div>
+          </div>
+          <p class="text-[14px] text-[#55504c] line-clamp-2">
+            ${description}
+          </p>
+          <div class="flex items-center gap-4 mt-3 pt-3 border-t border-gray-200">
+            <div class="flex items-center gap-1 text-[#ad343e]">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+              </svg>
+              <span class="text-[14px]">${post.likes_count || 0}</span>
+            </div>
+            <div class="flex items-center gap-1 text-[#55504c]">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              <span class="text-[14px]">${post.cooking_time_minutes ? post.cooking_time_minutes + ' នាទី' : 'មើល'}</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Make card clickable
+      article.style.cursor = 'pointer';
+      article.addEventListener('click', () => openFoodModal(post));
+
+      return article;
+    }
+
+    // Modal Functions
+    function openFoodModal(post) {
+      const modal = document.getElementById('foodDetailModal');
+      const modalContent = document.getElementById('modalContent');
+
+      // Get user info
+      const user = post.user || {};
+      const username = user.full_name || user.username || user.email || "អ្នកប្រើប្រាស់";
+      const userInitial = username.charAt(0).toUpperCase();
+
+      // Escape HTML
+      const escapeHtml = (text) => {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      };
+
+      const title = escapeHtml(post.title || "គ្មានចំណងជើង");
+      const description = escapeHtml(post.description || "គ្មានការពិពណ៌នា");
+      const recipe = escapeHtml(post.recipe || "គ្មានរូបមន្ត");
+      const displayName = escapeHtml(username);
+      const imageUrl = post.image_url || "images/Fish stew.jpg";
+
+      // Build ingredients list
+      let ingredientsHTML = '';
+      if (post.ingredients && post.ingredients.length > 0) {
+        ingredientsHTML = post.ingredients.map(ing =>
+          `<li class="flex items-start gap-2">
+            <span class="text-green-600 mt-1">✓</span>
+            <span>${escapeHtml(ing)}</span>
+          </li>`
+        ).join('');
+      } else {
+        ingredientsHTML = '<li class="text-gray-500">គ្មានគ្រឿងផ្សំ</li>';
+      }
+
+      // Build cooking steps
+      let stepsHTML = '';
+      if (post.step_to_cook && post.step_to_cook.length > 0) {
+        stepsHTML = post.step_to_cook.map((step, index) =>
+          `<li class="flex gap-3">
+            <span class="flex-shrink-0 w-8 h-8 bg-[#104127] text-white rounded-full flex items-center justify-center font-semibold">${index + 1}</span>
+            <p class="flex-1 pt-1">${escapeHtml(step)}</p>
+          </li>`
+        ).join('');
+      } else {
+        stepsHTML = '<li class="text-gray-500">គ្មានជំហាន</li>';
+      }
+
+      // Build tags
+      let tagsHTML = '';
+      if (post.tags && post.tags.length > 0) {
+        tagsHTML = post.tags.map(tag =>
+          `<span class="px-3 py-1 bg-[#f3e9dd] text-[#104127] rounded-full text-sm">${escapeHtml(tag)}</span>`
+        ).join('');
+      }
+
+      modalContent.innerHTML = `
+        <div class="space-y-6">
+          <!-- Image -->
+          <img src="${imageUrl}" alt="${title}" class="w-full h-64 md:h-96 object-cover rounded-xl" onerror="this.src='images/Fish stew.jpg'" />
+          
+          <!-- Title and User -->
+          <div>
+            <h2 class="text-3xl font-bold text-[#104127] mb-4">${title}</h2>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-full bg-[#f3e9dd] flex items-center justify-center">
+                <span class="text-xl text-[#104127] font-semibold">${userInitial}</span>
+              </div>
+              <div>
+                <p class="font-medium text-[#642f28]">${displayName}</p>
+                <p class="text-sm text-gray-500">អ្នកចែករំលែក</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Info Stats -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-[#f8f8f8] rounded-xl">
+            ${post.cooking_time_minutes ? `
+              <div class="text-center">
+                <p class="text-2xl font-bold text-[#104127]">${post.cooking_time_minutes}</p>
+                <p class="text-sm text-gray-600">នាទី</p>
+              </div>
+            ` : ''}
+            ${post.servings ? `
+              <div class="text-center">
+                <p class="text-2xl font-bold text-[#104127]">${post.servings}</p>
+                <p class="text-sm text-gray-600">មនុស្ស</p>
+              </div>
+            ` : ''}
+            ${post.difficulty_level ? `
+              <div class="text-center">
+                <p class="text-lg font-bold text-[#104127] capitalize">${escapeHtml(post.difficulty_level)}</p>
+                <p class="text-sm text-gray-600">កម្រិត</p>
+              </div>
+            ` : ''}
+            <div class="text-center">
+              <p class="text-2xl font-bold text-[#ad343e]">${post.likes_count || 0}</p>
+              <p class="text-sm text-gray-600">ចូលចិត្ត</p>
+            </div>
+          </div>
+          
+          <!-- Tags -->
+          ${tagsHTML ? `
+            <div class="flex flex-wrap gap-2">
+              ${tagsHTML}
+            </div>
+          ` : ''}
+          
+          <!-- Description -->
+          <div>
+            <h3 class="text-xl font-semibold text-[#104127] mb-3">ការពិពណ៌នា</h3>
+            <p class="text-gray-700 leading-relaxed">${description}</p>
+          </div>
+          
+          <!-- Recipe -->
+          <div>
+            <h3 class="text-xl font-semibold text-[#104127] mb-3">រូបមន្ត</h3>
+            <p class="text-gray-700 leading-relaxed whitespace-pre-wrap">${recipe}</p>
+          </div>
+          
+          <!-- Ingredients -->
+          <div>
+            <h3 class="text-xl font-semibold text-[#104127] mb-3">គ្រឿងផ្សំ</h3>
+            <ul class="space-y-2 text-gray-700">
+              ${ingredientsHTML}
+            </ul>
+          </div>
+          
+          <!-- Cooking Steps -->
+          <div>
+            <h3 class="text-xl font-semibold text-[#104127] mb-4">ជំហានធ្វើ</h3>
+            <ol class="space-y-4">
+              ${stepsHTML}
+            </ol>
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFoodModal() {
+      const modal = document.getElementById('foodDetailModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal on background click
+    document.getElementById('foodDetailModal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeFoodModal();
+      }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeFoodModal();
+      }
+    });
+  </script>
+</body>
+
+</html>

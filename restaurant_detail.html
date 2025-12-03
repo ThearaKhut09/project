@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>សម្បូរបែប - ភោជនីយដ្ឋានសៀមរាប</title>
+    <link rel="icon" href="images/logo1.png" type="image/x-icon">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Siemreap&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-white font-siemreap text-[#F5F5F5]">
+    <header class="bg-[#F5F5F5] h-auto md:h-[89px] py-3 md:py-0 sticky top-0 z-50 shadow-sm">
+        <nav
+            class="max-w-[1360px] mx-auto flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 lg:px-10 relative">
+            <div class="h-[60px] w-[120px] md:h-[90px] md:w-[165px] flex items-center">
+                <a href="index.html" class="block h-full w-full">
+                    <img src="images/logo.png" alt="SombobaebKH Logo" class="w-full h-full object-contain" />
+                </a>
+            </div>
+
+            <div class="hidden lg:flex gap-4 xl:gap-[26px] items-center text-[14px] xl:text-[16px]">
+                <a href="index.html" class="text-[#642f28] hover:text-[#dd070c] transition-colors">ទំព័រដើម</a>
+                <a href="general_food.html"
+                    class="text-[#642f28] hover:text-[#dd070c] transition-colors">មុខម្ហូបទូទៅ</a>
+                <a href="province.html" class="text-[#dd070c] font-semibold">ម្ហូបតាមខេត្ត</a>
+                <a href="about.html" class="text-[#642f28] hover:text-[#dd070c] transition-colors">អំពីយើង</a>
+            </div>
+
+            <div class="flex gap-2 md:gap-[15px] items-center">
+                <a href="#"
+                    class="hidden md:flex group border border-[#642f28] rounded-[5px] px-3 md:px-6 py-1.5 md:py-2 items-center gap-1 md:gap-2 hover:bg-[#dd070c] hover:text-white transition-colors">
+                    <svg class="w-[9px] h-[10px] text-[#642f28] group-hover:text-white transition-colors"
+                        viewBox="0 0 9 10" fill="none">
+                        <path d="M4.5 0L4.5 7M4.5 0L1.5 3M4.5 0L7.5 3M0 10H9" stroke="currentColor" stroke-width="1" />
+                    </svg>
+                    <span
+                        class="text-[#642f28] text-[13px] md:text-[15px] group-hover:text-white transition-colors">បង្ហោះ</span>
+                </a>
+
+                <button id="darkModeBtn" class="relative hidden md:block" aria-label="Toggle dark mode">
+                    <svg class="w-[28px] h-[32px] md:w-[34px] md:h-[38px]" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 640" fill="#000000">
+                        <path
+                            d="M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z" />
+                    </svg>
+                </button>
+
+                <button class="w-[38px] h-[38px] md:w-[47px] md:h-[47px] rounded-full overflow-hidden" data-user-trigger
+                    aria-label="User menu">
+                    <span
+                        class="block w-full h-full rounded-full overflow-hidden bg-[#104127] text-white font-semibold text-lg flex items-center justify-center"
+                        data-user-avatar>
+                        <img src="images/user-icon.svg" alt="User" class="w-full h-full object-cover"
+                            data-user-avatar-img />
+                        <span class="hidden" data-user-avatar-initial>U</span>
+                    </span>
+                </button>
+
+                <button id="hamburger"
+                    class="lg:hidden flex flex-col justify-center items-center w-10 h-10 rounded-md hover:bg-[#e5d5c4] transition-colors relative z-[60]"
+                    aria-label="Toggle menu">
+                    <span class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out"></span>
+                    <span
+                        class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out mt-1.5"></span>
+                    <span
+                        class="hamburger-line w-6 h-0.5 bg-[#642f28] transition-all duration-300 ease-in-out mt-1.5"></span>
+                </button>
+            </div>
+        </nav>
+
+        <div id="navMenu"
+            class="lg:hidden overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 absolute top-full left-0 right-0 z-40 w-full">
+            <div class="bg-white border-t-2 border-[#642f28] shadow-lg w-full">
+                <div class="max-w-[1360px] mx-auto px-4 py-4 flex flex-col gap-1">
+                    <a href="index.html"
+                        class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">ទំព័រដើម</a>
+                    <a href="general_food.html"
+                        class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">មុខម្ហូបទូទៅ</a>
+                    <a href="province.html"
+                        class="bg-[#f3e9dd] text-[#dd070c] px-4 py-3 rounded-md text-[15px] font-semibold">ម្ហូបតាមខេត្ត</a>
+                    <a href="about.html"
+                        class="text-[#642f28] hover:bg-[#f3e9dd] hover:text-[#dd070c] transition-colors px-4 py-3 rounded-md text-[15px] font-medium">អំពីយើង</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section
+            class="relative h-[320px] md:h-[420px] lg:h-[560px] flex items-center justify-center text-center text-white w-full">
+            <img src="https://www.figma.com/api/mcp/asset/2b456119-7eff-4500-b007-e1c7828b5626"
+                alt="Siem Reap chalk art" class="absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="relative z-10 px-4">
+                <p class="text-[#fbf2e8] text-[18px] md:text-[22px] tracking-wide mb-3">ម្ហូបតាមខេត្ត · ខេត្តសៀមរាប</p>
+                <h1 class="text-[40px] md:text-[58px] lg:text-[72px] leading-tight">បណ្តុំភោជនីយដ្ឋានល្បីៗ</h1>
+            </div>
+        </section>
+
+        <section class="bg-#F5F5F5] py-4 md:py-6 border-y border-[#e4d4c2]">
+            <div
+                class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 flex flex-wrap items-center gap-2 text-[15px] text-[#642f28]">
+                <a href="province.html" class="hover:text-[#dd070c]">ម្ហូបតាមខេត្ត</a>
+                <span class="text-[#ad343e]">›</span>
+                <span class="text-[#ad343e]">សៀមរាប</span>
+            </div>
+        </section>
+
+        <section class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 py-10 md:py-14">
+            <h2 class="text-[#104127] text-[30px] md:text-[40px] mb-4">ជម្រើសល្អបំផុតនៅសៀមរាប</h2>
+            <p class="text-[17px] leading-relaxed text-[#4f2620] max-w-3xl">ប្រមូលបានពីអ្នកមូលដ្ឋាន
+                ក្រុមអ្នកដំណើរនិងអ្នកឧត្តមសិល្បៈ ដែលស្រលាញ់អាហារខ្មែរ។ រាល់ហាងមានបរិយាកាសកក់ក្តៅ ស្នាមញញឹម
+                និងរសជាតិពោរពេញដោយវប្បធម៌។</p>
+        </section>
+
+        <section class="max-w-[1360px] mx-auto px-4 md:px-6 lg:px-10 pb-16 space-y-10">
+            <article class="bg-[#F5F5F5] border border-[#f0e2d3] rounded-[16px] shadow-sm overflow-hidden">
+                <div class="flex flex-col lg:flex-row lg:h-[280px]">
+                    <div class="lg:w-[45%]">
+                        <img src="https://www.figma.com/api/mcp/asset/790e083c-ba9c-4030-ab08-974601b3eb24"
+                            alt="K'am Siem Reap" class="w-full h-[280px] object-cover" />
+                    </div>
+                    <div class="lg:w-[55%] p-6 md:p-8 flex flex-col gap-5">
+                        <div class="flex items-center gap-2 text-[#ad343e] text-[15px]">
+                            <span class="text-[36px] leading-none font-semibold text-[#ad343e]">ក្អមសៀមរាប</span>
+                            <span class="hidden md:inline-block text-[#4f2620]">·</span>
+                            <span class="opacity-70">(1,228 reviews)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex text-[#fcbf45] text-xl">★★★★★</div>
+                            <p class="text-[#4f2620] text-sm">ជាភោជនីយដ្ឋានខ្មែរអន្តរជាតិ</p>
+                        </div>
+                        <p class="text-[#4f2620] text-[15px] leading-relaxed">“ពោរពេញទៅដោយមនុស្សរួសរាយ និងចេះជួយ
+                            ហើយពួកយើងឧស្សាហ៍បរិភោគនៅទីនេះ”</p>
+                        <div class="gallery-wrapper overflow-hidden">
+                            <div class="gallery-marquee">
+                                <img src="https://www.figma.com/api/mcp/asset/2b456119-7eff-4500-b007-e1c7828b5626"
+                                    alt="Dish detail" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                                <img src="https://www.figma.com/api/mcp/asset/d2feda34-cfbb-4a89-8fb4-42570fbd6388"
+                                    alt="Interior" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                                <img src="https://www.figma.com/api/mcp/asset/70565478-8525-468a-a0c4-0408f9b6ce6e"
+                                    alt="Dessert" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="bg-[#F5F5F5] border border-[#f0e2d3] rounded-[16px] shadow-sm overflow-hidden">
+                <div class="flex flex-col lg:flex-row lg:h-[280px]">
+                    <div class="lg:w-[45%]">
+                        <img src="https://www.figma.com/api/mcp/asset/a64c043a-f246-4e60-b434-15298ec1e216"
+                            alt="Buk Mom" class="w-full h-[280px] object-cover" />
+                    </div>
+                    <div class="lg:w-[55%] p-6 md:p-8 flex flex-col gap-5">
+                        <div class="flex items-center gap-2 text-[#ad343e] text-[15px]">
+                            <span class="text-[34px] leading-none font-semibold text-[#ad343e]">បុកមាន់សៀមរាប</span>
+                            <span class="hidden md:inline-block text-[#4f2620]">·</span>
+                            <span class="opacity-70">(1,228 reviews)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex text-[#fcbf45] text-xl">★★★★★</div>
+                            <p class="text-[#4f2620] text-sm">Signature Banana Blossom</p>
+                        </div>
+                        <p class="text-[#4f2620] text-[15px] leading-relaxed">“សម្បូរទៅដល់មនុស្សរួសរាយចេះជួយ
+                            និងពួកយើងចូលចិត្តបរិភោគ”</p>
+                        <div class="gallery-wrapper overflow-hidden">
+                            <div class="gallery-marquee">
+                                <img src="https://www.figma.com/api/mcp/asset/8b5e8f99-f3d7-4a30-98e7-334e13a37524"
+                                    alt="Banana dish" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                                <img src="https://www.figma.com/api/mcp/asset/8201350c-ff7c-430f-98b3-30b2374965a2"
+                                    alt="Soup" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                                <img src="https://www.figma.com/api/mcp/asset/70bc2460-9361-406e-b21e-4ae941afb71f"
+                                    alt="Dessert" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="bg-[#F5F5F5] border border-[#f0e2d3] rounded-[16px] shadow-sm overflow-hidden">
+                <div class="flex flex-col lg:flex-row lg:h-[280px]">
+                    <div class="lg:w-[45%]">
+                        <img src="https://www.figma.com/api/mcp/asset/a40d89af-3ac5-4d1a-b1b4-ad6b6afdc61a"
+                            alt="The Grill Lounge" class="w-full h-[280px] object-cover" />
+                    </div>
+                    <div class="lg:w-[55%] p-6 md:p-8 flex flex-col gap-5">
+                        <div class="flex items-center gap-2 text-[#ad343e] text-[15px]">
+                            <span class="text-[34px] leading-none font-semibold text-[#ad343e]">The Grill Lounge</span>
+                            <span class="hidden md:inline-block text-[#4f2620]">·</span>
+                            <span class="opacity-70">(1,228 reviews)</span>
+                        </div>
+                        <p class="text-[#4f2620] text-[15px] leading-relaxed">
+                            “បុព្វបទជាមួយការស្តុកស្តំល្អសម្រាប់ពិធីល្ងាចពិសេស”</p>
+                        <div class="gallery-wrapper overflow-hidden">
+                            <div class="gallery-marquee">
+                                <img src="https://www.figma.com/api/mcp/asset/8e116b96-9d17-4221-b495-ab8563d82025"
+                                    alt="Grilled dish" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                                <img src="https://www.figma.com/api/mcp/asset/627ee977-aff0-49db-babd-17bab51a22fc"
+                                    alt="Cocktail" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                                <img src="https://www.figma.com/api/mcp/asset/91158cd1-6a7e-4961-ac7c-0851822a3954"
+                                    alt="Interior" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="bg-[#F5F5F5] border border-[#f0e2d3] rounded-[16px] shadow-sm overflow-hidden">
+                <div class="flex flex-col lg:flex-row lg:h-[280px]">
+                    <div class="lg:w-[45%]">
+                        <img src="https://www.figma.com/api/mcp/asset/57e69296-d2ec-44eb-9fd3-f150843b13eb"
+                            alt="Old Maison" class="w-full h-[280px] object-cover" />
+                    </div>
+                    <div class="lg:w-[55%] p-6 md:p-8 flex flex-col gap-5">
+                        <div class="flex items-center gap-2 text-[#ad343e] text-[15px]">
+                            <span class="text-[32px] leading-none font-semibold text-[#ad343e]">Old Maison Eatery &amp;
+                                Lounge</span>
+                            <span class="hidden md:inline-block text-[#4f2620]">·</span>
+                            <span class="opacity-70">(1,228 reviews)</span>
+                        </div>
+                        <p class="text-[#4f2620] text-[15px] leading-relaxed">“ជួបជុំគ្រួសារដែលស្រលាញ់រសជាតិដើម
+                            និងបរិយាកាសទន់ភ្លន់”</p>
+                        <div class="gallery-wrapper overflow-hidden">
+                            <div class="gallery-marquee">
+                                <img src="https://www.figma.com/api/mcp/asset/1cd6dab8-2b42-4e5c-b1c9-e6f6bfba5204"
+                                    alt="House front" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                                <img src="https://www.figma.com/api/mcp/asset/cfc7f327-1d99-46e1-bffa-b8f161d2d112"
+                                    alt="Tea" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                                <img src="https://www.figma.com/api/mcp/asset/d2defb2f-8847-408c-8f41-46c92e1e83ae"
+                                    alt="Interior" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="bg-[#F5F5F5] border border-[#f0e2d3] rounded-[16px] shadow-sm overflow-hidden">
+                <div class="flex flex-col lg:flex-row lg:h-[280px]">
+                    <div class="lg:w-[45%]">
+                        <img src="https://www.figma.com/api/mcp/asset/032e5a2d-4ff0-45dd-b17f-d3a81aa7ed9d"
+                            alt="Palate Angkor" class="w-full h-[280px] object-cover" />
+                    </div>
+                    <div class="lg:w-[55%] p-6 md:p-8 flex flex-col gap-5">
+                        <div class="flex items-center gap-2 text-[#ad343e] text-[15px]">
+                            <span class="text-[32px] leading-none font-semibold text-[#ad343e]">Palate Angkor Restaurant
+                                &amp; Bar</span>
+                            <span class="hidden md:inline-block text-[#4f2620]">·</span>
+                            <span class="opacity-70">(1,228 reviews)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex text-[#fcbf45] text-xl">★★★★★</div>
+                            <p class="text-[#4f2620] text-sm">Skyline Dining</p>
+                        </div>
+                        <p class="text-[#4f2620] text-[15px] leading-relaxed">“កន្លែងរាំរែករសជាតិខ្មែរ និងភេសជ្ជៈបែប
+                            Tropic សម្រាប់រាត្រីក្នុងសៀមរាប”</p>
+                        <div class="gallery-wrapper overflow-hidden">
+                            <div class="gallery-marquee">
+                                <img src="https://www.figma.com/api/mcp/asset/1f3cda74-12bc-4d4a-b08e-78bbb0e47a67"
+                                    alt="Signature dish" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                                <img src="https://www.figma.com/api/mcp/asset/1cd6dab8-2b42-4e5c-b1c9-e6f6bfba5204"
+                                    alt="Exterior" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                                <img src="https://www.figma.com/api/mcp/asset/4266deb0-a861-4890-883d-0c8b233e6a2e"
+                                    alt="Signature drink" class="h-[90px] w-[120px] rounded-[10px] object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+    <footer class="bg-[#283b3f] py-6 md:py-8 lg:py-[37px] px-4 md:px-6 lg:px-10">
+        <div class="max-w-[1360px] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <div>
+                    <div class="w-[160px] md:w-[200px] lg:w-[220px] h-[90px] md:h-[110px] lg:h-[120px] mb-3 md:mb-4">
+                        <img src="images/logo1.png" alt="SombobaebKH Logo" class="w-full h-full object-contain" />
+                    </div>
+                    <p class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed">
+                        ការរក្សាទុកនិងអភិរក្សម្ហូបដ៏សម្បូរបែប<br />នៅប្រទេសកម្ពុជា
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-[#fbf2e8] text-[24px] md:text-[28px] lg:text-[32px] mb-4 md:mb-5 lg:mb-[24px]">
+                        តំណភ្ជាប់
+                    </h4>
+                    <ul class="space-y-2 md:space-y-[10px]">
+                        <li><a href="index.html"
+                                class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] hover:text-white transition-colors">ទំព័រដើម</a>
+                        </li>
+                        <li><a href="general_food.html"
+                                class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] hover:text-white transition-colors">មុខម្ហូបទូទៅ</a>
+                        </li>
+                        <li><a href="province.html"
+                                class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] hover:text-white transition-colors">ម្ហូបតាមខេត្ត</a>
+                        </li>
+                        <li><a href="about.html"
+                                class="text-[#fbf2e8] text-[16px] md:text-[18px] lg:text-[20px] hover:text-white transition-colors">អំពីយើង</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-[#fbf2e8] text-[24px] md:text-[28px] lg:text-[32px] mb-4 md:mb-5 lg:mb-[24px]">
+                        ទំនាក់ទំនងពួកយើង</h4>
+                    <div class="flex gap-4 mb-[28px]">
+                        <a href="#" aria-label="Facebook"
+                            class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                            <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                                <path
+                                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram"
+                            class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                            <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter"
+                            class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                            <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                                <path
+                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="YouTube"
+                            class="w-[32px] h-[32px] bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                            <svg class="w-4 h-4" fill="#283b3f" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.441 16.892c-2.102.144-6.784.144-8.883 0C5.282 16.736 5.017 15.622 5 12c.017-3.629.285-4.736 2.558-4.892 2.099-.144 6.782-.144 8.883 0C18.718 7.264 18.982 8.378 19 12c-.018 3.629-.285 4.736-2.559 4.892zM10 9.658l4.917 2.338L10 14.342V9.658z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="bg-[#d9d9d9] rounded-[25px] h-[42px] flex items-center px-4 gap-2">
+                        <input type="email" placeholder="Your email address"
+                            class="flex-1 bg-transparent text-[13px] text-[rgba(0,0,0,0.25)] outline-none" />
+                        <button class="text-[#ad343e] text-[13px] font-medium">Subscribe</button>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-white text-[28px] mb-[30px]">ឧបត្ថម្ភ និង គាំទ្រដោយ</p>
+                    <div class="w-[200px] h-[72px]">
+                        <img src="images/istad-logo.png" alt="ISTAD" class="w-full h-full object-contain" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const hamburgerLines = hamburger.querySelectorAll('.hamburger-line');
+        let isMenuOpen = false;
+
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isMenuOpen = !isMenuOpen;
+
+            if (isMenuOpen) {
+                navMenu.style.maxHeight = navMenu.scrollHeight + 'px';
+                navMenu.style.opacity = '1';
+
+                hamburgerLines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                hamburgerLines[1].style.opacity = '0';
+                hamburgerLines[1].style.transform = 'translateX(20px)';
+                hamburgerLines[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+            } else {
+                navMenu.style.maxHeight = '0';
+                navMenu.style.opacity = '0';
+
+                hamburgerLines[0].style.transform = '';
+                hamburgerLines[1].style.opacity = '1';
+                hamburgerLines[1].style.transform = '';
+                hamburgerLines[2].style.transform = '';
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (isMenuOpen && !hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                isMenuOpen = false;
+                navMenu.style.maxHeight = '0';
+                navMenu.style.opacity = '0';
+                hamburgerLines[0].style.transform = '';
+                hamburgerLines[1].style.opacity = '1';
+                hamburgerLines[1].style.transform = '';
+                hamburgerLines[2].style.transform = '';
+            }
+        });
+
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                navMenu.style.maxHeight = '0';
+                navMenu.style.opacity = '0';
+                hamburgerLines[0].style.transform = '';
+                hamburgerLines[1].style.opacity = '1';
+                hamburgerLines[1].style.transform = '';
+                hamburgerLines[2].style.transform = '';
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024 && isMenuOpen) {
+                isMenuOpen = false;
+                navMenu.style.maxHeight = '0';
+                navMenu.style.opacity = '0';
+                hamburgerLines[0].style.transform = '';
+                hamburgerLines[1].style.opacity = '1';
+                hamburgerLines[1].style.transform = '';
+                hamburgerLines[2].style.transform = '';
+            }
+        });
+
+        // Duplicate gallery items to enable seamless marquee scrolling
+        document.querySelectorAll('.gallery-marquee').forEach(track => {
+            const items = Array.from(track.children);
+            if (!items.length) {
+                return;
+            }
+
+            const fragment = document.createDocumentFragment();
+            items.forEach(item => fragment.appendChild(item.cloneNode(true)));
+            track.appendChild(fragment);
+        });
+    </script>
+</body>
+
+</html>
