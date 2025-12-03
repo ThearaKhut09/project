@@ -103,11 +103,7 @@
         <div class="flex-1 space-y-4">
           <div>
             <p class="text-[#ad343e] text-[22px] md:text-[24px] font-semibold">${name}</p>
-<<<<<<< HEAD
             <p class="text-[#6b5548] text-[15px] md:text-[17px] leading-relaxed line-clamp-3">${description}</p>
-=======
-            <p class="text-[#6b5548] text-[15px] md:text-[17px] leading-relaxed">${description}</p>
->>>>>>> project/main
           </div>
           <div class="flex flex-wrap gap-3">
             <a href="${detailLink}"
