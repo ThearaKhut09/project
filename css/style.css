@@ -665,11 +665,31 @@ body.dark-mode .text-\[\#fbf2e8\] {
 
 /* Section Headings Dark Mode */
 body.dark-mode .text-\[\#104127\] {
-  color: var(--green-light);
+  color: whitesmoke !important;
 }
 
 body.dark-mode .text-\[\#4f2620\] {
-  color: var(--text-primary);
+  color: whitesmoke !important;
+}
+
+/* All text elements in dark mode */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode div {
+  color: whitesmoke;
+}
+
+/* Hero section text */
+body.dark-mode .hero-section p,
+body.dark-mode .hero-section h1,
+body.dark-mode .hero-section h2 {
+  color: white !important;
 }
 
 /* Cards Dark Mode */
@@ -684,11 +704,20 @@ body.dark-mode .border-black\/10 {
 
 /* Restaurant Section Dark Mode */
 body.dark-mode .text-\[\#dd070c\] {
-  color: var(--red-dark);
+  color: #ff6b6b !important;
 }
 
 body.dark-mode .text-\[\#ad343e\] {
-  color: var(--red-dark);
+  color: #ff6b6b !important;
+}
+
+/* Restaurant section paragraphs */
+body.dark-mode article p.text-\[\#104127\] {
+  color: whitesmoke !important;
+}
+
+body.dark-mode section p {
+  color: whitesmoke !important;
 }
 
 body.dark-mode .rounded-\[20px\].shadow-sm {
@@ -699,6 +728,11 @@ body.dark-mode .rounded-\[20px\].shadow-sm {
 /* Recognition Section Dark Mode */
 body.dark-mode section.bg-\[\#104127\] {
   background-color: var(--green-dark);
+}
+
+body.dark-mode section.bg-\[\#104127\] h2,
+body.dark-mode section.bg-\[\#104127\] p {
+  color: white !important;
 }
 
 /* Additional Sections Dark Mode */
@@ -752,11 +786,16 @@ body.dark-mode .line-clamp-2 {
 
 /* Card Title Text Dark Mode */
 body.dark-mode h3.text-\[\#104127\] {
-  color: var(--green-light) !important;
+  color: whitesmoke !important;
 }
 
 body.dark-mode .text-\[\#642f28\] {
-  color: var(--text-secondary);
+  color: whitesmoke !important;
+}
+
+/* Top rated section text */
+body.dark-mode article p.text-\[\#104127\] {
+  color: whitesmoke !important;
 }
 
 /* Enhance readability in dark mode */
@@ -817,11 +856,23 @@ body.dark-mode a:hover svg[fill="#642f28"] {
 
 /* About Page Text Colors */
 body.dark-mode .text-\[\#4f2620\] {
-  color: var(--text-secondary);
+  color: whitesmoke !important;
 }
 
 body.dark-mode .bg-\[\#f8f8f8\] {
   background-color: var(--bg-secondary);
+}
+
+/* CTA Cambodia section text */
+body.dark-mode section h2,
+body.dark-mode section p,
+body.dark-mode div p {
+  color: whitesmoke !important;
+}
+
+/* Popular food section titles */
+body.dark-mode h4 {
+  color: whitesmoke !important;
 }
 
 /* Values Cards SVG Images Dark Mode */
@@ -933,7 +984,20 @@ body.dark-mode .auth-modal__frame {
 
 /* Star Rating Dark Mode */
 body.dark-mode .text-\[\#f7c646\] {
-  color: #ffd700;
+  color: #ffd700 !important;
+}
+
+body.dark-mode .text-\[\#f7c646\] span {
+  color: #ffd700 !important;
+}
+
+/* Keep star color consistent in both modes */
+.text-\[\#f7c646\] {
+  color: #ffd700 !important;
+}
+
+.text-\[\#f7c646\] span {
+  color: #ffd700 !important;
 }
 
 body.dark-mode .text-black\/50 {
@@ -943,6 +1007,38 @@ body.dark-mode .text-black\/50 {
 /* Hamburger Menu Dark Mode */
 body.dark-mode .hamburger-line {
   background-color: var(--text-primary);
+}
+
+/* Ensure all text in main content is white/whitesmoke */
+body.dark-mode main {
+  color: whitesmoke;
+}
+
+body.dark-mode main h1,
+body.dark-mode main h2,
+body.dark-mode main h3,
+body.dark-mode main h4,
+body.dark-mode main h5,
+body.dark-mode main h6,
+body.dark-mode main p,
+body.dark-mode main span:not(.text-\[\#f7c646\] span),
+body.dark-mode main a,
+body.dark-mode main div,
+body.dark-mode main article p,
+body.dark-mode main article h3,
+body.dark-mode main article h4 {
+  color: whitesmoke !important;
+}
+
+/* Buttons text in dark mode */
+body.dark-mode button span,
+body.dark-mode a span {
+  color: inherit;
+}
+
+body.dark-mode .bg-\[\#104127\] span,
+body.dark-mode .bg-\[\#104127\] {
+  color: white !important;
 }
 
 /* Smooth Transitions */
