@@ -758,6 +758,24 @@ body.dark-mode .bg-\[\#f3e9dd\] {
   background-color: var(--bg-tertiary);
 }
 
+/* Cake Gallery Cards Dark Mode */
+body.dark-mode #cake-gallery article {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark-mode #cake-gallery article .bg-white {
+  background-color: var(--card-bg) !important;
+}
+
+body.dark-mode #cake-gallery article p {
+  color: whitesmoke !important;
+}
+
+body.dark-mode #cake-gallery article:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
 /* Search Input Dark Mode */
 body.dark-mode .border-\[\#104127\] {
   border-color: var(--border-color);
