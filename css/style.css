@@ -776,6 +776,15 @@ body.dark-mode #cake-gallery article:hover {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
+/* Category Icons Dark Mode - Make icons white/bright */
+body.dark-mode article .bg-\[\#f3e9dd\] img {
+  filter: brightness(0) invert(1);
+}
+
+body.dark-mode section article img[src*="icons8"] {
+  filter: brightness(0) invert(1);
+}
+
 /* Search Input Dark Mode */
 body.dark-mode .border-\[\#104127\] {
   border-color: var(--border-color);
