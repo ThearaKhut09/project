@@ -785,6 +785,41 @@ body.dark-mode section article img[src*="icons8"] {
   filter: brightness(0) invert(1);
 }
 
+/* Restaurant Detail Page Dark Mode */
+body.dark-mode section.bg-\[\#F5F5F5\] {
+  background-color: var(--bg-secondary) !important;
+}
+
+body.dark-mode article.bg-\[\#F5F5F5\] {
+  background-color: var(--card-bg) !important;
+}
+
+body.dark-mode .border-\[\#f0e2d3\] {
+  border-color: var(--border-color) !important;
+}
+
+body.dark-mode .text-\[\#4f2620\] {
+  color: whitesmoke !important;
+}
+
+body.dark-mode .text-\[\#fcbf45\] {
+  color: #FFD700 !important;
+}
+
+/* Gallery marquee images - no filter needed */
+body.dark-mode .gallery-marquee img {
+  filter: none;
+}
+
+/* Breadcrumb dark mode */
+body.dark-mode section .text-\[\#642f28\] {
+  color: var(--text-secondary) !important;
+}
+
+body.dark-mode section .text-\[\#ad343e\] {
+  color: #ff6b6b !important;
+}
+
 /* Search Input Dark Mode */
 body.dark-mode .border-\[\#104127\] {
   border-color: var(--border-color);
