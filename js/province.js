@@ -20,15 +20,40 @@ async function listFood() {
       );
       const restaurant = await restRes.json();
 
-      display += `
-        <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
-          <!-- Heart Button -->
-          <button class="absolute top-[13px] right-[13px] bg-white p-[10px] rounded-[20px] hover:bg-red-50 transition-colors z-10">
-            <svg class="w-[18px] h-[18px]" viewBox="0 0 18 18" fill="none">
-              <path d="M9 15.75L7.9125 14.7675C4.05 11.28 1.5 8.97 1.5 6.15C1.5 3.84 3.285 2.25 5.25 2.25C6.36 2.25 7.4325 2.745 8.25 3.5475C9.0675 2.745 10.14 2.25 11.25 2.25C13.215 2.25 15 3.84 15 6.15C15 8.97 12.45 11.28 8.5875 14.7675L7.5 15.75H9Z"
-                stroke="#642f28" stroke-width="1.5" fill="none"/>
+      const foodId = item.id || item.food_item_id;
+      const foodName = escapeHtmlAttr(item.name || "ម្ហូប");
+      const safeFoodIdAttr = foodId ? escapeHtmlAttr(String(foodId)) : "";
+
+      const favoriteButtonMarkup = foodId
+        ? `
+          <button
+            type="button"
+            class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/80 text-[#dd070c] flex items-center justify-center drop-shadow hover:bg-white transition-colors z-10"
+            data-favorite-food-id="${safeFoodIdAttr}"
+            data-favorite-food-name="${foodName}"
+            aria-label="បន្ថែមទៅចូលចិត្ត"
+            aria-pressed="false"
+          >
+            <span class="sr-only">បន្ថែមទៅចូលចិត្ត</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.9"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"
+              />
             </svg>
           </button>
+        `
+        : "";
+
+      display += `
+        <div class="bg-neutral-50 rounded-[10px] overflow-hidden relative">
+          ${favoriteButtonMarkup}
 
           <div class="h-[250px] md:h-[320px] lg:h-[372px] overflow-hidden">
             <img src=${item.image_url} alt=" $${
@@ -277,7 +302,7 @@ function performLiveSearch(searchQuery) {
   displaySearchResults(filteredResults);
 }
 
-function displaySearchResults(results) {
+async function displaySearchResults(results) {
   const searchResultsContainer = document.getElementById(
     "searchResultsContainer"
   );
@@ -297,92 +322,116 @@ function displaySearchResults(results) {
 
   let display = '<div class="grid gap-6">';
 
-  results.forEach((item) => {
-    const restaurantId = item.id || item.restaurant_id;
-    const restaurantName = escapeHtmlAttr(item.name || "ភោជនីយដ្ឋាន");
-    const safeRestaurantIdAttr = restaurantId
-      ? escapeHtmlAttr(String(restaurantId))
-      : "";
+  // Show loading while fetching food items
+  searchResultsContainer.innerHTML = `
+    <div class="text-center text-gray-500 py-12">
+      <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#104127] mb-4"></div>
+      <p class="text-[16px]">កំពុងផ្ទុកម្ហូប...</p>
+    </div>
+  `;
 
-    const favoriteButtonMarkup = restaurantId
-      ? `
-        <button
-          type="button"
-          class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/80 text-[#dd070c] flex items-center justify-center drop-shadow hover:bg-white transition-colors"
-          data-favorite-restaurant-id="${safeRestaurantIdAttr}"
-          data-favorite-restaurant-name="${restaurantName}"
-          aria-label="បន្ថែមទៅចូលចិត្ត"
-          aria-pressed="false"
-        >
-          <span class="sr-only">បន្ថែមទៅចូលចិត្ត</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.9"
-          >
-            <path
-              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"
-            />
-          </svg>
-        </button>
-      `
-      : "";
+  // Fetch food items for each restaurant
+  for (const restaurant of results) {
+    try {
+      const restaurantId = restaurant.id || restaurant.restaurant_id;
+      const restaurantName = escapeHtmlAttr(restaurant.name || "ភោជនីយដ្ឋាន");
+      const locationName =
+        restaurant.location?.name || restaurant.location_id || "មិនទាន់កំណត់";
 
-    const rawImage =
-      item.image_url && item.image_url.trim().length
-        ? item.image_url.trim()
-        : FALLBACK_IMAGE;
-    const imageSource = escapeHtmlAttr(rawImage);
-    const restaurantDetailLink = restaurantId
-      ? `restaurant_detail.html?restaurantId=${encodeURIComponent(
-          restaurantId
-        )}`
-      : "restaurant_detail.html";
+      // Fetch food items from this restaurant
+      const foodResponse = await fetch(
+        `${API_BASE_URL}/food-items?restaurant_id=${restaurantId}`
+      );
+      const foodItems = await foodResponse.json();
 
-    const locationName =
-      item.location?.name || item.location_id || "មិនទាន់កំណត់";
+      if (foodItems && foodItems.length > 0) {
+        // Show first food item from this restaurant
+        const item = foodItems[0];
+        const foodId = item.id || item.food_item_id;
+        const foodName = escapeHtmlAttr(item.name || "ម្ហូប");
+        const safeFoodIdAttr = foodId ? escapeHtmlAttr(String(foodId)) : "";
 
-    display += `
-      <article class="bg-neutral-50 rounded-[16px] p-6 flex flex-col md:flex-row gap-6 hover:shadow-lg transition-shadow">
-        <div class="flex-1">
-          <p class="text-[#ad343e] text-[22px] mb-2">
-            ${item.name}
-          </p>
-          <p class="text-[16px] text-[#55504c] mb-2">
-            <span class="font-semibold">ទីតាំង:</span> ${locationName}
-          </p>
-          <p class="text-[16px] text-[#55504c] mb-4 line-clamp-3">
-            ${item.description || "គ្មានការពិពណ៌នា"}
-          </p>
-          <a
-            href="${restaurantDetailLink}"
-            class="inline-flex items-center gap-2 bg-[#104127] text-white px-5 py-2 rounded-[10px] text-[15px] hover:bg-[#ad343e] transition-colors"
-            >ព័ត៌មានបន្ថែម</a
-          >
-        </div>
-        <div class="w-full md:w-[280px] h-[200px] md:h-auto rounded-[12px] overflow-hidden relative flex-shrink-0">
-          ${favoriteButtonMarkup}
-          <img
-            src="${imageSource}"
-            alt="${restaurantName}"
-            class="w-full h-full object-cover"
-            onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}';"
-          />
-        </div>
-      </article>
-    `;
-  });
+        const favoriteButtonMarkup = foodId
+          ? `
+            <button
+              type="button"
+              class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/80 text-[#dd070c] flex items-center justify-center drop-shadow hover:bg-white transition-colors"
+              data-favorite-food-id="${safeFoodIdAttr}"
+              data-favorite-food-name="${foodName}"
+              aria-label="បន្ថែមទៅចូលចិត្ត"
+              aria-pressed="false"
+            >
+              <span class="sr-only">បន្ថែមទៅចូលចិត្ត</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.9"
+              >
+                <path
+                  fill="none"
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"
+                />
+              </svg>
+            </button>
+          `
+          : "";
+
+        const rawImage =
+          item.image_url && item.image_url.trim().length
+            ? item.image_url.trim()
+            : FALLBACK_IMAGE;
+        const imageSource = escapeHtmlAttr(rawImage);
+        const foodDetailLink = foodId
+          ? `food_detail.html?foodId=${encodeURIComponent(foodId)}`
+          : "food_detail.html";
+
+        display += `
+          <article class="bg-neutral-50 rounded-[16px] p-6 flex flex-col md:flex-row gap-6 hover:shadow-lg transition-shadow">
+            <div class="flex-1">
+              <p class="text-[#ad343e] text-[22px] mb-2">
+                ${item.name}
+              </p>
+              <p class="text-[16px] text-[#55504c] mb-2">
+                <span class="font-semibold">ភោជនីយដ្ឋាន:</span> ${restaurantName}
+              </p>
+              <p class="text-[16px] text-[#55504c] mb-2">
+                <span class="font-semibold">ទីតាំង:</span> ${locationName}
+              </p>
+              <p class="text-[16px] text-[#55504c] mb-4 line-clamp-3">
+                ${item.description || "គ្មានការពិពណ៌នា"}
+              </p>
+              <a
+                href="${foodDetailLink}"
+                class="inline-flex items-center gap-2 bg-[#104127] text-white px-5 py-2 rounded-[10px] text-[15px] hover:bg-[#ad343e] transition-colors"
+                >ព័ត៌មានបន្ថែម</a
+              >
+            </div>
+            <div class="w-full md:w-[280px] h-[200px] md:h-auto rounded-[12px] overflow-hidden relative flex-shrink-0">
+              ${favoriteButtonMarkup}
+              <img
+                src="${imageSource}"
+                alt="${foodName}"
+                class="w-full h-full object-cover"
+                onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}';"
+              />
+            </div>
+          </article>
+        `;
+      }
+    } catch (error) {
+      console.error(
+        "Error fetching food items for restaurant:",
+        restaurant.id,
+        error
+      );
+    }
+  }
 
   display += "</div>";
   searchResultsContainer.innerHTML = display;
-
-  // Re-attach favorite listeners after rendering
-  if (typeof attachFavoriteListeners === "function") {
-    attachFavoriteListeners();
-  }
 }
 
 function escapeHtmlAttr(text) {

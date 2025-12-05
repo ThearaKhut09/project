@@ -513,15 +513,19 @@ function setFavoriteButtonState(button, state) {
   button.dataset.favoriteState = state;
   button.setAttribute("aria-pressed", state === "saved" ? "true" : "false");
   const icon = button.querySelector("svg");
-  if (icon) {
-    const baseColor =
-      button.dataset.favoriteBaseColor || button.style.color || "#dd070c";
+  const path = icon?.querySelector("path");
+  if (icon && path) {
+    const baseColor = button.dataset.favoriteBaseColor || "#dd070c";
     if (state === "saved") {
       icon.style.fill = "currentColor";
       icon.style.stroke = "currentColor";
+      path.setAttribute("fill", "currentColor");
+      path.setAttribute("stroke", "currentColor");
     } else {
       icon.style.fill = "none";
       icon.style.stroke = baseColor;
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke", baseColor);
     }
   }
 }
