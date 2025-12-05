@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="km">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -111,17 +112,18 @@
             <div class="relative z-10 max-w-5xl mx-auto px-4 md:px-6">
                 <p class="text-[20px] md:text-[26px] lg:text-[30px] text-white mb-3">ស្វែងរកមុខម្ហូប</p>
 
-                <form class="mt-8 w-full">
+                <form class="mt-8 w-full" id="homeSearchForm">
                     <div
                         class="mx-auto flex w-full max-w-[980px] flex-col sm:flex-row items-stretch sm:items-center gap-3 rounded-[22px] border border-white/40 bg-[#f4ede3] px-4 sm:px-5 py-3.5 shadow-[0_15px_35px_rgba(16,65,39,0.18)]">
                         <div class="flex items-center gap-3 flex-1">
                             <span class="inline-flex items-center justify-center text-[#55504c] text-2xl flex-shrink-0">
                                 <img src="images/search.svg" alt="Search icon" class="w-6 h-6 sm:w-7 sm:h-7">
                             </span>
-                            <input type="text" placeholder="វាយឈ្មោះមុខម្ហូប (ឧ. ទឹកគ្រឿង, នំបញ្ចុក..)"
+                            <input type="text" id="foodSearchInput"
+                                placeholder="វាយឈ្មោះមុខម្ហូប (ឧ. ទឹកគ្រឿង, នំបញ្ចុក..)"
                                 class="flex-1 w-full bg-transparent text-[#6f6861] placeholder:text-[#b7b0a8] text-[15px] sm:text-[18px] focus:outline-none">
                         </div>
-                        <button type="submit"
+                        <button type="submit" id="foodSearchBtn"
                             class="w-full sm:w-auto sm:min-w-[140px] rounded-[16px] bg-[#104127] px-6 sm:px-8 py-2.5 text-[16px] sm:text-[18px] text-[#fbf2e8] font-medium whitespace-nowrap">ស្វែងរក</button>
                     </div>
                 </form>
@@ -148,7 +150,8 @@
                 </div>
                 <div class="col-span-3">
                     <img src="../img/lok_lak.png" alt="ឡុកឡាក់">
-                    <h4 class="text-lg md:text-2xl lg:text-2xl font-extrabold text-center md:mb-4 mt-6 font-siemreap">ឡុកឡាក់</h4>
+                    <h4 class="text-lg md:text-2xl lg:text-2xl font-extrabold text-center md:mb-4 mt-6 font-siemreap">
+                        ឡុកឡាក់</h4>
 
                 </div>
             </div>
@@ -430,6 +433,49 @@
             </div>
         </div>
     </footer>
+
+    <!-- Search Popup Modal -->
+    <div id="searchPopup"
+        class="hidden fixed inset-0 bg-black/50 z-[9999] justify-center items-start pt-10 overflow-y-auto">
+        <div class="bg-white rounded-[20px] w-full max-w-[900px] mx-4 mb-10 shadow-xl">
+            <!-- Popup Header -->
+            <div class="sticky top-0 bg-white rounded-t-[20px] border-b border-gray-200 p-6 z-10">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-[#104127] text-[24px] font-semibold">ស្វែងរកមុខម្ហូប</h2>
+                    <button id="closeSearchPopup" class="text-gray-500 hover:text-[#dd070c] transition-colors"
+                        aria-label="Close search">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <!-- Search Input in Popup -->
+                <div
+                    class="flex items-center gap-3 rounded-[16px] border border-gray-300 bg-[#f4ede3] px-4 py-3 focus-within:border-[#104127] transition-colors">
+                    <svg class="w-5 h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m21 21-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" />
+                    </svg>
+                    <input type="text" id="popupSearchInput" placeholder="វាយបញ្ចូលឈ្មោះមុខម្ហូប..."
+                        class="flex-1 bg-transparent text-[#6f6861] placeholder:text-[#b7b0a8] text-[16px] focus:outline-none" />
+                </div>
+            </div>
+            <!-- Search Results -->
+            <div id="searchResultsContainer" class="p-6 max-h-[60vh] overflow-y-auto">
+                <div class="text-center text-gray-500 py-12">
+                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m21 21-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" />
+                    </svg>
+                    <p class="text-[16px]">វាយបញ្ចូលធាតុម្ហូបដើម្បីស្វែងរក...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/index.js"></script>
     <script src="js/darkmode.js"></script>
     <script src="js/api.js"></script>
