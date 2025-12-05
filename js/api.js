@@ -267,6 +267,49 @@
     });
   }
 
+  async function updateUserProfile(profileData) {
+    const authHeaders = requireAuthHeaders();
+
+    return apiRequest("/auth/profile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        ...authHeaders,
+      },
+      body: JSON.stringify(profileData),
+    });
+  }
+
+  async function updateFoodPost(postId, foodPostData) {
+    if (!postId) {
+      throw new ApiError("Post ID is required to update a post.", 400);
+    }
+
+    const authHeaders = requireAuthHeaders();
+
+    return apiRequest(`/food-posts/${encodeURIComponent(postId)}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        ...authHeaders,
+      },
+      body: JSON.stringify(foodPostData),
+    });
+  }
+
+  async function deleteFoodPost(postId) {
+    if (!postId) {
+      throw new ApiError("Post ID is required to delete a post.", 400);
+    }
+
+    const authHeaders = requireAuthHeaders();
+
+    return apiRequest(`/food-posts/${encodeURIComponent(postId)}`, {
+      method: "DELETE",
+      headers: authHeaders,
+    });
+  }
+
   global.PteahBayAPI = {
     API_BASE_URL,
     AUTH_STORAGE_KEY,
@@ -286,6 +329,9 @@
     addFavoriteFood,
     removeFavoriteFood,
     listFavoriteFoods,
+    updateUserProfile,
+    updateFoodPost,
+    deleteFoodPost,
     apiRequest,
   };
 })(window);

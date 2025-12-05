@@ -363,7 +363,8 @@ function renderAuthDropdown() {
 
   const actions = currentAuthSession?.user
     ? [
-        { action: "home", label: AUTH_LABELS.goHome },
+        { action: "profile", label: "គណនីរបស់ខ្ញុំ" },
+        { action: "favorites", label: AUTH_LABELS.goHome },
         { action: "logout", label: AUTH_LABELS.signOut },
       ]
     : [
@@ -391,7 +392,11 @@ function handleAuthAction(action) {
       openAuthModal("sign-up");
       hideAuthDropdown();
       break;
-    case "home":
+    case "profile":
+      hideAuthDropdown();
+      navigateToProfile();
+      break;
+    case "favorites":
       hideAuthDropdown();
       navigateHome();
       break;
@@ -431,6 +436,14 @@ function navigateHome() {
     return;
   }
   window.location.href = "favorite.html";
+}
+
+function navigateToProfile() {
+  const path = window.location.pathname;
+  if (path.endsWith("profile.html")) {
+    return;
+  }
+  window.location.href = "profile.html";
 }
 
 // ========================================
