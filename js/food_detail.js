@@ -120,7 +120,7 @@ function renderFoodDetail(data) {
             </button>
           </div>
           <div class="flex items-center gap-3 mt-4 lg:mt-0 text-sm text-[#a4a4a4] lg:absolute lg:right-0 lg:bottom-0">
-            <img src="https://www.figma.com/api/mcp/asset/982bc587-7cdc-41fe-bd9d-abb7de7f4ef4" alt="Rating" class="w-[150px] h-7 object-contain" />
+            <img src="images/star-detail-food.svg" alt="Rating" class="w-[150px] h-7 object-contain" />
             <span>${ratingLabel}</span>
           </div>
         </div>
