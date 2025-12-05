@@ -165,7 +165,7 @@
       </h1>
 
       <!-- Search Bar -->
-      <div
+      <form id="provinceSearchForm"
         class="bg-[#F5F5F5] rounded-[10px] w-full max-w-[90vw] md:max-w-[600px] lg:w-[764px] h-auto md:h-[94px] flex flex-col md:flex-row items-center p-4 md:px-[34px] gap-3 md:gap-4">
         <!-- Search Icon -->
         <svg class="w-[24px] h-[24px] md:w-[30px] md:h-[30px] flex-shrink-0" viewBox="0 0 30 30" fill="none">
@@ -175,15 +175,15 @@
         </svg>
 
         <!-- Input -->
-        <input type="text" placeholder="វាយឈ្មោះខេត្ត (ឧ. សៀមរាប, កំពត, បាត់ដំបង...)"
+        <input type="text" id="restaurantSearchInput" placeholder="វាយឈ្មោះខេត្ត (ឧ. សៀមរាប, កំពត, បាត់ដំបង...)"
           class="flex-1 w-full md:w-auto bg-transparent text-[#55504c] text-[16px] md:text-[20px] outline-none placeholder:text-[#55504c]" />
 
         <!-- Search Button -->
-        <button
+        <button type="submit" id="restaurantSearchBtn"
           class="w-full md:w-auto bg-[#104127] text-white px-6 md:px-[40px] py-2 md:py-[10px] rounded-[10px] text-[16px] md:text-[20px] hover:bg-[#0d3620] transition-colors">
           ស្វែងរក
         </button>
-      </div>
+      </form>
     </div>
   </section>
 
@@ -620,6 +620,45 @@
       </div>
     </div>
   </footer>
+
+  <!-- Search Popup Modal -->
+  <div id="searchPopup"
+    class="hidden fixed inset-0 bg-black/50 z-[9999] justify-center items-start pt-10 overflow-y-auto">
+    <div class="bg-white rounded-[20px] w-full max-w-[900px] mx-4 mb-10 shadow-xl">
+      <!-- Popup Header -->
+      <div class="sticky top-0 bg-white rounded-t-[20px] border-b border-gray-200 p-6 z-10">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-[#104127] text-[24px] font-semibold">ស្វែងរកភោជនីយដ្ឋាន</h2>
+          <button id="closeSearchPopup" class="text-gray-500 hover:text-[#dd070c] transition-colors"
+            aria-label="Close search">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <!-- Search Input in Popup -->
+        <div
+          class="flex items-center gap-3 rounded-[16px] border border-gray-300 bg-[#f4ede3] px-4 py-3 focus-within:border-[#104127] transition-colors">
+          <svg class="w-5 h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m21 21-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" />
+          </svg>
+          <input type="text" id="popupSearchInput" placeholder="វាយបញ្ចូលឈ្មោះភោជនីយដ្ឋាន ឬខេត្ត..."
+            class="flex-1 bg-transparent text-[#6f6861] placeholder:text-[#b7b0a8] text-[16px] focus:outline-none" />
+        </div>
+      </div>
+      <!-- Search Results -->
+      <div id="searchResultsContainer" class="p-6 max-h-[60vh] overflow-y-auto">
+        <div class="text-center text-gray-500 py-12">
+          <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m21 21-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" />
+          </svg>
+          <p class="text-[16px]">វាយបញ្ចូលធាតុភោជនីយដ្ឋានដើម្បីស្វែងរក...</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- JavaScript -->
   <script src="js/province.js"></script>
